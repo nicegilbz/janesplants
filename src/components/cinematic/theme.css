@@ -150,9 +150,43 @@
   box-shadow: none;
 }
 
+/* Hero entrance — CSS-driven so it always settles visible (no JS timing risk) */
+@keyframes cine-rise {
+  from {
+    opacity: 0;
+    transform: translateY(118%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cine-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cine-anim-rise {
+  animation: cine-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.cine-anim-fade {
+  animation: cine-fade-up 0.9s ease-out 0.5s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cine-shimmer-bar,
   .cine-grain::after {
     animation: none;
+  }
+  /* still ensure entrance elements end visible, immediately */
+  .cine-anim-rise,
+  .cine-anim-fade {
+    animation-duration: 0.001ms;
+    animation-delay: 0ms;
   }
 }

@@ -195,6 +195,7 @@ export default function VisitHero() {
         <div className="visit-hero-fade">
           <MediaSlot
             id="F4"
+            src="/media/glasshouse-day.png"
             label="day / night glasshouse"
             kind="pair"
             aspect="4 / 5"

@@ -195,6 +195,7 @@ export default function HireHero() {
         <div className="hire-hero-fade">
           <MediaSlot
             id="F4"
+            src="/media/glasshouse-night.png"
             label="day / night glasshouse"
             kind="pair"
             aspect="4 / 5"

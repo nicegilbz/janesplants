@@ -182,7 +182,7 @@ export default function Manifesto() {
 
         {/* F2 growth time-lapse slot */}
         <div className="mx-auto mt-6 max-w-md">
-          <MediaSlot id="F2" label="growth time-lapse" kind="loop" aspect="4 / 3" />
+          <MediaSlot id="F2" src="/media/leaf-macro.png" label="growth time-lapse" kind="loop" aspect="4 / 3" />
         </div>
       </div>
     </section>

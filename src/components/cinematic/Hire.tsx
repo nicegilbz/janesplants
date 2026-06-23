@@ -112,6 +112,7 @@ export default function Hire() {
         <div className="cine-hire-reveal grid grid-cols-1 gap-5 sm:grid-cols-2">
           <MediaSlot
             id="F4"
+            src="/media/monstera.png"
             label="day / night styling"
             kind="pair"
             aspect="3 / 4"
@@ -120,12 +121,14 @@ export default function Hire() {
           <div className="flex flex-col gap-5">
             <MediaSlot
               id="L1"
+              src="/media/glasshouse-night.png"
               label="360 turntable"
               kind="turntable"
               aspect="4 / 3"
             />
             <MediaSlot
               id="F5"
+              src="/media/glasshouse-day.png"
               label="office install"
               kind="still"
               aspect="4 / 3"

@@ -11,6 +11,7 @@
  * framed cinematically.
  */
 
+import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -19,7 +20,6 @@ import { ArrowDown, Sprout } from "lucide-react";
 import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
-import MediaSlot from "./MediaSlot";
 import MagneticCTA from "./MagneticCTA";
 import { useReducedMotion } from "./hooks";
 
@@ -32,24 +32,9 @@ export default function Hero() {
       if (typeof window === "undefined") return;
       gsap.registerPlugin(ScrollTrigger);
 
-      // Headline reveal
-      gsap.from(".cine-hero-line", {
-        yPercent: 120,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-        stagger: 0.12,
-        delay: 0.2,
-      });
-      gsap.from(".cine-hero-fade", {
-        opacity: 0,
-        y: 24,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.1,
-        delay: 0.9,
-      });
-
+      // Headline + supporting entrance are CSS-driven (see .cine-anim-* in
+      // theme.css) so they always settle visible. GSAP here only drives the
+      // scroll parallax below.
       if (reduced) return;
 
       // Parallax depth — each layer scrolls at its own speed.
@@ -103,14 +88,24 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Base atmosphere */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(120% 90% at 50% 8%, #16271b 0%, #0c1410 55%, #060c08 100%)",
-        }}
-      />
+      {/* Base cinematic photography */}
+      <div className="absolute inset-0">
+        <Image
+          src="/media/hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 90% at 50% 6%, rgba(22,39,27,0.28) 0%, rgba(12,20,16,0.64) 55%, rgba(6,12,8,0.92) 100%)",
+          }}
+        />
+      </div>
 
       {/* Volumetric light shafts */}
       <div className="cine-shafts absolute inset-0 opacity-40">
@@ -164,7 +159,7 @@ export default function Hero() {
 
       {/* HERO CONTENT */}
       <div className="cine-hero-content relative z-20 mx-auto w-full max-w-6xl px-6 text-center">
-        <div className="cine-hero-fade mb-7 flex items-center justify-center gap-3">
+        <div className="cine-hero-fade cine-anim-fade mb-7 flex items-center justify-center gap-3">
           <span className="cine-eyebrow">{BRAND.location.label}</span>
           <span className="h-px w-10 bg-[var(--c-brass-line)]" />
           <span className="cine-mono text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
@@ -174,21 +169,21 @@ export default function Hero() {
 
         <h1 className="cine-serif mx-auto max-w-5xl text-[clamp(3.2rem,11vw,9.5rem)] text-[var(--c-bone)]">
           <span className="block overflow-hidden">
-            <span className="cine-hero-line block">Plants with</span>
+            <span className="cine-hero-line cine-anim-rise block" style={{ animationDelay: "0.12s" }}>Plants with</span>
           </span>
           <span className="block overflow-hidden">
-            <span className="cine-hero-line block">
+            <span className="cine-hero-line cine-anim-rise block" style={{ animationDelay: "0.26s" }}>
               <span className="cine-accent text-[var(--c-glow)]">presence</span>.
             </span>
           </span>
         </h1>
 
-        <p className="cine-hero-fade mx-auto mt-8 max-w-xl text-balance text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
+        <p className="cine-hero-fade cine-anim-fade mx-auto mt-8 max-w-xl text-balance text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
           A working glasshouse in Hertford. We grow characterful houseplants,
           and we style and hire them for the rooms that want to feel alive.
         </p>
 
-        <div className="cine-hero-fade mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="cine-hero-fade cine-anim-fade mt-10 flex flex-wrap items-center justify-center gap-4">
           <MagneticCTA href="#collection">
             <Sprout className="h-4 w-4" /> Shop the collection
           </MagneticCTA>
@@ -197,15 +192,6 @@ export default function Hero() {
           </MagneticCTA>
         </div>
 
-        {/* F1 hero media slot, framed cinematically */}
-        <div className="cine-hero-fade mx-auto mt-14 w-full max-w-3xl">
-          <MediaSlot
-            id="F1"
-            label="hero loop"
-            kind="loop"
-            aspect="21 / 9"
-          />
-        </div>
       </div>
 
       {/* FOREGROUND fronds (closest, fastest) */}
@@ -232,7 +218,7 @@ export default function Hero() {
       />
 
       {/* scroll cue */}
-      <div className="cine-hero-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
+      <div className="cine-hero-fade cine-anim-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
         <span className="cine-mono text-[0.62rem] uppercase tracking-[0.3em] text-[var(--c-sage)]">
           Walk in
         </span>
