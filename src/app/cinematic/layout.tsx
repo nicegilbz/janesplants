@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import "@/components/cinematic/theme.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import ConceptNav from "@/components/ConceptNav";
+import SiteHeader from "@/components/cinematic/SiteHeader";
+import SiteFooter from "@/components/cinematic/SiteFooter";
+import CursorLeaves from "@/components/cinematic/CursorLeaves";
 
 export const metadata: Metadata = {
   title: "Jane's Plants / Cinematic Jungle",
@@ -12,9 +15,13 @@ export default function CinematicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#0c1410] text-[#e9f1e6]">
-      <ConceptNav current="cinematic" tone="dark" accent="#3a7d44" />
-      <SmoothScroll>{children}</SmoothScroll>
+    <div className="cine cine-grain relative min-h-screen">
+      <CursorLeaves />
+      <SiteHeader />
+      <SmoothScroll>
+        <main>{children}</main>
+        <SiteFooter />
+      </SmoothScroll>
     </div>
   );
 }

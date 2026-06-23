@@ -347,3 +347,163 @@ export const CONCEPTS = [
 ] as const;
 
 export type ConceptSlug = (typeof CONCEPTS)[number]["slug"];
+
+/* ------------------------------------------------------------------ *
+ * Plant hire + styling (the rent-and-style revenue line)
+ * ------------------------------------------------------------------ */
+
+export type HirePackage = {
+  slug: string;
+  name: string;
+  forWho: string;
+  blurb: string;
+  from: number;
+  cadence: string;
+  includes: string[];
+};
+
+export const HIRE_PACKAGES: HirePackage[] = [
+  {
+    slug: "residential",
+    name: "Residential styling",
+    forWho: "Homes",
+    blurb:
+      "We read your light and your rooms, then place plants that look like they were always meant to be there. Delivered, styled and kept alive on a visit schedule that suits you.",
+    from: 95,
+    cadence: "per month",
+    includes: [
+      "Home light + space consultation",
+      "Plant and pot selection",
+      "Delivery and styling",
+      "Monthly care visits",
+      "Free swaps if anything sulks",
+    ],
+  },
+  {
+    slug: "workspace",
+    name: "Workspace greening",
+    forWho: "Offices",
+    blurb:
+      "Greener offices feel calmer and people notice. We design, install and maintain planting for receptions, desks and breakout spaces, fully managed so your team never lifts a watering can.",
+    from: 220,
+    cadence: "per month",
+    includes: [
+      "Site survey and planting scheme",
+      "Statement and desk planting",
+      "Professional installation",
+      "Fortnightly maintenance",
+      "Replacement guarantee",
+    ],
+  },
+  {
+    slug: "events",
+    name: "Events and weddings",
+    forWho: "Occasions",
+    blurb:
+      "Living green that makes a room. Short-term hire for weddings, shoots and launches, with foliage walls, aisles and statement specimens built around your day and collected after.",
+    from: 350,
+    cadence: "per event",
+    includes: [
+      "Mood and palette planning",
+      "Foliage features and aisles",
+      "Statement specimens",
+      "Delivery, build and collection",
+      "On-site styling",
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ * Care guides
+ * ------------------------------------------------------------------ */
+
+export type CareGuide = {
+  slug: string;
+  title: string;
+  summary: string;
+  tips: string[];
+};
+
+export const CARE_GUIDES: CareGuide[] = [
+  {
+    slug: "light",
+    title: "Reading the light",
+    summary:
+      "The single biggest factor in whether a plant thrives. Learn to see your rooms the way a plant does.",
+    tips: [
+      "Bright indirect means lots of daylight but no harsh direct sun on the leaves.",
+      "A north window is gentle; a south window is strong and may need a sheer.",
+      "If you can read a book comfortably without a lamp, most plants will cope.",
+      "Yellowing lower leaves often means too little light, not too little water.",
+    ],
+  },
+  {
+    slug: "water",
+    title: "Watering without fear",
+    summary:
+      "More houseplants die from kindness than neglect. Here is how to get it right.",
+    tips: [
+      "Check the top inch of soil with a finger before reaching for the can.",
+      "Water thoroughly until it runs from the base, then let it drain fully.",
+      "Most plants want less in autumn and winter when growth slows.",
+      "Drooping that recovers after a drink means thirsty; mushy stems mean too much.",
+    ],
+  },
+  {
+    slug: "humidity",
+    title: "Humidity and happy leaves",
+    summary:
+      "Calatheas, ferns and the fussier beauties want moisture in the air, not just the pot.",
+    tips: [
+      "Group plants together so they share the moisture they release.",
+      "A pebble tray with water under the pot lifts local humidity.",
+      "Crispy brown leaf edges are the classic dry-air signal.",
+      "Keep humidity lovers away from radiators and draughty doors.",
+    ],
+  },
+  {
+    slug: "feeding",
+    title: "Feeding through the seasons",
+    summary:
+      "Plants do most of their growing in spring and summer. Feed them when they want it.",
+    tips: [
+      "Feed every few weeks from spring to early autumn.",
+      "Ease right off in the darker months when growth pauses.",
+      "Slow-release food is a fuss-free option for one feed that lasts.",
+      "Less is more; over-feeding scorches roots faster than under-feeding starves them.",
+    ],
+  },
+  {
+    slug: "repotting",
+    title: "Knowing when to repot",
+    summary:
+      "A plant outgrowing its pot will tell you. Size up at the right moment and it surges.",
+    tips: [
+      "Roots circling the surface or escaping the drainage holes mean it is time.",
+      "Go up one pot size only; too big a pot holds too much wet soil.",
+      "Spring is the best season to repot, as the plant is ready to grow into it.",
+      "Fresh, open potting mix with good drainage beats tired compacted soil.",
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ * Helpers
+ * ------------------------------------------------------------------ */
+
+export function getPlant(slug: string): Plant | undefined {
+  return PLANTS.find((p) => p.slug === slug);
+}
+
+/** A few plants in the same category (or nearby), excluding the given one. */
+export function relatedPlants(slug: string, count = 3): Plant[] {
+  const plant = getPlant(slug);
+  if (!plant) return PLANTS.slice(0, count);
+  const sameCat = PLANTS.filter(
+    (p) => p.slug !== slug && p.category === plant.category,
+  );
+  const others = PLANTS.filter(
+    (p) => p.slug !== slug && p.category !== plant.category,
+  );
+  return [...sameCat, ...others].slice(0, count);
+}
