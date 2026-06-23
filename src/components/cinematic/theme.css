@@ -1,0 +1,158 @@
+/* Cinematic Jungle — local design tokens + keyframes.
+   Scoped to .cine root so it never leaks into other variants. */
+
+.cine {
+  --c-canvas: #0c1410;
+  --c-surface: #16271b;
+  --c-emerald: #1f5f3f;
+  --c-glow: #9fd15b; /* the one alive accent */
+  --c-brass: #b08d57;
+  --c-terracotta: #c0613b;
+  --c-bone: #f4efe3;
+  --c-sage: #a9b5a3;
+
+  --c-glow-soft: rgba(159, 209, 91, 0.16);
+  --c-glow-line: rgba(159, 209, 91, 0.45);
+  --c-brass-line: rgba(176, 141, 87, 0.4);
+
+  color: var(--c-bone);
+  background: var(--c-canvas);
+}
+
+/* Brass hairline rule */
+.cine-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--c-brass-line) 12%,
+    var(--c-brass-line) 88%,
+    transparent
+  );
+}
+
+.cine-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--c-glow);
+}
+
+.cine-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.cine-serif {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+.cine-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+}
+
+/* Film grain overlay */
+.cine-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism card */
+.cine-glass {
+  background: linear-gradient(
+    160deg,
+    rgba(31, 95, 63, 0.18),
+    rgba(12, 20, 16, 0.55)
+  );
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(176, 141, 87, 0.18);
+}
+
+@keyframes cine-shimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+
+@keyframes cine-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -2.5%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes cine-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes cine-breathe {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.06); }
+}
+
+.cine-shimmer-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 239, 227, 0.14),
+    transparent
+  );
+  animation: cine-shimmer 4.5s ease-in-out infinite;
+}
+
+/* Magnetic CTA base */
+.cine-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  color: var(--c-bone);
+  background: linear-gradient(135deg, var(--c-terracotta), #9c4a2c);
+  box-shadow: 0 12px 40px -12px rgba(192, 97, 59, 0.6);
+  will-change: transform;
+  transition: box-shadow 0.4s ease;
+}
+.cine-cta:hover {
+  box-shadow: 0 18px 60px -10px rgba(192, 97, 59, 0.8);
+}
+
+.cine-cta--ghost {
+  background: transparent;
+  border: 1px solid var(--c-glow-line);
+  color: var(--c-glow);
+  box-shadow: none;
+}
+.cine-cta--ghost:hover {
+  background: var(--c-glow-soft);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cine-shimmer-bar,
+  .cine-grain::after {
+    animation: none;
+  }
+}
