@@ -7,14 +7,12 @@
  */
 
 import { useRef, useState, useMemo } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "motion/react";
 import { Sun, Droplets, PawPrint, Sparkles } from "lucide-react";
 import HoverImage from "./HoverImage";
 import { PLANTS, CATEGORIES, plantImage, type PlantCategory } from "@/lib/content";
 import { useStaticMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 
 type Filter = PlantCategory | "All";
 
@@ -51,21 +49,16 @@ export default function Collection() {
     [filter],
   );
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined" || reduced) return;
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.from(".cine-coll-head > *", {
-        opacity: 0,
-        y: 28,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.1,
-        scrollTrigger: { trigger: ".cine-coll-head", start: "top 85%" },
-      });
-    },
-    { scope: root, dependencies: [reduced] },
-  );
+  useGsapReveal(root, (gsap) => {
+    gsap.from(".cine-coll-head > *", {
+      opacity: 0,
+      y: 28,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.1,
+      scrollTrigger: { trigger: ".cine-coll-head", start: "top 85%" },
+    });
+  });
 
   return (
     <section id="collection" ref={root} className="relative py-28 lg:py-36">

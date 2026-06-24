@@ -8,72 +8,66 @@
  */
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CARE_STEPS } from "@/lib/content";
-import { useReducedMotion, useIsTouch } from "./hooks";
+import { useRichMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 
 export default function CarePhilosophy() {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const touch = useIsTouch();
-  const horizontal = !reduced && !touch;
+  // Default false (SSR/mobile): renders the vertical stack and builds no pin.
+  // Flips true on a motion-OK desktop, which loads GSAP and pins the track.
+  const horizontal = useRichMotion();
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined" || !horizontal || !track.current) return;
-      gsap.registerPlugin(ScrollTrigger);
+  useGsapReveal(root, (gsap) => {
+    if (!track.current) return;
 
-      const panels = gsap.utils.toArray<HTMLElement>(".cine-care-panel");
-      const totalShift = track.current.scrollWidth - window.innerWidth;
+    const panels = gsap.utils.toArray<HTMLElement>(".cine-care-panel");
+    const totalShift = track.current.scrollWidth - window.innerWidth;
 
-      // On ultra-wide screens the track already fits; do not pin a section that
-      // never needs to move (it would eat a viewport of scroll for nothing).
-      if (totalShift < 1) return;
+    // On ultra-wide screens the track already fits; do not pin a section that
+    // never needs to move (it would eat a viewport of scroll for nothing).
+    if (totalShift < 1) return;
 
-      const tween = gsap.to(track.current, {
-        x: -totalShift,
-        ease: "none",
+    const tween = gsap.to(track.current, {
+      x: -totalShift,
+      ease: "none",
+      scrollTrigger: {
+        trigger: root.current,
+        start: "top top",
+        end: () => `+=${totalShift}`,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // progress rail
+    gsap.to(".cine-care-rail-fill", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: root.current,
+        start: "top top",
+        end: () => `+=${totalShift}`,
+        scrub: true,
+      },
+    });
+
+    // per-panel number reveal
+    panels.forEach((panel) => {
+      gsap.from(panel.querySelector(".cine-care-num"), {
+        opacity: 0,
+        y: 40,
         scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: () => `+=${totalShift}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+          trigger: panel,
+          containerAnimation: tween,
+          start: "left 70%",
         },
       });
-
-      // progress rail
-      gsap.to(".cine-care-rail-fill", {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: () => `+=${totalShift}`,
-          scrub: true,
-        },
-      });
-
-      // per-panel number reveal
-      panels.forEach((panel) => {
-        gsap.from(panel.querySelector(".cine-care-num"), {
-          opacity: 0,
-          y: 40,
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: tween,
-            start: "left 70%",
-          },
-        });
-      });
-    },
-    { scope: root, dependencies: [horizontal] },
-  );
+    });
+  });
 
   return (
     <section

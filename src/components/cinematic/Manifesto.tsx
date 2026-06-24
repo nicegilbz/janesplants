@@ -10,23 +10,14 @@
  */
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import { BRAND } from "@/lib/content";
 import MediaSlot from "./MediaSlot";
-import { useStaticMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 
 export default function Manifesto() {
   const root = useRef<HTMLDivElement>(null);
-  const reduced = useStaticMotion();
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined" || reduced) return;
-      gsap.registerPlugin(ScrollTrigger, SplitText);
-
+  useGsapReveal(root, (gsap, _st, SplitText) => {
       // Mission text - line-by-line reveal via SplitText
       try {
         const split = new SplitText(".cine-mani-text", { type: "lines" });
@@ -50,9 +41,7 @@ export default function Manifesto() {
         stagger: 0.12,
         scrollTrigger: { trigger: ".cine-promise-list", start: "top 85%" },
       });
-    },
-    { scope: root, dependencies: [reduced] },
-  );
+  });
 
   return (
     <section

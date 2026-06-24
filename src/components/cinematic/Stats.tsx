@@ -6,48 +6,40 @@
  */
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { STATS } from "@/lib/content";
 import { useStaticMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 
 export default function Stats() {
   const root = useRef<HTMLElement>(null);
   const reduced = useStaticMotion();
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined" || reduced) return;
-      gsap.registerPlugin(ScrollTrigger);
+  useGsapReveal(root, (gsap) => {
+    gsap.from(".cine-stat", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.12,
+      scrollTrigger: { trigger: root.current, start: "top 80%" },
+    });
 
-      gsap.from(".cine-stat", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: { trigger: root.current, start: "top 80%" },
+    // count up numeric prefixes
+    gsap.utils.toArray<HTMLElement>(".cine-stat-num").forEach((el) => {
+      const target = Number(el.dataset.target || "0");
+      if (!target) return;
+      const obj = { v: 0 };
+      gsap.to(obj, {
+        v: target,
+        duration: 1.6,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 90%" },
+        onUpdate: () => {
+          el.firstChild!.textContent = String(Math.round(obj.v));
+        },
       });
-
-      // count up numeric prefixes
-      gsap.utils.toArray<HTMLElement>(".cine-stat-num").forEach((el) => {
-        const target = Number(el.dataset.target || "0");
-        if (!target) return;
-        const obj = { v: 0 };
-        gsap.to(obj, {
-          v: target,
-          duration: 1.6,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 90%" },
-          onUpdate: () => {
-            el.firstChild!.textContent = String(Math.round(obj.v));
-          },
-        });
-      });
-    },
-    { scope: root, dependencies: [reduced] },
-  );
+    });
+  });
 
   return (
     <section ref={root} className="relative py-24">

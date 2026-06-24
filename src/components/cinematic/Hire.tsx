@@ -7,13 +7,10 @@
  */
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Home, Building2, PartyPopper, Heart, ArrowUpRight } from "lucide-react";
 import MediaSlot from "./MediaSlot";
 import MagneticCTA from "./MagneticCTA";
-import { useStaticMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 
 const SERVICES = [
   {
@@ -40,23 +37,17 @@ const SERVICES = [
 
 export default function Hire() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useStaticMotion();
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined" || reduced) return;
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.from(".cine-hire-reveal", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: { trigger: root.current, start: "top 75%" },
-      });
-    },
-    { scope: root, dependencies: [reduced] },
-  );
+  useGsapReveal(root, (gsap) => {
+    gsap.from(".cine-hire-reveal", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.12,
+      scrollTrigger: { trigger: root.current, start: "top 75%" },
+    });
+  });
 
   return (
     <section id="hire" ref={root} className="relative py-28 lg:py-40">

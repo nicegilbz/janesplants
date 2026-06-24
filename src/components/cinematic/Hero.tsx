@@ -13,15 +13,13 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, Sprout } from "lucide-react";
 import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
 import MagneticCTA from "./MagneticCTA";
 import { useStaticMotion } from "./hooks";
+import { useGsapReveal } from "./useGsapReveal";
 import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
@@ -39,50 +37,21 @@ export default function Hero() {
       ? "/media/video/glasshouse-day.mp4"
       : "/media/video/hero-loop.mp4";
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined") return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Headline + supporting entrance are CSS-driven (see .cine-anim-* in
-      // theme.css) so they always settle visible. GSAP here only drives the
-      // scroll parallax below.
-      if (lite) return;
-
-      // Parallax depth — each layer scrolls at its own speed.
-      const layers: [string, number][] = [
-        [".cine-layer-mist", -8],
-        [".cine-layer-back", -22],
-        [".cine-layer-mid", -46],
-        [".cine-layer-fore", -92],
-        [".cine-layer-near", -140],
-      ];
-      layers.forEach(([sel, dist]) => {
-        gsap.to(sel, {
-          yPercent: dist,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
-
-      // Light shafts widen slightly as you scroll, content lifts.
-      gsap.to(".cine-shafts", {
-        opacity: 0.25,
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-      gsap.to(".cine-hero-content", {
-        yPercent: -18,
-        opacity: 0.4,
+  // GSAP only drives the scroll parallax; it loads only on motion-OK desktops.
+  // The headline + supporting entrance are CSS-driven so they always settle
+  // visible. On mobile/reduced the hero is the static poster (see `lite`).
+  useGsapReveal(root, (gsap) => {
+    // Parallax depth — each layer scrolls at its own speed.
+    const layers: [string, number][] = [
+      [".cine-layer-mist", -8],
+      [".cine-layer-back", -22],
+      [".cine-layer-mid", -46],
+      [".cine-layer-fore", -92],
+      [".cine-layer-near", -140],
+    ];
+    layers.forEach(([sel, dist]) => {
+      gsap.to(sel, {
+        yPercent: dist,
         ease: "none",
         scrollTrigger: {
           trigger: root.current,
@@ -91,9 +60,30 @@ export default function Hero() {
           scrub: true,
         },
       });
-    },
-    { scope: root, dependencies: [lite] },
-  );
+    });
+
+    // Light shafts widen slightly as you scroll, content lifts.
+    gsap.to(".cine-shafts", {
+      opacity: 0.25,
+      scrollTrigger: {
+        trigger: root.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+    gsap.to(".cine-hero-content", {
+      yPercent: -18,
+      opacity: 0.4,
+      ease: "none",
+      scrollTrigger: {
+        trigger: root.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  });
 
   return (
     <section
@@ -135,6 +125,11 @@ export default function Hero() {
         />
       </div>
 
+      {/* Decorative depth layers (procedural SVG + pollen canvas) are desktop-
+          only - they are a large share of mobile Style&Layout and sit behind
+          the poster anyway. */}
+      {!lite && (
+        <>
       {/* Volumetric light shafts */}
       <div className="cine-shafts absolute inset-0 opacity-40">
         {[20, 42, 64, 80].map((left, i) => (
@@ -184,6 +179,8 @@ export default function Hero() {
       <div className="cine-layer-mid absolute -bottom-16 right-[-3%] w-[32%] max-w-[420px] opacity-90">
         <PlantSilhouette accent="#356b41" seed="mid-b" className="w-full" />
       </div>
+        </>
+      )}
 
       {/* HERO CONTENT */}
       <div className="cine-hero-content relative z-20 mx-auto w-full max-w-6xl px-6 text-center">
@@ -224,6 +221,8 @@ export default function Hero() {
 
       </div>
 
+      {!lite && (
+        <>
       {/* FOREGROUND fronds (closest, fastest) */}
       <div className="cine-layer-fore pointer-events-none absolute -left-10 top-[-8%] w-[30%] max-w-[420px] opacity-95">
         <Frond accent="#1a4d30" className="w-full" />
@@ -237,6 +236,8 @@ export default function Hero() {
       <div className="cine-layer-near pointer-events-none absolute -bottom-28 -right-20 w-[44%] max-w-[580px] opacity-100">
         <Frond accent="#0f3a22" flip className="w-full -rotate-[16deg]" />
       </div>
+        </>
+      )}
 
       {/* vignette */}
       <div

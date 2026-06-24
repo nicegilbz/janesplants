@@ -28,11 +28,18 @@ export function useIsTouch() {
   return touch;
 }
 
-/** Cheap "should we run expensive JS visuals" gate. */
+/**
+ * "Should we run expensive JS visuals / load motion libraries" gate.
+ *
+ * This is the inverse of useStaticMotion, so it DEFAULTS TO FALSE: on SSR, the
+ * first client paint and all touch/reduced clients it returns false, and only
+ * flips true on a confirmed non-touch, motion-OK client. That lets us put GSAP,
+ * Lenis, the parallax/pin set-pieces and the decorative DOM behind it and have
+ * them never load or hydrate on mobile (the main mobile CPU cost). Below-fold
+ * rich features upgrade after hydration, before they are scrolled into view.
+ */
 export function useRichMotion() {
-  const reduced = useReducedMotion();
-  const touch = useIsTouch();
-  return !reduced && !touch;
+  return !useStaticMotion();
 }
 
 /**
