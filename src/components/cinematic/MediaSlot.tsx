@@ -13,7 +13,6 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
-import { useStaticMotion } from "./hooks";
 
 export default function MediaSlot({
   id,
@@ -36,11 +35,11 @@ export default function MediaSlot({
   video?: string;
   priority?: boolean;
 }) {
-  // Static on touch/reduced: show the still poster instead of decoding a
-  // looping clip - autoplay video is a major mobile CPU/battery cost.
-  const stat = useStaticMotion();
+  // Every slot with a clip plays it, on every device (the brand wants the
+  // motion). The IntersectionObserver below still only decodes it while it is
+  // on screen, so off-screen footage costs nothing.
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playsVideo = Boolean(video) && !stat;
+  const playsVideo = Boolean(video);
 
   // Only decode/play the clip while it is on screen; pause it once it scrolls
   // out of view so off-screen footage never decodes in the background.
@@ -131,7 +130,7 @@ export default function MediaSlot({
         style={{
           background:
             "radial-gradient(120% 100% at 30% 20%, rgba(31,95,63,0.55), transparent 60%), radial-gradient(90% 90% at 80% 90%, rgba(159,209,91,0.14), transparent 55%), linear-gradient(160deg, #102017, #0a120d)",
-          animation: stat ? undefined : "cine-breathe 9s ease-in-out infinite",
+          animation: "cine-breathe 9s ease-in-out infinite",
         }}
       />
       <div

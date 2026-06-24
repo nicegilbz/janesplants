@@ -32,6 +32,13 @@ import { prefersReducedMotion } from "./hooks";
 const HOVER_Q = "(hover: hover) and (pointer: fine)";
 const MOTION_Q = "(prefers-reduced-motion: reduce)";
 
+// Browsers cap how many live WebGL contexts can exist (Firefox especially);
+// past the cap they force-lose the oldest, which across a 12-card grid means
+// dropped contexts + console noise. So we limit how many distortion surfaces
+// run at once and fall back to the plain image beyond it.
+let liveContexts = 0;
+const MAX_CONTEXTS = 4;
+
 function subscribeCapability(onChange: () => void) {
   if (typeof window === "undefined" || !window.matchMedia) return () => {};
   const a = window.matchMedia(HOVER_Q);
@@ -207,6 +214,7 @@ export default function HoverImage({
       // ignore disposal hiccups
     }
     gl.current = null;
+    liveContexts = Math.max(0, liveContexts - 1);
   }
 
   async function initGL() {
@@ -223,6 +231,8 @@ export default function HoverImage({
     initializing.current = false;
     // bail if the component unmounted or a context already exists by now
     if (!wrapRef.current || gl.current) return;
+    // Respect the browser's WebGL context budget; beyond it, stay a still image.
+    if (liveContexts >= MAX_CONTEXTS) return;
 
     let renderer: T.WebGLRenderer;
     try {
@@ -235,6 +245,7 @@ export default function HoverImage({
       // WebGL unavailable — keep the static image silently
       return;
     }
+    liveContexts += 1;
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(w, h, false);
@@ -247,6 +258,16 @@ export default function HoverImage({
     canvas.style.opacity = "0";
     canvas.style.transition = "opacity 360ms ease";
     canvas.style.pointerEvents = "none";
+    // If the GPU drops the context, tear down cleanly so the base image shows
+    // through rather than a dead canvas.
+    canvas.addEventListener(
+      "webglcontextlost",
+      (e) => {
+        e.preventDefault();
+        disposeGL();
+      },
+      { once: true },
+    );
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
