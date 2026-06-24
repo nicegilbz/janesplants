@@ -28,7 +28,7 @@ import {
   type Plant,
   type PlantCategory,
 } from "@/lib/content";
-import { useReducedMotion } from "@/components/cinematic/hooks";
+import { useStaticMotion } from "@/components/cinematic/hooks";
 import { cn } from "@/lib/utils";
 
 type Filter = PlantCategory | "All";
@@ -94,7 +94,7 @@ function PlantCard({ p }: { p: Plant }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_38%,transparent_55%,rgba(12,20,16,0.55))]" />
+        <div className="cine-card-vignette pointer-events-none absolute inset-0" />
       </div>
 
       {/* meta */}
@@ -148,7 +148,7 @@ function PlantCard({ p }: { p: Plant }) {
 
 export default function ShopGrid() {
   const params = useSearchParams();
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const [filter, setFilter] = useState<Filter>(() =>
     normaliseCat(params.get("cat")),
   );
@@ -219,7 +219,7 @@ export default function ShopGrid() {
               value={sort}
               onChange={(e) => setSort(e.target.value as Sort)}
               aria-label="Sort plants"
-              className="cine-mono cursor-pointer appearance-none rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)] py-2 pl-4 pr-9 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--c-bone)] outline-none transition-colors duration-300 hover:border-[var(--c-glow-line)] focus-visible:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="cine-mono cursor-pointer appearance-none rounded-full border border-[var(--c-brass-line)] bg-[var(--c-field)] py-2 pl-4 pr-9 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--c-bone)] outline-none transition-colors duration-300 hover:border-[var(--c-glow-line)] focus-visible:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {SORTS.map((s) => (
                 <option key={s.key} value={s.key} className="text-black">

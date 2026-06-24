@@ -17,7 +17,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { PLANTS, type Plant } from "@/lib/content";
 import { PlantEmblem } from "../botanicals";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 import { cn } from "@/lib/utils";
 
 type Level = "low" | "medium" | "bright";
@@ -42,7 +42,7 @@ function matchesLight(plant: Plant, level: Level): boolean {
 }
 
 export default function LightMatch() {
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const [level, setLevel] = useState<Level>("medium");
 
   const matches = PLANTS.filter((p) => matchesLight(p, level));

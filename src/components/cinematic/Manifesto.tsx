@@ -16,11 +16,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { BRAND } from "@/lib/content";
 import MediaSlot from "./MediaSlot";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 export default function Manifesto() {
   const root = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {
@@ -107,7 +107,7 @@ export default function Manifesto() {
         />
         <MediaSlot
           id="F2"
-          src="/media/leaf-macro.png"
+          src="/media/leaf-macro.webp"
           video="/media/video/growth.mp4"
           label="growth time-lapse"
           kind="loop"

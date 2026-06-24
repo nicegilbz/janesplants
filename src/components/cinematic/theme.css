@@ -179,6 +179,40 @@
   animation: cine-fade-up 0.9s ease-out 0.5s both;
 }
 
+/* Hero video fades in over the poster still, so a day/night swap (which
+ * remounts the video) cross-fades through the new poster with no black flash. */
+@keyframes cine-hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cine-hero-video {
+  animation: cine-hero-fade 0.8s ease both;
+}
+
+/* Photo scrims — theme-aware so day-mode frames/cards aren't muddied by the
+ * heavy night vignette. Night keeps the deep cinematic darkening; day uses a
+ * barely-there warm scrim that still seats the tick-marks and labels. */
+.cine-frame-scrim {
+  background:
+    linear-gradient(180deg, rgba(6, 12, 8, 0.12), transparent 35%, rgba(6, 12, 8, 0.35)),
+    radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(6, 12, 8, 0.55));
+}
+[data-theme="day"] .cine-frame-scrim {
+  background:
+    linear-gradient(180deg, rgba(28, 32, 20, 0.05), transparent 32%, rgba(28, 32, 20, 0.12)),
+    radial-gradient(120% 120% at 50% 40%, transparent 72%, rgba(28, 32, 20, 0.14));
+}
+.cine-card-vignette {
+  background: radial-gradient(70% 60% at 50% 38%, transparent 55%, rgba(12, 20, 16, 0.55));
+}
+[data-theme="day"] .cine-card-vignette {
+  background: radial-gradient(70% 60% at 50% 38%, transparent 70%, rgba(28, 32, 20, 0.12));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cine-shimmer-bar,
   .cine-grain::after {

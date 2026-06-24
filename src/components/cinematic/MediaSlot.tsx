@@ -13,7 +13,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 export default function MediaSlot({
   id,
@@ -36,9 +36,11 @@ export default function MediaSlot({
   video?: string;
   priority?: boolean;
 }) {
-  const reduced = useReducedMotion();
+  // Static on touch/reduced: show the still poster instead of decoding a
+  // looping clip - autoplay video is a major mobile CPU/battery cost.
+  const stat = useStaticMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playsVideo = Boolean(video) && !reduced;
+  const playsVideo = Boolean(video) && !stat;
 
   // Only decode/play the clip while it is on screen; pause it once it scrolls
   // out of view so off-screen footage never decodes in the background.
@@ -70,13 +72,7 @@ export default function MediaSlot({
   ] as const;
 
   const overlay = (
-    <div
-      className="pointer-events-none absolute inset-0"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(6,12,8,0.12), transparent 35%, rgba(6,12,8,0.35)), radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(6,12,8,0.55))",
-      }}
-    />
+    <div className="cine-frame-scrim pointer-events-none absolute inset-0" />
   );
   const tickMarks = corners.map((c) => (
     <span
@@ -85,8 +81,10 @@ export default function MediaSlot({
     />
   ));
 
-  // Real media mode (video or still) -------------------------------------
-  if (video || src) {
+  // Real media mode (playing video, or a still). A video-only slot in static
+  // mode (no still poster) falls through to the premium placeholder below
+  // rather than rendering an empty frame.
+  if (playsVideo || src) {
     return (
       <figure
         className={`group relative overflow-hidden rounded-2xl cine-glass ${className}`}
@@ -133,7 +131,7 @@ export default function MediaSlot({
         style={{
           background:
             "radial-gradient(120% 100% at 30% 20%, rgba(31,95,63,0.55), transparent 60%), radial-gradient(90% 90% at 80% 90%, rgba(159,209,91,0.14), transparent 55%), linear-gradient(160deg, #102017, #0a120d)",
-          animation: reduced ? undefined : "cine-breathe 9s ease-in-out infinite",
+          animation: stat ? undefined : "cine-breathe 9s ease-in-out infinite",
         }}
       />
       <div

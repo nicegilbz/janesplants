@@ -21,20 +21,19 @@ import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
 import MagneticCTA from "./MagneticCTA";
-import { useReducedMotion, useIsTouch } from "./hooks";
+import { useStaticMotion } from "./hooks";
 import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const touch = useIsTouch();
-  // On touch devices (phones) we show the still and skip the parallax + the
-  // autoplay video entirely - video decode + scroll-linked transforms are the
-  // main mobile CPU/battery cost.
-  const lite = reduced || touch;
+  // Static (touch / reduced / first paint) shows just the still and skips the
+  // parallax + the autoplay video - video decode + scroll-linked transforms are
+  // the main mobile CPU/battery cost. The poster sits under the video so the
+  // desktop upgrade to video cross-fades rather than flashing.
+  const lite = useStaticMotion();
   const { theme } = useTheme();
   const heroPoster =
-    theme === "day" ? "/media/glasshouse-day.png" : "/media/hero.png";
+    theme === "day" ? "/media/glasshouse-day.webp" : "/media/hero.webp";
   const heroVideo =
     theme === "day"
       ? "/media/video/glasshouse-day.mp4"
@@ -101,19 +100,20 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Base cinematic media: hero loop (still poster, image fallback) */}
+      {/* Base cinematic media: a poster still always sits underneath, so a
+          day/night swap cross-fades instead of flashing black; on desktop the
+          matching video fades in over it. Touch/reduced shows just the still. */}
       <div className="absolute inset-0">
-        {lite ? (
-          <Image
-            key={heroPoster}
-            src={heroPoster}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        ) : (
+        <Image
+          key={heroPoster}
+          src={heroPoster}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        {!lite && (
           <video
             key={heroVideo}
             autoPlay
@@ -121,8 +121,7 @@ export default function Hero() {
             loop
             playsInline
             preload="metadata"
-            poster={heroPoster}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="cine-hero-video absolute inset-0 h-full w-full object-cover"
           >
             <source src={heroVideo} type="video/mp4" />
           </video>
@@ -256,7 +255,7 @@ export default function Hero() {
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
           aria-hidden="true"
-          style={{ animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite" }}
+          style={{ animation: lite ? undefined : "cine-pulse 2s ease-in-out infinite" }}
         />
       </div>
     </section>

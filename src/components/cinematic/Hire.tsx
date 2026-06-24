@@ -13,7 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Home, Building2, PartyPopper, Heart, ArrowUpRight } from "lucide-react";
 import MediaSlot from "./MediaSlot";
 import MagneticCTA from "./MagneticCTA";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 const SERVICES = [
   {
@@ -40,7 +40,7 @@ const SERVICES = [
 
 export default function Hire() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {
@@ -112,7 +112,7 @@ export default function Hire() {
         <div className="cine-hire-reveal grid grid-cols-1 gap-5 sm:grid-cols-2">
           <MediaSlot
             id="F4"
-            src="/media/monstera.png"
+            src="/media/monstera.webp"
             label="day / night styling"
             kind="pair"
             aspect="3 / 4"
@@ -121,7 +121,7 @@ export default function Hire() {
           <div className="flex flex-col gap-5">
             <MediaSlot
               id="F5"
-              src="/media/leaf-macro.png"
+              src="/media/leaf-macro.webp"
               video="/media/video/leaf-loop.mp4"
               label="leaf macro"
               kind="loop"
@@ -129,7 +129,7 @@ export default function Hire() {
             />
             <MediaSlot
               id="F5"
-              src="/media/glasshouse-day.png"
+              src="/media/glasshouse-day.webp"
               label="office install"
               kind="still"
               aspect="4 / 3"

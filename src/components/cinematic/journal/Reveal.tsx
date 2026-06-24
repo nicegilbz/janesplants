@@ -9,7 +9,7 @@
  */
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useReducedMotion } from "@/components/cinematic/hooks";
+import { useStaticMotion } from "@/components/cinematic/hooks";
 import { cn } from "@/lib/utils";
 
 export default function Reveal({
@@ -24,7 +24,7 @@ export default function Reveal({
   delay?: number;
   as?: "div" | "li" | "article" | "section";
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
 

@@ -14,7 +14,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Sun, Droplets, PawPrint, Sparkles } from "lucide-react";
 import HoverImage from "./HoverImage";
 import { PLANTS, CATEGORIES, plantImage, type PlantCategory } from "@/lib/content";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 type Filter = PlantCategory | "All";
 
@@ -42,7 +42,7 @@ function Difficulty({ level }: { level: number }) {
 
 export default function Collection() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const [filter, setFilter] = useState<Filter>("All");
 
   const filtered = useMemo(
@@ -146,7 +146,7 @@ export default function Collection() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_38%,transparent_55%,rgba(12,20,16,0.55))]" />
+                  <div className="cine-card-vignette pointer-events-none absolute inset-0" />
                 </div>
 
                 {/* meta */}

@@ -27,7 +27,7 @@ import MagneticCTA from "@/components/cinematic/MagneticCTA";
 import EnquiryForm from "@/components/cinematic/EnquiryForm";
 import HoverImage from "@/components/cinematic/HoverImage";
 import { MistBand } from "@/components/cinematic/botanicals";
-import { useReducedMotion } from "@/components/cinematic/hooks";
+import { useStaticMotion } from "@/components/cinematic/hooks";
 import { CARE_GUIDES, plantImage, type Plant } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import PlantInspector from "./PlantInspector";
@@ -58,7 +58,7 @@ export default function PlantView({
   related: Plant[];
 }) {
   const root = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const care = tailoredTips(plant);
 
   useGSAP(

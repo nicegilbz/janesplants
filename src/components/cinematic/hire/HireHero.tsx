@@ -19,18 +19,17 @@ import { ArrowDown, Leaf } from "lucide-react";
 import { Frond, PlantSilhouette, MistBand } from "../botanicals";
 import MediaSlot from "../MediaSlot";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion, useIsTouch } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 export default function HireHero() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const touch = useIsTouch();
+  const stat = useStaticMotion();
 
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
 
-      if (reduced || touch) return;
+      if (stat) return;
 
       // Subtle, header-friendly parallax drift on the foliage layers.
       gsap.registerPlugin(ScrollTrigger);
@@ -63,7 +62,7 @@ export default function HireHero() {
         },
       });
     },
-    { scope: root, dependencies: [reduced, touch] },
+    { scope: root, dependencies: [stat] },
   );
 
   return (
@@ -179,7 +178,7 @@ export default function HireHero() {
         <div className="hire-hero-fade">
           <MediaSlot
             id="F4"
-            src="/media/glasshouse-night.png"
+            src="/media/glasshouse-night.webp"
             label="day / night glasshouse"
             kind="pair"
             aspect="4 / 5"
@@ -206,7 +205,7 @@ export default function HireHero() {
           className="h-4 w-4 text-[var(--c-glow)]"
           aria-hidden="true"
           style={{
-            animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite",
+            animation: stat ? undefined : "cine-pulse 2s ease-in-out infinite",
           }}
         />
       </div>

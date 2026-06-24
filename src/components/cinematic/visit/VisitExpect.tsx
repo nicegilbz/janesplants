@@ -14,7 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Car, TramFront, Dog, Hand } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PlantEmblem } from "../botanicals";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 type Item = { icon: LucideIcon; title: string; body: string };
 
@@ -46,7 +46,7 @@ const WHAT_TO_EXPECT: Item[] = [
 
 export default function VisitExpect() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

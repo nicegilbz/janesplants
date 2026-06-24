@@ -15,11 +15,11 @@ import { BRAND } from "@/lib/content";
 import { Frond } from "./botanicals";
 import MagneticCTA from "./MagneticCTA";
 import Pollen from "./Pollen";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 export default function Visit() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

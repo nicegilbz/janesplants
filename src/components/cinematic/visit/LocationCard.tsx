@@ -16,7 +16,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MapPin, Clock } from "lucide-react";
 import { BRAND } from "@/lib/content";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 /** Opening hours, plain and warm. */
 const HOURS: { day: string; time: string }[] = [
@@ -28,7 +28,7 @@ const HOURS: { day: string; time: string }[] = [
 
 export default function LocationCard() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

@@ -19,18 +19,17 @@ import { ArrowDown, MapPin, Leaf } from "lucide-react";
 import { Frond, PlantSilhouette, MistBand } from "../botanicals";
 import MediaSlot from "../MediaSlot";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion, useIsTouch } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 export default function VisitHero() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const touch = useIsTouch();
+  const stat = useStaticMotion();
 
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
 
-      if (reduced || touch) return;
+      if (stat) return;
 
       gsap.registerPlugin(ScrollTrigger);
       const layers: [string, number][] = [
@@ -62,7 +61,7 @@ export default function VisitHero() {
         },
       });
     },
-    { scope: root, dependencies: [reduced, touch] },
+    { scope: root, dependencies: [stat] },
   );
 
   return (
@@ -179,7 +178,7 @@ export default function VisitHero() {
         <div className="visit-hero-fade">
           <MediaSlot
             id="F4"
-            src="/media/glasshouse-day.png"
+            src="/media/glasshouse-day.webp"
             video="/media/video/glasshouse-day.mp4"
             label="day / night glasshouse"
             kind="pair"
@@ -207,7 +206,7 @@ export default function VisitHero() {
           className="h-4 w-4 text-[var(--c-glow)]"
           aria-hidden="true"
           style={{
-            animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite",
+            animation: stat ? undefined : "cine-pulse 2s ease-in-out infinite",
           }}
         />
       </div>

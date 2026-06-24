@@ -34,3 +34,32 @@ export function useRichMotion() {
   const touch = useIsTouch();
   return !reduced && !touch;
 }
+
+/**
+ * True when we should render statically with no entrance animation/parallax:
+ * reduced-motion OR touch.
+ *
+ * Defaults to TRUE so SSR and the first client paint create NO scroll
+ * animations; we only switch to animated once we've confirmed a non-touch
+ * client that hasn't asked for reduced motion. That guarantees phones never
+ * build ScrollTriggers (the main mobile CPU cost) - there is no brief
+ * "animated" window that would need reverting. Reveal components gate on this
+ * and render the same DOM either way (content is visible by default), so there
+ * is no flash on desktop.
+ */
+export function useStaticMotion() {
+  const [isStatic, setIsStatic] = useState(true);
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarse = window.matchMedia("(hover: none), (pointer: coarse)");
+    const set = () => setIsStatic(reduce.matches || coarse.matches);
+    set();
+    reduce.addEventListener("change", set);
+    coarse.addEventListener("change", set);
+    return () => {
+      reduce.removeEventListener("change", set);
+      coarse.removeEventListener("change", set);
+    };
+  }, []);
+  return isStatic;
+}

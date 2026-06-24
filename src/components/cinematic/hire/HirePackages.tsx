@@ -15,7 +15,7 @@ import { Check, ArrowUpRight } from "lucide-react";
 import { HIRE_PACKAGES } from "@/lib/content";
 import { PlantEmblem } from "../botanicals";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 import { cn } from "@/lib/utils";
 
 /** Pair each package with a generative emblem form + accent for cohesion. */
@@ -27,7 +27,7 @@ const EMBLEM: Record<string, { category: string; accent: string }> = {
 
 export default function HirePackages() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

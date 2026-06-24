@@ -14,11 +14,11 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Plus } from "lucide-react";
 import { CARE_GUIDES } from "@/lib/content";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 import { cn } from "@/lib/utils";
 
 export default function CareGuides() {
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
   const [open, setOpen] = useState<string>(CARE_GUIDES[0]?.slug ?? "");
 
   return (

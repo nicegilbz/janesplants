@@ -17,11 +17,11 @@ import Link from "next/link";
 import { ArrowDown, Sprout } from "lucide-react";
 import { Frond, MistBand, PlantSilhouette } from "../botanicals";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 export default function AboutHero() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

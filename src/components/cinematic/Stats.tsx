@@ -10,11 +10,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { STATS } from "@/lib/content";
-import { useReducedMotion } from "./hooks";
+import { useStaticMotion } from "./hooks";
 
 export default function Stats() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

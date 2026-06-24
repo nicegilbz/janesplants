@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MediaSlot from "../MediaSlot";
-import { useReducedMotion } from "../hooks";
+import { useStaticMotion } from "../hooks";
 
 const SHOTS: {
   id: string;
@@ -22,15 +22,15 @@ const SHOTS: {
   src?: string;
   video?: string;
 }[] = [
-  { id: "F4", label: "styled living room", kind: "loop", aspect: "4 / 3", span: "lg:col-span-2 lg:row-span-2", src: "/media/glasshouse-day.png", video: "/media/video/hire-walkthrough.mp4" },
-  { id: "L1", label: "office reception", kind: "loop", aspect: "4 / 3", span: "", src: "/media/glasshouse-day.png", video: "/media/video/glasshouse-day.mp4" },
-  { id: "F5", label: "desk planting", kind: "still", aspect: "4 / 3", span: "", src: "/media/plants/monstera-deliciosa.png" },
+  { id: "F4", label: "styled living room", kind: "loop", aspect: "4 / 3", span: "lg:col-span-2 lg:row-span-2", src: "/media/glasshouse-day.webp", video: "/media/video/hire-walkthrough.mp4" },
+  { id: "L1", label: "office reception", kind: "loop", aspect: "4 / 3", span: "", src: "/media/glasshouse-day.webp", video: "/media/video/glasshouse-day.mp4" },
+  { id: "F5", label: "desk planting", kind: "still", aspect: "4 / 3", span: "", src: "/media/plants/monstera-deliciosa.webp" },
   { id: "F6", label: "wedding foliage aisle", kind: "loop", aspect: "16 / 9", span: "lg:col-span-2", video: "/media/video/event-reveal.mp4" },
 ];
 
 export default function ProofGallery() {
   const root = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useStaticMotion();
 
   useGSAP(
     () => {

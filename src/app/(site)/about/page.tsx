@@ -63,7 +63,7 @@ export default function AboutPage() {
           <div className="relative">
             <MediaSlot
               id="A1"
-              src="/media/plants/bird-of-paradise.png"
+              src="/media/plants/bird-of-paradise.webp"
               label="a glasshouse specimen"
               kind="still"
               aspect="4 / 5"
@@ -96,7 +96,7 @@ export default function AboutPage() {
           <div className="order-2 lg:order-1">
             <MediaSlot
               id="A2"
-              src="/media/glasshouse-day.png"
+              src="/media/glasshouse-day.webp"
               video="/media/video/glasshouse-day.mp4"
               label="the Hertford glasshouse"
               kind="loop"
