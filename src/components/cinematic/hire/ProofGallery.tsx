@@ -19,11 +19,13 @@ const SHOTS: {
   kind: "loop" | "pair" | "turntable" | "still";
   aspect: string;
   span: string;
+  src?: string;
+  video?: string;
 }[] = [
-  { id: "F4", label: "styled living room", kind: "still", aspect: "4 / 3", span: "lg:col-span-2 lg:row-span-2" },
-  { id: "L1", label: "office reception", kind: "turntable", aspect: "4 / 3", span: "" },
-  { id: "F5", label: "desk planting", kind: "still", aspect: "4 / 3", span: "" },
-  { id: "F6", label: "wedding foliage aisle", kind: "loop", aspect: "16 / 9", span: "lg:col-span-2" },
+  { id: "F4", label: "styled living room", kind: "loop", aspect: "4 / 3", span: "lg:col-span-2 lg:row-span-2", src: "/media/glasshouse-day.png", video: "/media/video/hire-walkthrough.mp4" },
+  { id: "L1", label: "office reception", kind: "loop", aspect: "4 / 3", span: "", src: "/media/glasshouse-day.png", video: "/media/video/glasshouse-day.mp4" },
+  { id: "F5", label: "desk planting", kind: "still", aspect: "4 / 3", span: "", src: "/media/plants/monstera-deliciosa.png" },
+  { id: "F6", label: "wedding foliage aisle", kind: "loop", aspect: "16 / 9", span: "lg:col-span-2", video: "/media/video/event-reveal.mp4" },
 ];
 
 export default function ProofGallery() {
@@ -79,6 +81,8 @@ export default function ProofGallery() {
                 label={shot.label}
                 kind={shot.kind}
                 aspect={shot.aspect}
+                src={shot.src}
+                video={shot.video}
                 className="h-full w-full"
               />
             </div>

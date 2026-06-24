@@ -88,16 +88,29 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Base cinematic photography */}
+      {/* Base cinematic media: hero loop (still poster, image fallback) */}
       <div className="absolute inset-0">
-        <Image
-          src="/media/hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {reduced ? (
+          <Image
+            src="/media/hero.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        ) : (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/media/hero.png"
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/media/video/hero-loop.mp4" type="video/mp4" />
+          </video>
+        )}
         <div
           className="absolute inset-0"
           style={{

@@ -3,14 +3,16 @@
 /**
  * Cinematic media frame.
  *
- * With a `src` it renders real imagery (optimised via next/image) inside the
- * cinematic frame. Without one it falls back to a labelled, premium-looking
- * placeholder (breathing light field + play affordance + asset id) standing in
- * for forthcoming Gemini footage. Either way it never looks broken.
+ * - `video` set  -> autoplays a muted, looping clip (with `src` as the poster),
+ *   falling back to the still under reduced motion.
+ * - `src` set    -> shows the optimised still (next/image).
+ * - neither      -> a labelled, premium placeholder for forthcoming footage.
+ * Never looks broken.
  */
 
 import Image from "next/image";
 import { Play } from "lucide-react";
+import { useReducedMotion } from "./hooks";
 
 export default function MediaSlot({
   id,
@@ -19,6 +21,7 @@ export default function MediaSlot({
   kind = "loop",
   className = "",
   src,
+  video,
   priority = false,
 }: {
   id: string;
@@ -26,10 +29,13 @@ export default function MediaSlot({
   aspect?: string;
   kind?: "loop" | "pair" | "turntable" | "still";
   className?: string;
-  /** When set, real imagery is shown instead of the placeholder. */
+  /** Still image source (also used as the video poster). */
   src?: string;
+  /** Video source. Autoplays muted + looped; needs reduced-motion fallback. */
+  video?: string;
   priority?: boolean;
 }) {
+  const reduced = useReducedMotion();
   const corners = [
     "left-3 top-3 border-l border-t",
     "right-3 top-3 border-r border-t",
@@ -37,48 +43,53 @@ export default function MediaSlot({
     "right-3 bottom-3 border-r border-b",
   ] as const;
 
-  // Real media mode -------------------------------------------------------
-  if (src) {
+  const overlay = (
+    <div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(6,12,8,0.12), transparent 35%, rgba(6,12,8,0.35)), radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(6,12,8,0.55))",
+      }}
+    />
+  );
+  const tickMarks = corners.map((c) => (
+    <span
+      key={c}
+      className={`pointer-events-none absolute h-4 w-4 border-[var(--c-brass-line)] ${c}`}
+    />
+  ));
+
+  // Real media mode (video or still) -------------------------------------
+  if (video || src) {
     return (
       <figure
         className={`group relative overflow-hidden rounded-2xl cine-glass ${className}`}
         style={{ aspectRatio: aspect }}
       >
-        <Image
-          src={src}
-          alt={label}
-          fill
-          priority={priority}
-          sizes="(max-width: 768px) 100vw, 60vw"
-          className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]"
-        />
-        {/* legibility + cinematic grade */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(6,12,8,0.12), transparent 35%, rgba(6,12,8,0.35)), radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(6,12,8,0.55))",
-          }}
-        />
-        {corners.map((c) => (
-          <span
-            key={c}
-            className={`pointer-events-none absolute h-4 w-4 border-[var(--c-brass-line)] ${c}`}
+        {video && !reduced ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={src}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+        ) : src ? (
+          <Image
+            src={src}
+            alt={label}
+            fill
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, 60vw"
+            className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]"
           />
-        ))}
-        {kind === "loop" && (
-          <span className="pointer-events-none absolute inset-x-3 bottom-3 flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[rgba(12,20,16,0.5)] backdrop-blur-sm">
-              <Play
-                className="h-3 w-3 translate-x-[1px] text-[var(--c-glow)]"
-                fill="currentColor"
-              />
-            </span>
-            <span className="cine-mono text-[0.6rem] uppercase tracking-[0.22em] text-[var(--c-bone)]/80">
-              {label}
-            </span>
-          </span>
-        )}
+        ) : null}
+        {overlay}
+        {tickMarks}
       </figure>
     );
   }
@@ -105,7 +116,6 @@ export default function MediaSlot({
         }}
       />
       <div className="cine-shimmer-bar" />
-
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[rgba(12,20,16,0.5)] backdrop-blur-sm transition-transform duration-500 group-hover:scale-110">
           <Play
@@ -114,14 +124,7 @@ export default function MediaSlot({
           />
         </div>
       </div>
-
-      {corners.map((c) => (
-        <span
-          key={c}
-          className={`pointer-events-none absolute h-4 w-4 border-[var(--c-brass-line)] ${c}`}
-        />
-      ))}
-
+      {tickMarks}
       <figcaption className="absolute inset-x-3 bottom-3 flex items-center justify-between">
         <span className="cine-mono rounded-full bg-[rgba(12,20,16,0.6)] px-2.5 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-glow)] backdrop-blur-sm">
           {id}

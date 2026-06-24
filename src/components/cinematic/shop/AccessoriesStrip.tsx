@@ -6,6 +6,7 @@
  * brass mono. Pure CSS visuals, no media. Matches the cinematic card language.
  */
 
+import Image from "next/image";
 import { Flower2, HeartPulse, Scissors } from "lucide-react";
 import { ACCESSORIES, type Accessory } from "@/lib/content";
 
@@ -63,9 +64,18 @@ export default function AccessoriesStrip() {
                   {items.map((a) => (
                     <li
                       key={a.name}
-                      className="flex items-start justify-between gap-4 border-t border-[var(--c-brass-line)] pt-4 first:border-t-0 first:pt-0"
+                      className="flex items-center gap-4 border-t border-[var(--c-brass-line)] pt-4 first:border-t-0 first:pt-0"
                     >
-                      <div className="min-w-0">
+                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-[var(--c-brass-line)]">
+                        <Image
+                          src={a.image}
+                          alt={a.name}
+                          fill
+                          sizes="56px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-[0.95rem] text-[var(--c-bone)]">
                           {a.name}
                         </p>

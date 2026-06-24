@@ -267,17 +267,18 @@ export type Accessory = {
   kind: "Pot" | "Care" | "Tool";
   blurb: string;
   price: number;
+  image: string;
 };
 
 export const ACCESSORIES: Accessory[] = [
-  { name: "Hand-thrown stoneware pot", kind: "Pot", blurb: "Matte, tonal, drainage done right.", price: 32 },
-  { name: "Aged terracotta", kind: "Pot", blurb: "Breathable clay that ages beautifully.", price: 18 },
-  { name: "Fluted ceramic planter", kind: "Pot", blurb: "Ribbed shadows that catch the light.", price: 44 },
-  { name: "Slow-release plant food", kind: "Care", blurb: "Six months of feeding in one go.", price: 12 },
-  { name: "Leaf shine cloth set", kind: "Care", blurb: "For glossy leaves that mean it.", price: 9 },
-  { name: "Brass mister", kind: "Tool", blurb: "A fine mist for the humidity lovers.", price: 28 },
-  { name: "Moisture meter", kind: "Tool", blurb: "Stop guessing when to water.", price: 16 },
-  { name: "Copper snips", kind: "Tool", blurb: "Clean cuts, no crushed stems.", price: 22 },
+  { name: "Hand-thrown stoneware pot", kind: "Pot", blurb: "Matte, tonal, drainage done right.", price: 32, image: "/media/accessories/stoneware-pot.png" },
+  { name: "Aged terracotta", kind: "Pot", blurb: "Breathable clay that ages beautifully.", price: 18, image: "/media/accessories/terracotta-pot.png" },
+  { name: "Fluted ceramic planter", kind: "Pot", blurb: "Ribbed shadows that catch the light.", price: 44, image: "/media/accessories/fluted-planter.png" },
+  { name: "Slow-release plant food", kind: "Care", blurb: "Six months of feeding in one go.", price: 12, image: "/media/accessories/plant-food.png" },
+  { name: "Leaf shine cloth set", kind: "Care", blurb: "For glossy leaves that mean it.", price: 9, image: "/media/accessories/leaf-cloth.png" },
+  { name: "Brass mister", kind: "Tool", blurb: "A fine mist for the humidity lovers.", price: 28, image: "/media/accessories/brass-mister.png" },
+  { name: "Moisture meter", kind: "Tool", blurb: "Stop guessing when to water.", price: 16, image: "/media/accessories/moisture-meter.png" },
+  { name: "Copper snips", kind: "Tool", blurb: "Clean cuts, no crushed stems.", price: 22, image: "/media/accessories/copper-snips.png" },
 ];
 
 export const CARE_STEPS = [

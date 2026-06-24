@@ -120,10 +120,11 @@ export default function Hire() {
           />
           <div className="flex flex-col gap-5">
             <MediaSlot
-              id="L1"
-              src="/media/glasshouse-night.png"
-              label="360 turntable"
-              kind="turntable"
+              id="F5"
+              src="/media/leaf-macro.png"
+              video="/media/video/leaf-loop.mp4"
+              label="leaf macro"
+              kind="loop"
               aspect="4 / 3"
             />
             <MediaSlot

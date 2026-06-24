@@ -179,6 +179,7 @@ export default function VisitHero() {
           <MediaSlot
             id="F4"
             src="/media/glasshouse-day.png"
+            video="/media/video/glasshouse-day.mp4"
             label="day / night glasshouse"
             kind="pair"
             aspect="4 / 5"
