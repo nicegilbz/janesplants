@@ -14,6 +14,7 @@
   --c-glow-soft: rgba(159, 209, 91, 0.16);
   --c-glow-line: rgba(159, 209, 91, 0.45);
   --c-brass-line: rgba(176, 141, 87, 0.4);
+  --c-field: rgba(12, 20, 16, 0.4); /* form field background */
 
   color: var(--c-bone);
   background: var(--c-canvas);
@@ -207,6 +208,7 @@
   --c-glow-soft: rgba(79, 122, 44, 0.12);
   --c-glow-line: rgba(79, 122, 44, 0.42);
   --c-brass-line: rgba(138, 106, 52, 0.42);
+  --c-field: rgba(255, 255, 255, 0.6);
   background: var(--c-canvas);
 }
 

@@ -115,7 +115,7 @@ export default function EnquiryForm({
   }
 
   const field =
-    "w-full rounded-xl border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.4)] px-4 py-3 text-[var(--c-bone)] outline-none transition-colors placeholder:text-[var(--c-sage)]/60 focus:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+    "w-full rounded-xl border border-[var(--c-brass-line)] bg-[var(--c-field)] px-4 py-3 text-[var(--c-bone)] outline-none transition-colors placeholder:text-[var(--c-sage)]/60 focus:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
 
   return (
     <form onSubmit={onSubmit} className="rounded-2xl cine-glass p-6 sm:p-8">
