@@ -29,23 +29,6 @@ export default function VisitHero() {
     () => {
       if (typeof window === "undefined") return;
 
-      gsap.from(".visit-hero-line", {
-        yPercent: 120,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-        stagger: 0.12,
-        delay: 0.2,
-      });
-      gsap.from(".visit-hero-fade", {
-        opacity: 0,
-        y: 24,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.1,
-        delay: 0.8,
-      });
-
       if (reduced) return;
 
       gsap.registerPlugin(ScrollTrigger);
@@ -144,7 +127,7 @@ export default function VisitHero() {
       {/* CONTENT — two columns: copy + media pair */}
       <div className="visit-hero-content relative z-20 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 px-6 pt-28 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20">
         <div>
-          <div className="visit-hero-fade mb-6 flex items-center gap-3">
+          <div className="visit-hero-fade cine-anim-fade mb-6 flex items-center gap-3">
             <span className="cine-eyebrow">Visit</span>
             <span className="h-px w-10 bg-[var(--c-brass-line)]" />
             <span className="cine-mono flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
@@ -155,22 +138,22 @@ export default function VisitHero() {
 
           <h1 className="cine-serif text-[clamp(2.8rem,8vw,6.5rem)] text-[var(--c-bone)]">
             <span className="block overflow-hidden">
-              <span className="visit-hero-line block">Come and</span>
+              <span className="visit-hero-line cine-anim-rise block">Come and</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="visit-hero-line block">
+              <span className="visit-hero-line cine-anim-rise block">
                 <span className="cine-accent text-[var(--c-glow)]">wander</span>.
               </span>
             </span>
           </h1>
 
-          <p className="visit-hero-fade mt-7 max-w-md text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
+          <p className="visit-hero-fade cine-anim-fade mt-7 max-w-md text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
             A working glasshouse and shop, open to wander. Come and meet the
             plants, breathe the warm green air, and leave with one you cannot
             stop looking at.
           </p>
 
-          <div className="visit-hero-fade mt-9 flex flex-wrap items-center gap-4">
+          <div className="visit-hero-fade cine-anim-fade mt-9 flex flex-wrap items-center gap-4">
             <MagneticCTA href="#enquire">
               <Leaf className="h-4 w-4" /> Say hello
             </MagneticCTA>
@@ -179,10 +162,10 @@ export default function VisitHero() {
             </MagneticCTA>
           </div>
 
-          <p className="visit-hero-fade mt-6 text-[0.8rem] text-[var(--c-sage)]">
+          <p className="visit-hero-fade cine-anim-fade mt-6 text-[0.8rem] text-[var(--c-sage)]">
             Want a plant ready when you arrive?{" "}
             <Link
-              href="/cinematic/shop"
+              href="/shop"
               className="text-[var(--c-glow)] underline-offset-4 hover:underline"
             >
               Browse the shop
@@ -214,7 +197,7 @@ export default function VisitHero() {
       />
 
       {/* scroll cue */}
-      <div className="visit-hero-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
+      <div className="visit-hero-fade cine-anim-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
         <span className="cine-mono text-[0.62rem] uppercase tracking-[0.3em] text-[var(--c-sage)]">
           Plan your visit
         </span>

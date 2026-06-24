@@ -59,7 +59,7 @@ export default function CarePage() {
 
           <div className="mt-11 flex flex-wrap items-center gap-4">
             <MagneticCTA href="#guides">Read the guides</MagneticCTA>
-            <MagneticCTA href="/cinematic/shop" variant="ghost">
+            <MagneticCTA href="/shop" variant="ghost">
               Browse the plants
             </MagneticCTA>
           </div>
@@ -149,15 +149,15 @@ export default function CarePage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MagneticCTA href="/cinematic/visit#enquire">Ask us a question</MagneticCTA>
-            <MagneticCTA href="/cinematic/hire" variant="ghost">
+            <MagneticCTA href="/visit#enquire">Ask us a question</MagneticCTA>
+            <MagneticCTA href="/hire" variant="ghost">
               Have us style it
             </MagneticCTA>
           </div>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[var(--c-sage)]">
             <Link
-              href="/cinematic"
+              href="/"
               className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] transition-colors hover:text-[var(--c-glow)]"
             >
               Back to the glasshouse

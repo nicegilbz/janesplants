@@ -495,6 +495,11 @@ export function getPlant(slug: string): Plant | undefined {
   return PLANTS.find((p) => p.slug === slug);
 }
 
+/** Public path to a plant's cinematic specimen photo. */
+export function plantImage(slug: string): string {
+  return `/media/plants/${slug}.png`;
+}
+
 /** A few plants in the same category (or nearby), excluding the given one. */
 export function relatedPlants(slug: string, count = 3): Plant[] {
   const plant = getPlant(slug);

@@ -26,7 +26,7 @@ export default function ConceptNav({
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[100] flex items-center justify-between px-5 py-5 sm:px-8">
       <Link
-        href="/"
+        href="/concepts"
         className={`pointer-events-auto inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] backdrop-blur-md transition-colors ${base}`}
       >
         <ArrowLeft className="h-3.5 w-3.5" />
@@ -44,7 +44,7 @@ export default function ConceptNav({
           return (
             <Link
               key={c.slug}
-              href={`/${c.slug}`}
+              href={c.slug === "cinematic" ? "/" : `/${c.slug}`}
               className="rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide transition-colors"
               style={{
                 background: active ? (accent ?? c.accent) : "transparent",

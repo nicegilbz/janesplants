@@ -12,10 +12,10 @@ import { Leaf, Menu, X } from "lucide-react";
 import { BRAND } from "@/lib/content";
 
 const NAV = [
-  { href: "/cinematic/shop", label: "Shop" },
-  { href: "/cinematic/hire", label: "Hire" },
-  { href: "/cinematic/care", label: "Care" },
-  { href: "/cinematic/visit", label: "Visit" },
+  { href: "/shop", label: "Shop" },
+  { href: "/hire", label: "Hire" },
+  { href: "/care", label: "Care" },
+  { href: "/visit", label: "Visit" },
 ];
 
 export default function SiteHeader() {
@@ -45,7 +45,7 @@ export default function SiteHeader() {
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/cinematic" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           <Leaf className="h-5 w-5 text-[var(--c-glow)]" />
           <span className="font-[family-name:var(--font-serif)] text-lg tracking-tight text-[var(--c-bone)]">
             {BRAND.name}
@@ -67,7 +67,7 @@ export default function SiteHeader() {
             );
           })}
           <Link
-            href="/cinematic/visit#enquire"
+            href="/visit#enquire"
             className="cine-mono rounded-full border border-[var(--c-glow-line)] px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] text-[var(--c-glow)] transition-colors hover:bg-[var(--c-glow-soft)]"
           >
             Enquire
@@ -97,7 +97,7 @@ export default function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/cinematic/visit#enquire"
+              href="/visit#enquire"
               className="cine-mono text-sm uppercase tracking-[0.18em] text-[var(--c-glow)]"
             >
               Enquire

@@ -95,7 +95,7 @@ export default function PlantView({
         <div className="mx-auto max-w-7xl">
           {/* breadcrumb back to shop */}
           <Link
-            href="/cinematic/shop"
+            href="/shop"
             className="cine-mono inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to the shop
@@ -135,7 +135,7 @@ export default function PlantView({
                 <span className="cine-mono text-3xl text-[var(--c-brass)]">
                   £{plant.price}
                 </span>
-                <MagneticCTA href="/cinematic/visit#enquire">
+                <MagneticCTA href="/visit#enquire">
                   Reserve / ask about this <ArrowRight className="h-4 w-4" />
                 </MagneticCTA>
                 <a
@@ -191,7 +191,7 @@ export default function PlantView({
             </div>
 
             <Link
-              href="/cinematic/care"
+              href="/care"
               className="cine-mono mt-7 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-glow)] transition-colors hover:text-[var(--c-bone)]"
             >
               <BookOpen className="h-4 w-4" /> Read the full care guides
@@ -223,7 +223,7 @@ export default function PlantView({
             <p className="mt-4 text-[0.85rem] text-[var(--c-sage)]/80">
               Styling a whole room or a venue instead?{" "}
               <Link
-                href="/cinematic/hire"
+                href="/hire"
                 className="text-[var(--c-glow)] underline-offset-4 hover:underline"
               >
                 See plant hire and styling
@@ -258,7 +258,7 @@ export default function PlantView({
             {related.map((p) => (
               <Link
                 key={p.slug}
-                href={`/cinematic/plant/${p.slug}`}
+                href={`/plant/${p.slug}`}
                 className={cn(
                   "pv-reveal group relative overflow-hidden rounded-2xl cine-glass p-5 transition-all duration-500 hover:-translate-y-1",
                 )}
@@ -300,7 +300,7 @@ export default function PlantView({
 
           <div className="pv-reveal mt-12">
             <Link
-              href="/cinematic/shop"
+              href="/shop"
               className="cine-mono inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
             >
               See the whole collection <ArrowRight className="h-3.5 w-3.5" />

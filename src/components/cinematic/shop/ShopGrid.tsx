@@ -20,13 +20,14 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Sun, PawPrint, Sparkles, ArrowUpRight, ArrowDownUp } from "lucide-react";
+import Image from "next/image";
 import {
   PLANTS,
   CATEGORIES,
+  plantImage,
   type Plant,
   type PlantCategory,
 } from "@/lib/content";
-import { PlantEmblem } from "@/components/cinematic/botanicals";
 import { useReducedMotion } from "@/components/cinematic/hooks";
 import { cn } from "@/lib/utils";
 
@@ -71,7 +72,7 @@ function Difficulty({ level }: { level: number }) {
 function PlantCard({ p }: { p: Plant }) {
   return (
     <Link
-      href={`/cinematic/plant/${p.slug}`}
+      href={`/plant/${p.slug}`}
       className="group relative block overflow-hidden rounded-2xl cine-glass p-5 transition-all duration-500 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-none"
       style={{ "--accent": p.accent } as React.CSSProperties}
     >
@@ -85,17 +86,16 @@ function PlantCard({ p }: { p: Plant }) {
         </span>
       )}
 
-      {/* emblem */}
-      <div className="relative mb-4 flex h-44 items-center justify-center">
-        <div className="absolute inset-0 rounded-xl bg-[radial-gradient(60%_60%_at_50%_45%,rgba(31,95,63,0.35),transparent_70%)]" />
-        <div className="relative h-full transition-transform duration-700 ease-out group-hover:scale-105">
-          <PlantEmblem
-            accent={p.accent}
-            category={p.category}
-            slug={p.slug}
-            className="h-full"
-          />
-        </div>
+      {/* specimen photo */}
+      <div className="relative mb-4 aspect-[4/5] overflow-hidden rounded-xl">
+        <Image
+          src={plantImage(p.slug)}
+          alt={p.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_38%,transparent_55%,rgba(12,20,16,0.55))]" />
       </div>
 
       {/* meta */}

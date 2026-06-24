@@ -13,7 +13,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link href="/cinematic" className="flex items-center gap-2.5">
+            <Link href="/" className="flex items-center gap-2.5">
               <Leaf className="h-5 w-5 text-[var(--c-glow)]" />
               <span className="font-[family-name:var(--font-serif)] text-lg text-[var(--c-bone)]">
                 {BRAND.name}
@@ -32,7 +32,7 @@ export default function SiteFooter() {
               {CATEGORIES.map((c) => (
                 <li key={c.key}>
                   <Link
-                    href={`/cinematic/shop?cat=${encodeURIComponent(c.key)}`}
+                    href={`/shop?cat=${encodeURIComponent(c.key)}`}
                     className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
                   >
                     {c.label}
@@ -48,17 +48,17 @@ export default function SiteFooter() {
             </h4>
             <ul className="mt-4 space-y-2.5">
               <li>
-                <Link href="/cinematic/hire" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/hire" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
                   Plant hire and styling
                 </Link>
               </li>
               <li>
-                <Link href="/cinematic/care" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/care" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
                   Care guides
                 </Link>
               </li>
               <li>
-                <Link href="/cinematic/visit" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/visit" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
                   The glasshouse
                 </Link>
               </li>
@@ -88,7 +88,7 @@ export default function SiteFooter() {
             {BRAND.name}, Hertford. Plants with presence.
           </p>
           <Link
-            href="/"
+            href="/concepts"
             className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
           >
             View concept gallery

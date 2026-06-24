@@ -65,7 +65,7 @@ export default function ShopPage() {
         <div className="relative mx-auto max-w-7xl px-6">
           <nav className="cine-mono mb-8 flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-sage)]">
             <Link
-              href="/cinematic"
+              href="/"
               className="transition-colors hover:text-[var(--c-glow)]"
             >
               Home
@@ -148,18 +148,18 @@ export default function ShopPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MagneticCTA href="/cinematic/visit#enquire">
+            <MagneticCTA href="/visit#enquire">
               Enquire or reserve
               <ArrowRight className="ml-2 h-4 w-4" />
             </MagneticCTA>
-            <MagneticCTA href="/cinematic/care" variant="ghost">
+            <MagneticCTA href="/care" variant="ghost">
               Read the care guides
             </MagneticCTA>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link
-              href="/cinematic/hire"
+              href="/hire"
               className="cine-mono text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
             >
               Plant hire & styling

@@ -136,7 +136,7 @@ export default function LightMatch() {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
-                href={`/cinematic/plant/${plant.slug}`}
+                href={`/plant/${plant.slug}`}
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl cine-glass p-4 transition-colors duration-400 hover:bg-[var(--c-surface)]/50"
               >
                 <div className="relative mb-3 aspect-square overflow-hidden rounded-xl bg-[var(--c-canvas)]/60">

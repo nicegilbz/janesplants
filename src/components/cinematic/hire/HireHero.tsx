@@ -29,23 +29,6 @@ export default function HireHero() {
     () => {
       if (typeof window === "undefined") return;
 
-      gsap.from(".hire-hero-line", {
-        yPercent: 120,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-        stagger: 0.12,
-        delay: 0.2,
-      });
-      gsap.from(".hire-hero-fade", {
-        opacity: 0,
-        y: 24,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.1,
-        delay: 0.8,
-      });
-
       if (reduced) return;
 
       // Subtle, header-friendly parallax drift on the foliage layers.
@@ -145,7 +128,7 @@ export default function HireHero() {
       {/* CONTENT — two columns: copy + media pair */}
       <div className="hire-hero-content relative z-20 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 px-6 pt-28 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20">
         <div>
-          <div className="hire-hero-fade mb-6 flex items-center gap-3">
+          <div className="hire-hero-fade cine-anim-fade mb-6 flex items-center gap-3">
             <span className="cine-eyebrow">Plant hire and styling</span>
             <span className="h-px w-10 bg-[var(--c-brass-line)]" />
             <span className="cine-mono text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
@@ -155,22 +138,22 @@ export default function HireHero() {
 
           <h1 className="cine-serif text-[clamp(2.8rem,8vw,6.5rem)] text-[var(--c-bone)]">
             <span className="block overflow-hidden">
-              <span className="hire-hero-line block">Living green,</span>
+              <span className="hire-hero-line cine-anim-rise block">Living green,</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="hire-hero-line block">
+              <span className="hire-hero-line cine-anim-rise block">
                 on <span className="cine-accent text-[var(--c-glow)]">loan</span>.
               </span>
             </span>
           </h1>
 
-          <p className="hire-hero-fade mt-7 max-w-md text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
+          <p className="hire-hero-fade cine-anim-fade mt-7 max-w-md text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
             We design, deliver and look after plants for homes, offices, events
             and weddings, across Hertford and beyond. You get the jungle. We keep
             it alive.
           </p>
 
-          <div className="hire-hero-fade mt-9 flex flex-wrap items-center gap-4">
+          <div className="hire-hero-fade cine-anim-fade mt-9 flex flex-wrap items-center gap-4">
             <MagneticCTA href="#enquire">
               <Leaf className="h-4 w-4" /> Start an enquiry
             </MagneticCTA>
@@ -179,10 +162,10 @@ export default function HireHero() {
             </MagneticCTA>
           </div>
 
-          <p className="hire-hero-fade mt-6 text-[0.8rem] text-[var(--c-sage)]">
+          <p className="hire-hero-fade cine-anim-fade mt-6 text-[0.8rem] text-[var(--c-sage)]">
             Prefer to buy outright?{" "}
             <Link
-              href="/cinematic/shop"
+              href="/shop"
               className="text-[var(--c-glow)] underline-offset-4 hover:underline"
             >
               Shop the collection
@@ -214,7 +197,7 @@ export default function HireHero() {
       />
 
       {/* scroll cue */}
-      <div className="hire-hero-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
+      <div className="hire-hero-fade cine-anim-fade absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2">
         <span className="cine-mono text-[0.62rem] uppercase tracking-[0.3em] text-[var(--c-sage)]">
           How it works
         </span>

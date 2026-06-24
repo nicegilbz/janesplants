@@ -80,7 +80,7 @@ export default function Hub() {
               }}
             >
               <Link
-                href={`/${c.slug}`}
+                href={c.slug === "cinematic" ? "/" : `/${c.slug}`}
                 className="group relative block overflow-hidden rounded-2xl border border-white/10 p-7 transition-colors duration-500 hover:border-white/25"
                 style={{ background: c.bg }}
               >

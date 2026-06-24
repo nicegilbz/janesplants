@@ -6,7 +6,7 @@ import SiteFooter from "@/components/cinematic/SiteFooter";
 import CursorLeaves from "@/components/cinematic/CursorLeaves";
 
 export const metadata: Metadata = {
-  title: "Jane's Plants / Cinematic Jungle",
+  title: "Jane's Plants",
 };
 
 export default function CinematicLayout({

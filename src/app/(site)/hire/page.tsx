@@ -75,14 +75,14 @@ export default function HirePage() {
             <p className="mt-8 text-[0.85rem] text-[var(--c-sage)]">
               Rather wander the glasshouse first?{" "}
               <Link
-                href="/cinematic/visit"
+                href="/visit"
                 className="text-[var(--c-glow)] underline-offset-4 hover:underline"
               >
                 Plan a visit
               </Link>
               , or read our{" "}
               <Link
-                href="/cinematic/care"
+                href="/care"
                 className="text-[var(--c-glow)] underline-offset-4 hover:underline"
               >
                 care guides

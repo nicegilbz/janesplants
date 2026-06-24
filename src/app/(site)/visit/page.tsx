@@ -88,14 +88,14 @@ export default function VisitPage() {
               <p className="mt-8 text-[0.85rem] text-[var(--c-sage)]">
                 After plants for a space rather than a windowsill?{" "}
                 <Link
-                  href="/cinematic/hire"
+                  href="/hire"
                   className="text-[var(--c-glow)] underline-offset-4 hover:underline"
                 >
                   See plant hire and styling
                 </Link>
                 , or read our{" "}
                 <Link
-                  href="/cinematic/care"
+                  href="/care"
                   className="text-[var(--c-glow)] underline-offset-4 hover:underline"
                 >
                   care guides
