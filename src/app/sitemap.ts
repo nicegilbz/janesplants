@@ -4,7 +4,15 @@ import { PLANTS } from "@/lib/content";
 const BASE = "https://janesplants.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/shop", "/hire", "/care", "/visit", "/concepts"].map(
+  const pages = [
+    "",
+    "/shop",
+    "/build",
+    "/hire",
+    "/care",
+    "/visit",
+    "/concepts",
+  ].map(
     (path) => ({
       url: `${BASE}${path}`,
       changeFrequency: "monthly" as const,

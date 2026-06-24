@@ -15,6 +15,7 @@ import { useTheme } from "./ThemeProvider";
 
 const NAV = [
   { href: "/shop", label: "Shop" },
+  { href: "/build", label: "Build" },
   { href: "/hire", label: "Hire" },
   { href: "/care", label: "Care" },
   { href: "/visit", label: "Visit" },
