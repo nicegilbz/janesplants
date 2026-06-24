@@ -7,7 +7,7 @@
  */
 
 import { useEffect, useRef } from "react";
-import { useRichMotion } from "./hooks";
+import { useReducedMotion, useIsTouch } from "./hooks";
 
 export default function Pollen({
   count = 70,
@@ -16,11 +16,12 @@ export default function Pollen({
   count?: number;
   className?: string;
 }) {
-  const rich = useRichMotion();
+  const reduced = useReducedMotion();
+  const touch = useIsTouch();
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!rich) return;
+    if (reduced) return;
     const canvas = ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -40,7 +41,7 @@ export default function Pollen({
     };
     resize();
 
-    const n = Math.min(count, 90);
+    const n = Math.min(count, touch ? 24 : 90);
     const parts = Array.from({ length: n }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -92,9 +93,9 @@ export default function Pollen({
       io.disconnect();
       window.removeEventListener("resize", resize);
     };
-  }, [rich, count]);
+  }, [reduced, touch, count]);
 
-  if (!rich) return null;
+  if (reduced) return null;
   return (
     <canvas
       ref={ref}

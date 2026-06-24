@@ -18,17 +18,19 @@ import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
 import MagneticCTA from "./MagneticCTA";
-import { useStaticMotion } from "./hooks";
+import { useReducedMotion } from "./hooks";
 import { useGsapReveal } from "./useGsapReveal";
 import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
-  // Static (touch / reduced / first paint) shows just the still and skips the
-  // parallax + the autoplay video - video decode + scroll-linked transforms are
-  // the main mobile CPU/battery cost. The poster sits under the video so the
-  // desktop upgrade to video cross-fades rather than flashing.
-  const lite = useStaticMotion();
+  // Cinematic visuals (video, foliage, pollen, shafts) render on mobile too -
+  // they are the soul of the opening. We only suppress them for users who asked
+  // for reduced motion. The heavier scroll-linked parallax stays desktop-only
+  // (loaded lazily via useGsapReveal below), since GSAP was the real mobile
+  // cost, not the visuals. The poster always sits under the video so the swap
+  // cross-fades rather than flashing.
+  const reduced = useReducedMotion();
   const { theme } = useTheme();
   const heroPoster =
     theme === "day" ? "/media/glasshouse-day.webp" : "/media/hero.webp";
@@ -37,9 +39,9 @@ export default function Hero() {
       ? "/media/video/glasshouse-day.mp4"
       : "/media/video/hero-loop.mp4";
 
-  // GSAP only drives the scroll parallax; it loads only on motion-OK desktops.
-  // The headline + supporting entrance are CSS-driven so they always settle
-  // visible. On mobile/reduced the hero is the static poster (see `lite`).
+  // GSAP only adds the scroll-linked PARALLAX (layers drifting as you scroll) on
+  // top of the already-rendered visuals, and it loads only on motion-OK desktops.
+  // Mobile keeps the full cinematic hero, just without the scroll parallax.
   useGsapReveal(root, (gsap) => {
     // Parallax depth — each layer scrolls at its own speed.
     const layers: [string, number][] = [
@@ -104,7 +106,7 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover"
         />
-        {!lite && (
+        {!reduced && (
           <video
             key={heroVideo}
             autoPlay
@@ -126,10 +128,10 @@ export default function Hero() {
         />
       </div>
 
-      {/* Decorative depth layers (procedural SVG + pollen canvas) are desktop-
-          only - they are a large share of mobile Style&Layout and sit behind
-          the poster anyway. */}
-      {!lite && (
+      {/* Decorative depth layers: procedural SVG foliage + the drifting pollen
+          canvas. These render on every device (reduced-motion users excepted);
+          the scroll parallax on top is layered on lazily on desktop. */}
+      {!reduced && (
         <>
       {/* Volumetric light shafts */}
       <div className="cine-shafts absolute inset-0 opacity-40">
@@ -222,7 +224,7 @@ export default function Hero() {
 
       </div>
 
-      {!lite && (
+      {!reduced && (
         <>
       {/* FOREGROUND fronds (closest, fastest) */}
       <div className="cine-layer-fore pointer-events-none absolute -left-10 top-[-8%] w-[30%] max-w-[420px] opacity-95">
@@ -257,7 +259,7 @@ export default function Hero() {
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
           aria-hidden="true"
-          style={{ animation: lite ? undefined : "cine-pulse 2s ease-in-out infinite" }}
+          style={{ animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite" }}
         />
       </div>
     </section>
