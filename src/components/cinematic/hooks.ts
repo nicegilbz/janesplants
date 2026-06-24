@@ -2,10 +2,20 @@
 
 import { useEffect, useState } from "react";
 
-/** True when the user asked for reduced motion. SSR-safe (defaults false). */
+/**
+ * Whether to honour the OS "Reduce Motion" setting. Jane's Plants is a brand
+ * experience whose (gentle) motion - ambient hero video, drifting pollen, soft
+ * scroll reveals and foliage parallax - is core to the feel, so by owner
+ * decision we show it to everyone. Set this back to `true` to respect the OS
+ * accessibility setting again.
+ */
+const HONOUR_REDUCED_MOTION = false;
+
+/** True when we should suppress motion. SSR-safe (defaults false). */
 export function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
+    if (!HONOUR_REDUCED_MOTION) return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const set = () => setReduced(mq.matches);
     set();
