@@ -14,7 +14,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { RotateCcw, Hand } from "lucide-react";
 import { useRichMotion } from "@/components/cinematic/hooks";
-import { plantImage, type Plant } from "@/lib/content";
+import { plantImage, plantTurntable, type Plant } from "@/lib/content";
 
 /** Round before any computed number could reach markup. */
 const r2 = (n: number) => Math.round(n * 100) / 100;
@@ -30,6 +30,7 @@ const CORNERS = [
 
 export default function PlantInspector({ plant }: { plant: Plant }) {
   const rich = useRichMotion();
+  const turntable = plantTurntable(plant.slug);
   const frame = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const last = useRef(0);
@@ -116,14 +117,27 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
           transformStyle: "preserve-3d",
         }}
       >
-        <Image
-          src={plantImage(plant.slug)}
-          alt={plant.name}
-          fill
-          priority
-          sizes="(max-width: 1024px) 90vw, 45vw"
-          className="object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.55)]"
-        />
+        {turntable && rich ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={plantImage(plant.slug)}
+            className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.55)]"
+          >
+            <source src={turntable} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src={plantImage(plant.slug)}
+            alt={plant.name}
+            fill
+            priority
+            sizes="(max-width: 1024px) 90vw, 45vw"
+            className="object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.55)]"
+          />
+        )}
       </div>
 
       {/* corner ticks */}

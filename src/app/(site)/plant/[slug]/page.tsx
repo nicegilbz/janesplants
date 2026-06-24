@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PLANTS, getPlant, relatedPlants } from "@/lib/content";
+import { PLANTS, getPlant, relatedPlants, plantImage } from "@/lib/content";
 import PlantView from "@/components/cinematic/plant/PlantView";
+import JsonLd from "@/components/JsonLd";
 
 /** Pre-render every plant page at build time. */
 export function generateStaticParams() {
@@ -31,5 +32,27 @@ export default async function PlantPage({
   const plant = getPlant(slug);
   if (!plant) notFound();
 
-  return <PlantView plant={plant} related={relatedPlants(slug, 3)} />;
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: plant.name,
+    image: `https://janesplants.com${plantImage(plant.slug)}`,
+    description: plant.blurb,
+    category: plant.category,
+    brand: { "@type": "Brand", name: "Jane's Plants" },
+    offers: {
+      "@type": "Offer",
+      price: plant.price,
+      priceCurrency: "GBP",
+      availability: "https://schema.org/InStock",
+      url: `https://janesplants.com/plant/${plant.slug}`,
+    },
+  };
+
+  return (
+    <>
+      <JsonLd data={productJsonLd} />
+      <PlantView plant={plant} related={relatedPlants(slug, 3)} />
+    </>
+  );
 }

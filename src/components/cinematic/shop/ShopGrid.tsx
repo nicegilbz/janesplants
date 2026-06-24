@@ -20,7 +20,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Sun, PawPrint, Sparkles, ArrowUpRight, ArrowDownUp } from "lucide-react";
-import Image from "next/image";
+import HoverImage from "@/components/cinematic/HoverImage";
 import {
   PLANTS,
   CATEGORIES,
@@ -88,12 +88,11 @@ function PlantCard({ p }: { p: Plant }) {
 
       {/* specimen photo */}
       <div className="relative mb-4 aspect-[4/5] overflow-hidden rounded-xl">
-        <Image
+        <HoverImage
           src={plantImage(p.slug)}
           alt={p.name}
-          fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          className="transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_38%,transparent_55%,rgba(12,20,16,0.55))]" />
       </div>

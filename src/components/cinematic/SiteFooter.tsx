@@ -67,6 +67,21 @@ export default function SiteFooter() {
                   The glasshouse
                 </Link>
               </li>
+              <li>
+                <Link href="/build" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                  Build your jungle
+                </Link>
+              </li>
+              <li>
+                <Link href="/journal" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                  Journal
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                  Our story
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -92,12 +107,26 @@ export default function SiteFooter() {
           <p className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/70">
             {BRAND.name}, Hertford. Plants with presence.
           </p>
-          <Link
-            href="/concepts"
-            className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
-          >
-            View concept gallery
-          </Link>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href="/privacy"
+              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/terms"
+              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+            >
+              Terms
+            </Link>
+            <Link
+              href="/concepts"
+              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+            >
+              View concept gallery
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

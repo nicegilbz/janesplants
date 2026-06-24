@@ -501,6 +501,13 @@ export function plantImage(slug: string): string {
   return `/media/plants/${slug}.png`;
 }
 
+/** Plants that have a 360 turntable video for the inspector. Extend as more
+ *  are generated. */
+const TURNTABLES = new Set<string>(["monstera-deliciosa"]);
+export function plantTurntable(slug: string): string | null {
+  return TURNTABLES.has(slug) ? `/media/video/turntable-${slug}.mp4` : null;
+}
+
 /** A few plants in the same category (or nearby), excluding the given one. */
 export function relatedPlants(slug: string, count = 3): Plant[] {
   const plant = getPlant(slug);
@@ -512,4 +519,135 @@ export function relatedPlants(slug: string, count = 3): Plant[] {
     (p) => p.slug !== slug && p.category !== plant.category,
   );
   return [...sameCat, ...others].slice(0, count);
+}
+
+/* ------------------------------------------------------------------ *
+ * Journal — editorial growing notes (SEO + brand depth)
+ * ------------------------------------------------------------------ */
+
+export type JournalSection = { heading?: string; body: string };
+export type JournalPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string; // ISO, e.g. 2026-06-01
+  dateLabel: string; // human, e.g. June 2026
+  category: string;
+  readMins: number;
+  sections: JournalSection[];
+};
+
+export const JOURNAL: JournalPost[] = [
+  {
+    slug: "five-plants-we-recommend-most",
+    title: "The five plants we recommend most",
+    excerpt:
+      "If you are starting out, or starting over, these are the five that earn their place in almost any room.",
+    date: "2026-06-10",
+    dateLabel: "June 2026",
+    category: "Getting started",
+    readMins: 4,
+    sections: [
+      {
+        body: "People often come in wanting the rare and the dramatic, and we love those too. But the plants that make someone fall for houseplants for good tend to be the generous ones: forgiving, characterful, and happy in the light most homes actually have.",
+      },
+      {
+        heading: "Start with a Monstera",
+        body: "Nothing turns a corner into a jungle faster. Give it a bright spot out of direct sun and a moss pole to climb, and those split leaves will keep coming. It forgives the odd missed watering, which is exactly what a first big plant should do.",
+      },
+      {
+        heading: "Add something unkillable",
+        body: "A Snake Plant or a ZZ Plant asks for almost nothing and still looks expensive. Both cope with lower light and weeks between drinks, so they carry the rooms you forget about.",
+      },
+      {
+        heading: "Then something that trails",
+        body: "A Marble Queen Pothos softens a hard shelf and grows fast enough to feel rewarding. Cuttings root in water, so one plant quickly becomes three.",
+      },
+      {
+        body: "Get those bones in place and the collecting bug usually takes care of the rest.",
+      },
+    ],
+  },
+  {
+    slug: "reading-the-light-in-your-home",
+    title: "Reading the light in your home",
+    excerpt:
+      "The single biggest thing that keeps a plant happy is light. Here is how to see a room the way a plant does.",
+    date: "2026-06-04",
+    dateLabel: "June 2026",
+    category: "Care",
+    readMins: 5,
+    sections: [
+      {
+        body: "Before you think about watering, feeding or pots, think about light. Match the plant to the light a spot actually gets and most of the rest looks after itself.",
+      },
+      {
+        heading: "Bright, indirect",
+        body: "Lots of daylight, but no harsh sun falling straight on the leaves. A few steps back from a bright window, or beside one that faces away from the midday sun. This suits the widest range of houseplants.",
+      },
+      {
+        heading: "The shady side",
+        body: "North-facing rooms and corners away from windows. Reach for the tolerant ones here: snake plants, ZZ plants and pothos will all cope, where a Calathea would sulk.",
+      },
+      {
+        heading: "A simple test",
+        body: "If you can read a book comfortably in a spot without turning a lamp on, most plants will be content there. If you are squinting, it is darker than it feels.",
+      },
+    ],
+  },
+  {
+    slug: "styling-with-plants",
+    title: "Styling with plants: a few quiet rules",
+    excerpt:
+      "A room full of plants can feel lush or cluttered. The difference is usually restraint, height and repetition.",
+    date: "2026-05-28",
+    dateLabel: "May 2026",
+    category: "Styling",
+    readMins: 4,
+    sections: [
+      {
+        heading: "Work in odd numbers",
+        body: "Group plants in threes and fives rather than pairs. Vary the height within the group so the eye travels: one tall, one medium, one trailing over an edge.",
+      },
+      {
+        heading: "Let one plant be the star",
+        body: "Give a single statement plant room to breathe rather than crowding five medium ones together. A Bird of Paradise or a Fiddle Leaf Fig earns the space.",
+      },
+      {
+        heading: "Repeat your pots",
+        body: "A shelf of mismatched pots reads as clutter. Repeat a material or a tone, terracotta or matte stoneware, and a collection suddenly looks considered.",
+      },
+    ],
+  },
+  {
+    slug: "winter-care",
+    title: "Helping plants through the dark months",
+    excerpt:
+      "Most houseplants slow right down in winter. The kindest thing you can do is do less.",
+    date: "2026-05-20",
+    dateLabel: "May 2026",
+    category: "Seasonal",
+    readMins: 4,
+    sections: [
+      {
+        body: "As the light drops, growth pauses, and the care that kept a plant thriving in summer can start to drown it. A few small changes carry most plants through.",
+      },
+      {
+        heading: "Water less",
+        body: "Cooler, darker rooms mean soil stays wet for longer. Let the top of the soil dry out more than you would in summer, and always check with a finger before watering.",
+      },
+      {
+        heading: "Ease off the food",
+        body: "There is little point feeding a plant that is not growing. Stop or slow your feeding through the darkest months and pick it back up in spring.",
+      },
+      {
+        heading: "Mind the cold and the radiators",
+        body: "Keep plants off cold windowsills at night and away from the dry heat of a radiator. Both stress a plant faster than a missed watering.",
+      },
+    ],
+  },
+];
+
+export function getJournalPost(slug: string): JournalPost | undefined {
+  return JOURNAL.find((p) => p.slug === slug);
 }

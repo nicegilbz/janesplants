@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { BRAND, CARE_STEPS } from "@/lib/content";
+import { BRAND, CARE_STEPS, CARE_GUIDES } from "@/lib/content";
 import MagneticCTA from "@/components/cinematic/MagneticCTA";
 import { MistBand } from "@/components/cinematic/botanicals";
 import CareGuides from "@/components/cinematic/care/CareGuides";
@@ -115,6 +115,54 @@ export default function CarePage() {
       <div id="guides" className="scroll-mt-24">
         <CareGuides />
       </div>
+
+      {/* ---------------------------------------------------------------- *
+       * Read the full guide — links to each /care/[slug] detail page
+       * ---------------------------------------------------------------- */}
+      <section className="relative border-t border-[var(--c-brass-line)] bg-[var(--c-surface)]/20 py-20 lg:py-24">
+        <div className="mx-auto w-full max-w-7xl px-6">
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="cine-serif text-[clamp(1.8rem,4vw,3rem)] text-[var(--c-bone)]">
+              Read a guide in full
+            </h2>
+            <p className="cine-mono max-w-xs text-[0.66rem] uppercase leading-relaxed tracking-[0.22em] text-[var(--c-sage)]">
+              Each one on its own page, kept short and honest.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {CARE_GUIDES.map((guide, i) => (
+              <Link
+                key={guide.slug}
+                href={`/care/${guide.slug}`}
+                className="group relative overflow-hidden rounded-2xl cine-glass p-7 transition-colors duration-500 hover:bg-[var(--c-surface)]/50"
+              >
+                <div
+                  className="pointer-events-none absolute -right-8 -top-12 h-40 w-40 rounded-full opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(159,209,91,0.14), transparent 70%)",
+                  }}
+                  aria-hidden
+                />
+                <span className="cine-mono text-[0.7rem] tracking-[0.24em] text-[var(--c-brass)]">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-4 font-[family-name:var(--font-serif)] text-xl text-[var(--c-bone)] transition-colors group-hover:text-[var(--c-glow)]">
+                  {guide.title}
+                </h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-[var(--c-sage)]">
+                  {guide.summary}
+                </p>
+                <span className="cine-mono mt-6 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors group-hover:text-[var(--c-glow)]">
+                  Read the full guide
+                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ---------------------------------------------------------------- *
        * Match a plant to your light (interactive island)
