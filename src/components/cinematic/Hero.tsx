@@ -21,12 +21,17 @@ import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
 import MagneticCTA from "./MagneticCTA";
-import { useReducedMotion } from "./hooks";
+import { useReducedMotion, useIsTouch } from "./hooks";
 import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const touch = useIsTouch();
+  // On touch devices (phones) we show the still and skip the parallax + the
+  // autoplay video entirely - video decode + scroll-linked transforms are the
+  // main mobile CPU/battery cost.
+  const lite = reduced || touch;
   const { theme } = useTheme();
   const heroPoster =
     theme === "day" ? "/media/glasshouse-day.png" : "/media/hero.png";
@@ -43,7 +48,7 @@ export default function Hero() {
       // Headline + supporting entrance are CSS-driven (see .cine-anim-* in
       // theme.css) so they always settle visible. GSAP here only drives the
       // scroll parallax below.
-      if (reduced) return;
+      if (lite) return;
 
       // Parallax depth — each layer scrolls at its own speed.
       const layers: [string, number][] = [
@@ -88,7 +93,7 @@ export default function Hero() {
         },
       });
     },
-    { scope: root, dependencies: [reduced] },
+    { scope: root, dependencies: [lite] },
   );
 
   return (
@@ -98,7 +103,7 @@ export default function Hero() {
     >
       {/* Base cinematic media: hero loop (still poster, image fallback) */}
       <div className="absolute inset-0">
-        {reduced ? (
+        {lite ? (
           <Image
             key={heroPoster}
             src={heroPoster}

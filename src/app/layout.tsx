@@ -18,7 +18,7 @@ const instrument = Instrument_Serif({
   variable: "--font-accent",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
+  style: "italic", // only ever used italic (cine-accent); avoids an unused preload
 });
 
 export const metadata: Metadata = {

@@ -19,17 +19,18 @@ import { ArrowDown, MapPin, Leaf } from "lucide-react";
 import { Frond, PlantSilhouette, MistBand } from "../botanicals";
 import MediaSlot from "../MediaSlot";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion } from "../hooks";
+import { useReducedMotion, useIsTouch } from "../hooks";
 
 export default function VisitHero() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const touch = useIsTouch();
 
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
 
-      if (reduced) return;
+      if (reduced || touch) return;
 
       gsap.registerPlugin(ScrollTrigger);
       const layers: [string, number][] = [
@@ -61,7 +62,7 @@ export default function VisitHero() {
         },
       });
     },
-    { scope: root, dependencies: [reduced] },
+    { scope: root, dependencies: [reduced, touch] },
   );
 
   return (

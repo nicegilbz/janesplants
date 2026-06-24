@@ -4,6 +4,7 @@ import { ReactLenis, type LenisRef } from "lenis/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useIsTouch } from "./cinematic/hooks";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -11,7 +12,11 @@ if (typeof window !== "undefined") {
 
 /**
  * Inertia smooth-scroll wired to the GSAP ticker and ScrollTrigger.
- * Wrap any immersive route so Lenis drives scroll and GSAP stays in sync.
+ *
+ * On touch devices we leave Lenis dormant and use NATIVE scroll: the per-frame
+ * lenis.raf loop is the main idle CPU/battery cost on phones, and momentum
+ * scrolling is already native there. ScrollTrigger stays synced to native
+ * scroll. Desktop keeps the smooth inertia.
  */
 export default function SmoothScroll({
   children,
@@ -21,8 +26,15 @@ export default function SmoothScroll({
   options?: Record<string, unknown>;
 }) {
   const lenisRef = useRef<LenisRef>(null);
+  const touch = useIsTouch();
 
   useEffect(() => {
+    if (touch) {
+      // native scroll: just keep ScrollTrigger fresh, no Lenis raf loop
+      ScrollTrigger.refresh();
+      return;
+    }
+
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
     }
@@ -36,7 +48,7 @@ export default function SmoothScroll({
       gsap.ticker.remove(update);
       lenis?.off("scroll", ScrollTrigger.update);
     };
-  }, []);
+  }, [touch]);
 
   return (
     <ReactLenis
@@ -45,7 +57,7 @@ export default function SmoothScroll({
       options={{
         autoRaf: false,
         lerp: 0.1,
-        smoothWheel: true,
+        smoothWheel: !touch,
         ...options,
       }}
     >

@@ -19,17 +19,18 @@ import { ArrowDown, Leaf } from "lucide-react";
 import { Frond, PlantSilhouette, MistBand } from "../botanicals";
 import MediaSlot from "../MediaSlot";
 import MagneticCTA from "../MagneticCTA";
-import { useReducedMotion } from "../hooks";
+import { useReducedMotion, useIsTouch } from "../hooks";
 
 export default function HireHero() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const touch = useIsTouch();
 
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
 
-      if (reduced) return;
+      if (reduced || touch) return;
 
       // Subtle, header-friendly parallax drift on the foliage layers.
       gsap.registerPlugin(ScrollTrigger);
@@ -62,7 +63,7 @@ export default function HireHero() {
         },
       });
     },
-    { scope: root, dependencies: [reduced] },
+    { scope: root, dependencies: [reduced, touch] },
   );
 
   return (
