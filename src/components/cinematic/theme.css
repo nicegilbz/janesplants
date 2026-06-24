@@ -213,18 +213,6 @@
   background: radial-gradient(70% 60% at 50% 38%, transparent 70%, rgba(28, 32, 20, 0.12));
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cine-shimmer-bar,
-  .cine-grain::after {
-    animation: none;
-  }
-  /* still ensure entrance elements end visible, immediately */
-  .cine-anim-rise,
-  .cine-anim-fade {
-    animation-duration: 0.001ms;
-    animation-delay: 0ms;
-  }
-}
 
 /* ------------------------------------------------------------------ *
  * DAY theme — "Conservatory" daylight. Default is night (above).
@@ -268,12 +256,6 @@
 ::view-transition-new(root) {
   animation-duration: 0.55s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
 }
 
 /* ------------------------------------------------------------------ *

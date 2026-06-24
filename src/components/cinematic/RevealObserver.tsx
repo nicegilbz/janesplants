@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { prefersReducedMotion } from "./hooks";
 
 /**
  * Lightweight scroll-reveal driver. One IntersectionObserver lifts every
@@ -18,7 +19,7 @@ export default function RevealObserver() {
     root.classList.add("cine-js");
 
     const els = Array.from(document.querySelectorAll(SELECTOR));
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = prefersReducedMotion();
 
     if (reduced || typeof IntersectionObserver === "undefined") {
       els.forEach((el) => el.classList.add("is-in"));

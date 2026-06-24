@@ -18,6 +18,7 @@ import {
   useState,
 } from "react";
 import { flushSync } from "react-dom";
+import { prefersReducedMotion } from "./hooks";
 
 type Theme = "day" | "night";
 
@@ -55,7 +56,7 @@ export default function ThemeProvider({
       document.documentElement.dataset.theme = next;
       flushSync(() => setTheme(next));
     };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     const vt = (
       document as Document & {
         startViewTransition?: (cb: () => void) => void;

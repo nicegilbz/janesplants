@@ -9,7 +9,20 @@ import { useEffect, useState } from "react";
  * decision we show it to everyone. Set this back to `true` to respect the OS
  * accessibility setting again.
  */
-const HONOUR_REDUCED_MOTION = false;
+export const HONOUR_REDUCED_MOTION = false;
+
+/**
+ * Imperative (non-hook) reduced-motion check, honouring the flag above. Used
+ * where we read matchMedia directly in effects/snapshots (HoverImage,
+ * RevealObserver) rather than via a hook.
+ */
+export function prefersReducedMotion() {
+  return (
+    HONOUR_REDUCED_MOTION &&
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
 
 /** True when we should suppress motion. SSR-safe (defaults false). */
 export function useReducedMotion() {
@@ -69,7 +82,8 @@ export function useStaticMotion() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     const coarse = window.matchMedia("(hover: none), (pointer: coarse)");
-    const set = () => setIsStatic(reduce.matches || coarse.matches);
+    const set = () =>
+      setIsStatic((HONOUR_REDUCED_MOTION && reduce.matches) || coarse.matches);
     set();
     reduce.addEventListener("change", set);
     coarse.addEventListener("change", set);

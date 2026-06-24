@@ -6,6 +6,7 @@
  */
 
 import { STATS } from "@/lib/content";
+import CountUp from "./CountUp";
 
 export default function Stats() {
   return (
@@ -21,10 +22,7 @@ export default function Stats() {
               <div key={s.label} className="cine-stat px-2 text-center lg:text-left">
                 <div className="cine-serif flex items-baseline justify-center text-[clamp(3rem,7vw,5.5rem)] text-[var(--c-bone)] lg:justify-start">
                   {m ? (
-                    <span>
-                      <span>{num}</span>
-                      <span className="text-[var(--c-glow)]">{suffix}</span>
-                    </span>
+                    <CountUp value={num} suffix={suffix} />
                   ) : (
                     <span className="text-[var(--c-glow)]">{s.value}</span>
                   )}

@@ -21,6 +21,7 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import type * as T from "three";
 import { cn } from "@/lib/utils";
+import { prefersReducedMotion } from "./hooks";
 
 /**
  * SSR-safe capability detection via useSyncExternalStore: enabled only on
@@ -45,9 +46,7 @@ function subscribeCapability(onChange: () => void) {
 
 function getCapabilitySnapshot() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
-  return (
-    window.matchMedia(HOVER_Q).matches && !window.matchMedia(MOTION_Q).matches
-  );
+  return window.matchMedia(HOVER_Q).matches && !prefersReducedMotion();
 }
 
 type HoverImageProps = {
