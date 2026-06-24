@@ -18,28 +18,58 @@ export default function RevealObserver() {
     const root = document.documentElement;
     root.classList.add("cine-js");
 
-    const els = Array.from(document.querySelectorAll(SELECTOR));
-    const reduced = prefersReducedMotion();
+    const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
 
-    if (reduced || typeof IntersectionObserver === "undefined") {
+    if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
       els.forEach((el) => el.classList.add("is-in"));
       return;
     }
 
+    const remaining = new Set(els);
+    const reveal = (el: HTMLElement) => {
+      el.classList.add("is-in");
+      remaining.delete(el);
+      io.unobserve(el);
+    };
+
+    // Trigger as the element approaches (positive bottom margin), threshold 0,
+    // so even the LAST sections - which can never reach a negative-margin dead
+    // zone - reveal reliably.
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) reveal(entry.target as HTMLElement);
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      { rootMargin: "0px 0px 12% 0px", threshold: 0 },
     );
-
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    // Belt-and-braces: a rAF-throttled scroll check reveals anything whose top
+    // has entered the viewport, in case any IntersectionObserver edge case (pin
+    // spacers, smooth scroll) misses an element. Self-removes once all are in.
+    let ticking = false;
+    const sweep = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      for (const el of Array.from(remaining)) {
+        if (el.getBoundingClientRect().top < vh * 0.95) reveal(el);
+      }
+      if (!remaining.size) window.removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(sweep);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    sweep();
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return null;
