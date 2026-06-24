@@ -49,7 +49,7 @@
 .cine-serif {
   font-family: var(--font-serif);
   font-weight: 300;
-  font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+  font-variation-settings: "opsz" 120;
   letter-spacing: -0.02em;
   line-height: 0.98;
 }

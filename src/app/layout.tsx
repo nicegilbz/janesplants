@@ -4,21 +4,31 @@ import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 
 const geistSans = Geist({ variable: "--font-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
+// Mono is only used for small eyebrow/label text - let it swap in rather than
+// compete with the LCP image for critical-path bandwidth on slow mobile.
+const geistMono = Geist_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  preload: false,
+});
 
-// Variable serif for editorial + cinematic display type.
+// Variable serif for the display headline (the LCP text). SOFT/WONK were pinned
+// to 0 (their defaults), so only opsz is actually used - dropping the unused
+// axes shrinks this critical font file.
 const fraunces = Fraunces({
   variable: "--font-serif",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
+  axes: ["opsz"],
 });
 
-// High-contrast serif for editorial accents and pull quotes.
+// High-contrast italic serif for accents (the "presence" word). Decorative, so
+// it swaps in rather than blocking the critical path.
 const instrument = Instrument_Serif({
   variable: "--font-accent",
   subsets: ["latin"],
   weight: "400",
-  style: "italic", // only ever used italic (cine-accent); avoids an unused preload
+  style: "italic",
+  preload: false,
 });
 
 export const metadata: Metadata = {
