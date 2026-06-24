@@ -19,12 +19,12 @@ const SERVICES = [
   {
     icon: Home,
     title: "Homes",
-    body: "Style a room for a shoot, a season, or a fresh start. We deliver, place, and maintain.",
+    body: "Style a room for a shoot, a season or a fresh start. We deliver, place it and keep it alive.",
   },
   {
     icon: Building2,
     title: "Offices & studios",
-    body: "Green that works as hard as your team. Rotated and cared for on a schedule.",
+    body: "Greenery that works as hard as your team, rotated and looked after on a schedule.",
   },
   {
     icon: PartyPopper,
@@ -80,7 +80,7 @@ export default function Hire() {
           </h2>
           <p className="cine-hire-reveal mt-5 max-w-md text-[var(--c-sage)]">
             We style and hire plants for the rooms that want to feel alive, then
-            keep them that way. Delivered, placed, and maintained from the
+            keep them that way. Delivered, placed and looked after from the
             glasshouse.
           </p>
 

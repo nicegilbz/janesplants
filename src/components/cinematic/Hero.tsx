@@ -115,6 +115,7 @@ export default function Hero() {
             muted
             loop
             playsInline
+            preload="metadata"
             poster={heroPoster}
             className="absolute inset-0 h-full w-full object-cover"
           >

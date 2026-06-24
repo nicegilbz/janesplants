@@ -83,45 +83,6 @@ export default function Visit() {
             </div>
           </div>
         </div>
-
-        {/* footer */}
-        <footer className="mt-16">
-          <div className="cine-rule mb-8" />
-          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-            <div className="flex items-center gap-3">
-              <span className="cine-serif text-2xl text-[var(--c-bone)]">
-                {BRAND.name}
-              </span>
-              <span className="h-4 w-px bg-[var(--c-brass-line)]" />
-              <span className="cine-mono text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)]">
-                {BRAND.tagline}
-              </span>
-            </div>
-            <div className="flex items-center gap-6">
-              <a
-                href="#collection"
-                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              >
-                Shop
-              </a>
-              <a
-                href="#hire"
-                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              >
-                Hire
-              </a>
-              <a
-                href="#care"
-                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              >
-                Care
-              </a>
-            </div>
-          </div>
-          <p className="cine-mono mt-8 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[var(--c-sage)]/70">
-            {BRAND.domain} · Concept 01 / Cinematic Jungle
-          </p>
-        </footer>
       </div>
     </section>
   );

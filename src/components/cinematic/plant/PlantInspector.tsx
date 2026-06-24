@@ -150,10 +150,12 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
         />
       ))}
 
-      {/* asset note */}
-      <span className="cine-mono pointer-events-none absolute bottom-3 right-3 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--c-sage)]/70">
-        L1 / 360 turntable
-      </span>
+      {/* asset note (only when a real turntable video exists) */}
+      {turntable && (
+        <span className="cine-mono pointer-events-none absolute bottom-3 right-3 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--c-sage)]/70">
+          360 turntable
+        </span>
+      )}
 
       {/* drag hint + reset (interactive devices only) */}
       {rich && (
@@ -161,7 +163,7 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
           <div className="pointer-events-none absolute left-1/2 top-4 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-[rgba(12,20,16,0.55)] px-3 py-1.5 backdrop-blur-sm">
             <Hand className="h-3.5 w-3.5 text-[var(--c-glow)]" aria-hidden="true" />
             <span className="cine-mono text-[0.6rem] uppercase tracking-[0.2em] text-[var(--c-sage)]">
-              Drag to rotate
+              {turntable ? "Drag to rotate" : "Move to inspect"}
             </span>
           </div>
           {(rot !== 0 || tilt !== 0) && (

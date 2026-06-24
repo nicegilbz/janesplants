@@ -85,7 +85,7 @@ const STEPS: Step[] = [
     options: [
       { v: "low", label: "Set and forget", sub: "I travel, or I forget", Icon: Plane },
       { v: "some", label: "A little love", sub: "A weekly check is fine", Icon: Sprout },
-      { v: "high", label: "I am devoted", sub: "Bring on the fussy ones", Icon: Heart },
+      { v: "high", label: "I'm devoted", sub: "Happy with the fussy ones", Icon: Heart },
     ],
   },
   {

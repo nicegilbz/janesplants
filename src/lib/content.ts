@@ -12,7 +12,7 @@ export const BRAND = {
   domain: "janesplants.com",
   tagline: "Plants with presence.",
   mission:
-    "A stylish houseplant shop for people who want their rooms to feel alive. We hand-pick characterful plants, pair them with pots worth showing off, and tell you exactly how to keep them thriving.",
+    "A working glasshouse and houseplant shop in Hertford. We grow characterful plants, pair them with pots worth showing off, and tell you exactly how to keep them alive.",
   promise: [
     "Hand-selected, nursery-fresh stock",
     "Honest care guidance with every plant",
@@ -60,7 +60,7 @@ export type PlantCategory =
 export const CATEGORIES: { key: PlantCategory; label: string; note: string }[] = [
   { key: "Statement", label: "Statement", note: "Floor plants that anchor a room." },
   { key: "Easy-care", label: "Easy-care", note: "Forgiving plants that still look expensive." },
-  { key: "Rare", label: "Rare & unusual", note: "Limited finds for the collectors." },
+  { key: "Rare", label: "Rare & unusual", note: "Unusual ones, in and out of stock fast." },
   { key: "Trailing", label: "Trailing", note: "Shelves, hangers and long green tails." },
   { key: "Pet-friendly", label: "Pet-friendly", note: "Safe around cats and dogs." },
 ];
@@ -74,7 +74,7 @@ export const PLANTS: Plant[] = [
     blurb:
       "Those split leaves are a whole personality. Give it room and a moss pole and it will reward you with a canopy that turns a corner into a jungle.",
     light: "Bright, indirect",
-    water: "Weekly when the top inch is dry",
+    water: "Weekly when the top 2cm is dry",
     difficulty: 2,
     petSafe: false,
     price: 48,
@@ -104,9 +104,9 @@ export const PLANTS: Plant[] = [
     latin: "Ficus lyrata",
     nickname: "The Icon",
     blurb:
-      "The plant that launched a thousand interiors shoots. Glossy, sculptural, and happiest when you stop moving it around.",
+      "The plant that launched a thousand interiors shoots. Glossy, sculptural, and happiest once you stop moving it about.",
     light: "Bright, indirect",
-    water: "When the top 2 inches dry out",
+    water: "When the top 2-3cm dry out",
     difficulty: 4,
     petSafe: false,
     price: 75,
@@ -120,9 +120,9 @@ export const PLANTS: Plant[] = [
     latin: "Philodendron erubescens",
     nickname: "The Collector's Crush",
     blurb:
-      "Dark chocolate leaves splashed with bubblegum pink. No two are alike, which is exactly why people queue for them.",
+      "Dark chocolate leaves splashed with bubblegum pink. No two are alike, which is why they sell the moment they land.",
     light: "Bright, indirect",
-    water: "When the top inch is dry",
+    water: "When the top 2cm is dry",
     difficulty: 3,
     petSafe: false,
     price: 65,
@@ -220,7 +220,7 @@ export const PLANTS: Plant[] = [
     blurb:
       "Cream and green marbled leaves that grow almost anywhere and trail for metres. The easiest way to soften a hard room.",
     light: "Low to bright, indirect",
-    water: "When the top inch is dry",
+    water: "When the top 2cm is dry",
     difficulty: 1,
     petSafe: false,
     price: 24,
@@ -236,7 +236,7 @@ export const PLANTS: Plant[] = [
     blurb:
       "Deep burgundy-green leaves with a high-gloss finish. Grows into a proper indoor tree if you let it.",
     light: "Bright, indirect",
-    water: "When the top 2 inches dry out",
+    water: "When the top 2-3cm dry out",
     difficulty: 2,
     petSafe: false,
     price: 42,
@@ -302,9 +302,9 @@ export const CARE_STEPS = [
 
 export const STATS = [
   { value: "200+", label: "Varieties in stock" },
-  { value: "12yr", label: "Growing and curating" },
+  { value: "12yr", label: "Growing and selling" },
   { value: "48h", label: "Nursery to your door" },
-  { value: "100%", label: "Plants we would keep ourselves" },
+  { value: "100%", label: "Plants we'd keep ourselves" },
 ];
 
 /** The four art-direction concepts, used by the comparison hub. */
@@ -401,7 +401,7 @@ export const HIRE_PACKAGES: HirePackage[] = [
     name: "Events and weddings",
     forWho: "Occasions",
     blurb:
-      "Living green that makes a room. Short-term hire for weddings, shoots and launches, with foliage walls, aisles and statement specimens built around your day and collected after.",
+      "Living greenery that makes a room. Short-term hire for weddings, shoots and launches, with foliage walls, aisles and statement specimens built around your day and collected after.",
     from: 350,
     cadence: "per event",
     includes: [
@@ -444,7 +444,7 @@ export const CARE_GUIDES: CareGuide[] = [
     summary:
       "More houseplants die from kindness than neglect. Here is how to get it right.",
     tips: [
-      "Check the top inch of soil with a finger before reaching for the can.",
+      "Check the top 2cm of soil with a finger before reaching for the can.",
       "Water thoroughly until it runs from the base, then let it drain fully.",
       "Most plants want less in autumn and winter when growth slows.",
       "Drooping that recovers after a drink means thirsty; mushy stems mean too much.",
