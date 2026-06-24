@@ -18,8 +18,12 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5">
-              <Leaf className="h-5 w-5 text-[var(--c-glow)]" />
+            <Link
+              href="/"
+              aria-label={`${BRAND.name} home`}
+              className="flex items-center gap-2.5 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              <Leaf className="h-5 w-5 text-[var(--c-glow)]" aria-hidden="true" />
               <span className="font-[family-name:var(--font-serif)] text-lg text-[var(--c-bone)]">
                 {BRAND.name}
               </span>
@@ -38,7 +42,7 @@ export default function SiteFooter() {
                 <li key={c.key}>
                   <Link
                     href={`/shop?cat=${encodeURIComponent(c.key)}`}
-                    className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                    className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   >
                     {c.label}
                   </Link>
@@ -53,32 +57,32 @@ export default function SiteFooter() {
             </h4>
             <ul className="mt-4 space-y-2.5">
               <li>
-                <Link href="/hire" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/hire" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   Plant hire and styling
                 </Link>
               </li>
               <li>
-                <Link href="/care" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/care" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   Care guides
                 </Link>
               </li>
               <li>
-                <Link href="/visit" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/visit" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   The glasshouse
                 </Link>
               </li>
               <li>
-                <Link href="/build" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/build" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   Build your jungle
                 </Link>
               </li>
               <li>
-                <Link href="/journal" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/journal" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   Journal
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]">
+                <Link href="/about" className="rounded-sm text-[0.9rem] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
                   Our story
                 </Link>
               </li>
@@ -91,7 +95,7 @@ export default function SiteFooter() {
             </h4>
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="mt-4 block font-[family-name:var(--font-serif)] text-xl text-[var(--c-bone)] transition-colors hover:text-[var(--c-glow)]"
+              className="mt-4 block rounded-sm font-[family-name:var(--font-serif)] text-xl text-[var(--c-bone)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>
@@ -104,25 +108,25 @@ export default function SiteFooter() {
         <div className="my-10 cine-rule" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/70">
+          <p className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/85">
             {BRAND.name}, Hertford. Plants with presence.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link
               href="/privacy"
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/80 transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/80 transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Terms
             </Link>
             <Link
               href="/concepts"
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/60 transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.18em] text-[var(--c-sage)]/80 transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               View concept gallery
             </Link>

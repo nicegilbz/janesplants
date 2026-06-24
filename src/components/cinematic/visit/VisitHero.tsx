@@ -131,7 +131,7 @@ export default function VisitHero() {
             <span className="cine-eyebrow">Visit</span>
             <span className="h-px w-10 bg-[var(--c-brass-line)]" />
             <span className="cine-mono flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
-              <MapPin className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+              <MapPin className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
               Hertford
             </span>
           </div>
@@ -155,7 +155,7 @@ export default function VisitHero() {
 
           <div className="visit-hero-fade cine-anim-fade mt-9 flex flex-wrap items-center gap-4">
             <MagneticCTA href="#enquire">
-              <Leaf className="h-4 w-4" /> Say hello
+              <Leaf className="h-4 w-4" aria-hidden="true" /> Say hello
             </MagneticCTA>
             <MagneticCTA href="#finding-us" variant="ghost">
               How to find us
@@ -166,7 +166,7 @@ export default function VisitHero() {
             Want a plant ready when you arrive?{" "}
             <Link
               href="/shop"
-              className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+              className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Browse the shop
             </Link>
@@ -204,6 +204,7 @@ export default function VisitHero() {
         </span>
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
+          aria-hidden="true"
           style={{
             animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite",
           }}

@@ -54,18 +54,24 @@ export default function HirePage() {
 
             <div className="mt-9 space-y-4 text-[0.9rem] text-[var(--c-bone)]/85">
               <p className="flex items-center gap-3">
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+                <span
+                  className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                  aria-hidden="true"
+                >
                   <Mail className="h-4 w-4 text-[var(--c-glow)]" />
                 </span>
                 <a
                   href={`mailto:${BRAND.contactEmail}`}
-                  className="underline-offset-4 hover:text-[var(--c-glow)] hover:underline"
+                  className="rounded-sm underline-offset-4 hover:text-[var(--c-glow)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   {BRAND.contactEmail}
                 </a>
               </p>
               <p className="flex items-center gap-3">
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)]">
+                <span
+                  className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)]"
+                  aria-hidden="true"
+                >
                   <MapPin className="h-4 w-4 text-[var(--c-brass)]" />
                 </span>
                 {BRAND.location.line}
@@ -76,14 +82,14 @@ export default function HirePage() {
               Rather wander the glasshouse first?{" "}
               <Link
                 href="/visit"
-                className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Plan a visit
               </Link>
               , or read our{" "}
               <Link
                 href="/care"
-                className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 care guides
               </Link>

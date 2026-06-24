@@ -210,7 +210,7 @@ export default function Hero() {
 
         <div className="cine-hero-fade cine-anim-fade mt-10 flex flex-wrap items-center justify-center gap-4">
           <MagneticCTA href="#collection">
-            <Sprout className="h-4 w-4" /> Shop the collection
+            <Sprout className="h-4 w-4" aria-hidden="true" /> Shop the collection
           </MagneticCTA>
           <MagneticCTA href="#hire" variant="ghost">
             Plant hire &amp; styling
@@ -249,6 +249,7 @@ export default function Hero() {
         </span>
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
+          aria-hidden="true"
           style={{ animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite" }}
         />
       </div>

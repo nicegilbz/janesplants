@@ -61,9 +61,12 @@ export default async function JournalPostPage({ params }: { params: Params }) {
         {/* back link */}
         <Link
           href="/journal"
-          className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+          className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         >
-          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <ArrowLeft
+            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5"
+            aria-hidden="true"
+          />
           All notes
         </Link>
 
@@ -124,7 +127,7 @@ export default async function JournalPostPage({ params }: { params: Params }) {
               <Link
                 key={p.slug}
                 href={`/journal/${p.slug}`}
-                className="group cine-glass relative flex flex-col rounded-2xl p-7 transition-transform duration-500 hover:-translate-y-0.5"
+                className="group cine-glass relative flex flex-col rounded-2xl p-7 transition-transform duration-500 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <div className="cine-mono flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-sage)]">
                   <span className="text-[var(--c-glow)]">{p.category}</span>
@@ -139,7 +142,10 @@ export default async function JournalPostPage({ params }: { params: Params }) {
                 </p>
                 <span className="cine-mono mt-5 inline-flex items-center gap-2 text-[0.64rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors group-hover:text-[var(--c-glow)]">
                   Read the note
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight
+                    className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
                 </span>
               </Link>
             ))}
@@ -176,14 +182,17 @@ export default async function JournalPostPage({ params }: { params: Params }) {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <Link
               href="/journal"
-              className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Back to the journal
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

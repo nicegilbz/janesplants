@@ -90,7 +90,7 @@ export default function Hire() {
                 key={s.title}
                 className="cine-hire-reveal group bg-[var(--c-canvas)] p-6 transition-colors duration-400 hover:bg-[var(--c-surface)]/60"
               >
-                <s.icon className="h-5 w-5 text-[var(--c-glow)]" />
+                <s.icon className="h-5 w-5 text-[var(--c-glow)]" aria-hidden="true" />
                 <h3 className="mt-3 font-[family-name:var(--font-serif)] text-xl text-[var(--c-bone)]">
                   {s.title}
                 </h3>
@@ -103,7 +103,7 @@ export default function Hire() {
 
           <div className="cine-hire-reveal mt-10">
             <MagneticCTA href="#visit">
-              Enquire about hire <ArrowUpRight className="h-4 w-4" />
+              Enquire about hire <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </MagneticCTA>
           </div>
         </div>

@@ -48,7 +48,7 @@ export default function AccessoriesStrip() {
                 <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--c-glow-line),transparent)]" />
                 <div className="mb-5 flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(31,95,63,0.18)]">
-                    <Icon className="h-4.5 w-4.5 text-[var(--c-glow)]" />
+                    <Icon className="h-4.5 w-4.5 text-[var(--c-glow)]" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="font-[family-name:var(--font-serif)] text-lg text-[var(--c-bone)]">

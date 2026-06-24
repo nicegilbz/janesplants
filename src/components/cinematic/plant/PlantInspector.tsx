@@ -123,7 +123,9 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
             loop
             muted
             playsInline
+            preload="metadata"
             poster={plantImage(plant.slug)}
+            aria-label={`Rotating view of ${plant.name}`}
             className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.55)]"
           >
             <source src={turntable} type="video/mp4" />
@@ -157,7 +159,7 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
       {rich && (
         <>
           <div className="pointer-events-none absolute left-1/2 top-4 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-[rgba(12,20,16,0.55)] px-3 py-1.5 backdrop-blur-sm">
-            <Hand className="h-3.5 w-3.5 text-[var(--c-glow)]" />
+            <Hand className="h-3.5 w-3.5 text-[var(--c-glow)]" aria-hidden="true" />
             <span className="cine-mono text-[0.6rem] uppercase tracking-[0.2em] text-[var(--c-sage)]">
               Drag to rotate
             </span>
@@ -166,11 +168,11 @@ export default function PlantInspector({ plant }: { plant: Plant }) {
             <button
               onClick={reset}
               onPointerDown={(e) => e.stopPropagation()}
-              className="absolute bottom-12 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.6)] text-[var(--c-sage)] backdrop-blur-sm transition-colors hover:text-[var(--c-glow)]"
+              className="absolute bottom-12 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.6)] text-[var(--c-sage)] backdrop-blur-sm transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label="Reset view"
               title="Reset view"
             >
-              <RotateCcw className="h-4 w-4" />
+              <RotateCcw className="h-4 w-4" aria-hidden="true" />
             </button>
           )}
         </>

@@ -113,7 +113,10 @@ export default function VisitExpect() {
                 key={item.title}
                 className="visit-expect-reveal group rounded-2xl cine-glass p-6 transition-colors hover:border-[var(--c-glow-line)]"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)] transition-colors group-hover:border-[var(--c-glow-line)]">
+                <span
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)] transition-colors group-hover:border-[var(--c-glow-line)]"
+                  aria-hidden="true"
+                >
                   <Icon className="h-5 w-5 text-[var(--c-glow)]" />
                 </span>
                 <h3 className="mt-5 font-[family-name:var(--font-serif)] text-xl text-[var(--c-bone)]">

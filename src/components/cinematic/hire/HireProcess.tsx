@@ -92,7 +92,10 @@ export default function HireProcess() {
           <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {STEPS.map((s) => (
               <li key={s.no} className="hire-step relative">
-                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-canvas)]">
+                <div
+                  className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-canvas)]"
+                  aria-hidden="true"
+                >
                   <s.icon className="h-6 w-6 text-[var(--c-glow)]" />
                 </div>
                 <span className="cine-mono mt-5 block text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-brass)]">

@@ -96,9 +96,9 @@ export default function PlantView({
           {/* breadcrumb back to shop */}
           <Link
             href="/shop"
-            className="cine-mono inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+            className="cine-mono inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to the shop
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Back to the shop
           </Link>
 
           <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
@@ -107,7 +107,7 @@ export default function PlantView({
               <PlantInspector plant={plant} />
               {plant.rare && (
                 <span className="cine-mono absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full border border-[var(--c-glow-line)] bg-[rgba(12,20,16,0.55)] px-3 py-1.5 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--c-glow)] backdrop-blur-sm">
-                  <Sparkles className="h-3 w-3" /> Rare find
+                  <Sparkles className="h-3 w-3" aria-hidden="true" /> Rare find
                 </span>
               )}
             </div>
@@ -136,11 +136,12 @@ export default function PlantView({
                   £{plant.price}
                 </span>
                 <MagneticCTA href="/visit#enquire">
-                  Reserve / ask about this <ArrowRight className="h-4 w-4" />
+                  Reserve / ask about this{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </MagneticCTA>
                 <a
                   href="#enquire"
-                  className="cine-mono text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] underline-offset-4 transition-colors hover:text-[var(--c-glow)] hover:underline"
+                  className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] underline-offset-4 transition-colors hover:text-[var(--c-glow)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   Or ask below
                 </a>
@@ -175,7 +176,10 @@ export default function PlantView({
             <div className="mt-6 space-y-4">
               {care.map(({ guide, tips }) => (
                 <div key={guide.slug} className="flex gap-3">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+                  <span
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                    aria-hidden="true"
+                  >
                     <Leaf className="h-3.5 w-3.5 text-[var(--c-glow)]" />
                   </span>
                   <div>
@@ -192,10 +196,11 @@ export default function PlantView({
 
             <Link
               href="/care"
-              className="cine-mono mt-7 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-glow)] transition-colors hover:text-[var(--c-bone)]"
+              className="cine-mono mt-7 inline-flex items-center gap-2 rounded-sm text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-glow)] transition-colors hover:text-[var(--c-bone)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
-              <BookOpen className="h-4 w-4" /> Read the full care guides
-              <ArrowRight className="h-3.5 w-3.5" />
+              <BookOpen className="h-4 w-4" aria-hidden="true" /> Read the full care
+              guides
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -260,7 +265,7 @@ export default function PlantView({
                 key={p.slug}
                 href={`/plant/${p.slug}`}
                 className={cn(
-                  "pv-reveal group relative overflow-hidden rounded-2xl cine-glass p-5 transition-all duration-500 hover:-translate-y-1",
+                  "pv-reveal group relative overflow-hidden rounded-2xl cine-glass p-5 transition-all duration-500 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
                 )}
               >
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 [box-shadow:inset_0_0_0_1px_var(--c-glow-line),0_24px_60px_-24px_rgba(159,209,91,0.35)]" />
@@ -292,7 +297,7 @@ export default function PlantView({
                 </div>
 
                 <span className="cine-mono mt-4 inline-flex items-center gap-1.5 text-[0.64rem] uppercase tracking-[0.18em] text-[var(--c-glow)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  View plant <ArrowRight className="h-3 w-3" />
+                  View plant <ArrowRight className="h-3 w-3" aria-hidden="true" />
                 </span>
               </Link>
             ))}
@@ -301,9 +306,10 @@ export default function PlantView({
           <div className="pv-reveal mt-12">
             <Link
               href="/shop"
-              className="cine-mono inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono inline-flex items-center gap-2 rounded-sm text-[0.72rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
-              See the whole collection <ArrowRight className="h-3.5 w-3.5" />
+              See the whole collection{" "}
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
         </div>

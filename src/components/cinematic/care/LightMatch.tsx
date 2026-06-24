@@ -87,7 +87,7 @@ export default function LightMatch() {
               aria-selected={active}
               onClick={() => setLevel(opt.level)}
               className={cn(
-                "group relative overflow-hidden rounded-2xl border p-6 text-left transition-all duration-400",
+                "group relative overflow-hidden rounded-2xl border p-6 text-left transition-all duration-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
                 active
                   ? "border-[var(--c-glow-line)] bg-[var(--c-surface)]/60 shadow-[0_0_30px_rgba(159,209,91,0.12)]"
                   : "border-[var(--c-brass-line)] bg-[var(--c-surface)]/20 hover:border-[var(--c-glow-line)]",
@@ -137,7 +137,7 @@ export default function LightMatch() {
             >
               <Link
                 href={`/plant/${plant.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl cine-glass p-4 transition-colors duration-400 hover:bg-[var(--c-surface)]/50"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl cine-glass p-4 transition-colors duration-400 hover:bg-[var(--c-surface)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <div className="relative mb-3 aspect-square overflow-hidden rounded-xl bg-[var(--c-canvas)]/60">
                   <PlantEmblem
@@ -156,7 +156,10 @@ export default function LightMatch() {
                       {plant.light}
                     </p>
                   </div>
-                  <ArrowUpRight className="mt-0.5 h-4 w-4 flex-none text-[var(--c-sage)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--c-glow)]" />
+                  <ArrowUpRight
+                    className="mt-0.5 h-4 w-4 flex-none text-[var(--c-sage)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--c-glow)]"
+                    aria-hidden="true"
+                  />
                 </div>
               </Link>
             </motion.div>

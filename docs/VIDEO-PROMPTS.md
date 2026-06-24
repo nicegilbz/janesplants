@@ -53,3 +53,35 @@ For the events and weddings line.
 ### Optional extras (only if you are enjoying it)
 - **plant-turntable-monstera.mp4** - "A Monstera deliciosa in a terracotta pot rotating slowly 360 degrees on a turntable against a seamless near-black background, even soft studio lighting with a subtle rim light, photoreal, no people, no text." (One per hero plant turns the plant page into a true 3D inspector.)
 - **pollen.mp4** - "Slow drifting glowing pollen and spores against pure black, soft bokeh, chartreuse and warm white particles, seamless." (Atmospheric overlay.)
+
+---
+
+## Still to generate (everything you have not sent yet)
+
+You have provided: hero-loop, growth, leaf-loop, glasshouse-day, hire-walkthrough, event-reveal, and the Monstera turntable. These are the rest. Same settings: 16:9, 8s, no music, save with the bold filename into `public/media/video/`.
+
+### 1. The night glasshouse (completes the Day/Night dial)
+**glasshouse-night.mp4**
+> The same Victorian glasshouse plant shop after dark. Plants glow softly under warm horticultural grow lights, faint magenta and cyan light bleeding through drifting mist, dew catching the light. The camera glides slowly down the central aisle past glowing foliage. Moody, magical, hushed, deep near-black with luminous greens, photoreal, shot on Arri Alexa, shallow depth of field, slow drifting fireflies of light, no people, no text, seamless.
+
+### 2. Plant turntables (one per plant -> a true rotating 360 inspector on each plant page)
+Use this template, swapping in the plant and pot. Save each as `turntable-<slug>.mp4` exactly as named below, and I light up that plant's inspector with one line of code.
+
+> A [PLANT] in a [POT] rotating slowly and smoothly through a full 360 degrees on a turntable, centred against a seamless near-black background, even soft studio lighting with a gentle rim light, faint volumetric haze, deep forest-green and aged-brass palette, photoreal, premium product cinematography, no people, no text, seamless loop.
+
+| Filename | [PLANT] | [POT] |
+|---|---|---|
+| **turntable-bird-of-paradise.mp4** | a tall Strelitzia nicolai bird of paradise with broad paddle-shaped leaves | a matte stoneware pot |
+| **turntable-fiddle-leaf-fig.mp4** | a Ficus lyrata fiddle leaf fig with large glossy violin-shaped leaves | a matte stoneware pot |
+| **turntable-pink-princess-philodendron.mp4** | a Philodendron Pink Princess, dark leaves splashed with bright pink | an aged terracotta pot |
+| **turntable-calathea-orbifolia.mp4** | a Calathea orbifolia with round silver-and-green striped leaves | a matte stoneware pot |
+| **turntable-string-of-pearls.mp4** | a Senecio string of pearls, long strands of round green beads cascading down | a raised stoneware pot |
+| **turntable-zz-plant.mp4** | a ZZ plant with upright glossy dark-green oval leaves | a matte stoneware pot |
+| **turntable-snake-plant.mp4** | a Sansevieria snake plant with tall upright sword-like leaves edged in yellow | a matte stoneware pot |
+| **turntable-alocasia-zebrina.mp4** | an Alocasia zebrina, arrow-shaped leaves on zebra-striped stems | a matte stoneware pot |
+| **turntable-marble-queen-pothos.mp4** | a marble queen pothos with cream-and-green marbled trailing leaves | a raised stoneware pot |
+| **turntable-rubber-plant.mp4** | a Ficus elastica rubber plant with glossy deep burgundy-green leaves | a matte stoneware pot |
+| **turntable-hoya-kerrii.mp4** | a Hoya kerrii, a single plump heart-shaped succulent leaf | a small stoneware pot |
+
+### 3. Optional ambient overlay
+**pollen.mp4** (prompt above, in Optional extras).

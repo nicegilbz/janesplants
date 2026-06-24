@@ -132,6 +132,7 @@ export default function CursorLeaves() {
     <>
       <div
         ref={glowRef}
+        aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[55] h-[180px] w-[180px] rounded-full"
         style={{
           background:
@@ -141,6 +142,7 @@ export default function CursorLeaves() {
       />
       <canvas
         ref={canvasRef}
+        aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-[56]"
       />
     </>

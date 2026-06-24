@@ -119,14 +119,14 @@ export default function TermsPage() {
           Not sure about something?{" "}
           <a
             href={`mailto:${BRAND.contactEmail}`}
-            className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+            className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
             {BRAND.contactEmail}
           </a>
           . You can also read our{" "}
           <Link
             href="/privacy"
-            className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+            className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
             privacy notice
           </Link>

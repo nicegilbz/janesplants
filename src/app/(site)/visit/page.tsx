@@ -45,10 +45,13 @@ export default function VisitPage() {
             </p>
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="cine-serif group mt-8 inline-flex items-center gap-3 text-[clamp(1.9rem,5.5vw,4rem)] text-[var(--c-bone)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-serif group mt-8 inline-flex items-center gap-3 rounded-sm text-[clamp(1.9rem,5.5vw,4rem)] text-[var(--c-bone)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
-              <ArrowUpRight className="h-[0.8em] w-[0.8em] flex-none text-[var(--c-glow)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+              <ArrowUpRight
+                className="h-[0.8em] w-[0.8em] flex-none text-[var(--c-glow)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </a>
             <div className="cine-rule mx-auto mt-12 max-w-3xl" />
           </div>
@@ -67,18 +70,24 @@ export default function VisitPage() {
 
               <div className="mt-9 space-y-4 text-[0.9rem] text-[var(--c-bone)]/85">
                 <p className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+                  <span
+                    className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                    aria-hidden="true"
+                  >
                     <Mail className="h-4 w-4 text-[var(--c-glow)]" />
                   </span>
                   <a
                     href={`mailto:${BRAND.contactEmail}`}
-                    className="underline-offset-4 hover:text-[var(--c-glow)] hover:underline"
+                    className="rounded-sm underline-offset-4 hover:text-[var(--c-glow)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   >
                     {BRAND.contactEmail}
                   </a>
                 </p>
                 <p className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)]">
+                  <span
+                    className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)]"
+                    aria-hidden="true"
+                  >
                     <MapPin className="h-4 w-4 text-[var(--c-brass)]" />
                   </span>
                   On the edge of Hertford, Hertfordshire
@@ -89,14 +98,14 @@ export default function VisitPage() {
                 After plants for a space rather than a windowsill?{" "}
                 <Link
                   href="/hire"
-                  className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                  className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   See plant hire and styling
                 </Link>
                 , or read our{" "}
                 <Link
                   href="/care"
-                  className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                  className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   care guides
                 </Link>

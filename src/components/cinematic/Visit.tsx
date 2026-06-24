@@ -68,17 +68,17 @@ export default function Visit() {
               <span className="cine-accent text-[var(--c-glow)]">wander</span>.
             </h2>
             <p className="cine-visit-reveal mx-auto mt-6 flex items-center justify-center gap-2 text-[var(--c-sage)]">
-              <MapPin className="h-4 w-4 text-[var(--c-brass)]" />
+              <MapPin className="h-4 w-4 text-[var(--c-brass)]" aria-hidden="true" />
               {BRAND.location.line}
             </p>
 
             <div className="cine-visit-reveal mt-12 flex flex-wrap items-center justify-center gap-4">
               <MagneticCTA href={`mailto:${BRAND.contactEmail}`}>
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4" aria-hidden="true" />
                 {BRAND.contactEmail}
               </MagneticCTA>
               <MagneticCTA href="#collection" variant="ghost">
-                Browse the shop <ArrowUpRight className="h-4 w-4" />
+                Browse the shop <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </MagneticCTA>
             </div>
           </div>
@@ -100,25 +100,25 @@ export default function Visit() {
             <div className="flex items-center gap-6">
               <a
                 href="#collection"
-                className="cine-mono text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Shop
               </a>
               <a
                 href="#hire"
-                className="cine-mono text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Hire
               </a>
               <a
                 href="#care"
-                className="cine-mono text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                className="cine-mono rounded-sm text-[0.7rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Care
               </a>
             </div>
           </div>
-          <p className="cine-mono mt-8 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[var(--c-sage)]/50">
+          <p className="cine-mono mt-8 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[var(--c-sage)]/70">
             {BRAND.domain} · Concept 01 / Cinematic Jungle
           </p>
         </footer>

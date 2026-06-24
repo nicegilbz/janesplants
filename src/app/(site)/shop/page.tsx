@@ -66,7 +66,7 @@ export default function ShopPage() {
           <nav className="cine-mono mb-8 flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-sage)]">
             <Link
               href="/"
-              className="transition-colors hover:text-[var(--c-glow)]"
+              className="rounded transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Home
             </Link>
@@ -91,7 +91,7 @@ export default function ShopPage() {
           {/* stat row */}
           <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
             <span className="flex items-center gap-2.5">
-              <Leaf className="h-4 w-4 text-[var(--c-glow)]" />
+              <Leaf className="h-4 w-4 text-[var(--c-glow)]" aria-hidden="true" />
               <span className="cine-mono text-[0.72rem] uppercase tracking-[0.18em] text-[var(--c-sage)]">
                 {PLANTS.length} plants in the collection
               </span>
@@ -150,7 +150,7 @@ export default function ShopPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <MagneticCTA href="/visit#enquire">
               Enquire or reserve
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </MagneticCTA>
             <MagneticCTA href="/care" variant="ghost">
               Read the care guides
@@ -160,14 +160,14 @@ export default function ShopPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link
               href="/hire"
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Plant hire & styling
             </Link>
             <span className="hidden h-3 w-px bg-[var(--c-brass-line)] sm:block" />
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

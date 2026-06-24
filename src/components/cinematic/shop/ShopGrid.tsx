@@ -82,7 +82,7 @@ function PlantCard({ p }: { p: Plant }) {
       {/* rare badge */}
       {p.rare && (
         <span className="cine-mono absolute right-4 top-4 z-10 flex items-center gap-1 rounded-full border border-[var(--c-glow-line)] bg-[rgba(12,20,16,0.5)] px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.18em] text-[var(--c-glow)]">
-          <Sparkles className="h-3 w-3" /> Rare
+          <Sparkles className="h-3 w-3" aria-hidden="true" /> Rare
         </span>
       )}
 
@@ -120,12 +120,13 @@ function PlantCard({ p }: { p: Plant }) {
 
       <div className="flex items-center justify-between text-[var(--c-sage)]">
         <span className="flex items-center gap-2 text-[0.78rem]">
-          <Sun className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+          <Sun className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
           {p.light}
         </span>
         {p.petSafe && (
           <span title="Pet-friendly" className="flex items-center gap-1">
-            <PawPrint className="h-3.5 w-3.5 text-[var(--c-glow)]" />
+            <PawPrint className="h-3.5 w-3.5 text-[var(--c-glow)]" aria-hidden="true" />
+            <span className="sr-only">Pet-friendly</span>
           </span>
         )}
       </div>
@@ -139,7 +140,7 @@ function PlantCard({ p }: { p: Plant }) {
       {/* view affordance */}
       <span className="cine-mono mt-5 flex items-center gap-1.5 text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)] transition-colors duration-300 group-hover:text-[var(--c-glow)]">
         View plant
-        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
       </span>
     </Link>
   );
@@ -192,7 +193,7 @@ export default function ShopGrid() {
                 type="button"
                 onClick={() => setFilter(key)}
                 aria-pressed={active}
-                className="cine-mono rounded-full border px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] transition-colors duration-300"
+                className="cine-mono rounded-full border px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{
                   borderColor: active
                     ? "var(--c-glow-line)"
@@ -210,14 +211,15 @@ export default function ShopGrid() {
         {/* sort control */}
         <label className="flex shrink-0 items-center gap-3 self-start lg:self-auto">
           <span className="cine-mono flex items-center gap-1.5 text-[0.66rem] uppercase tracking-[0.2em] text-[var(--c-sage)]">
-            <ArrowDownUp className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+            <ArrowDownUp className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
             Sort
           </span>
           <span className="relative">
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as Sort)}
-              className="cine-mono cursor-pointer appearance-none rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)] py-2 pl-4 pr-9 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--c-bone)] outline-none transition-colors duration-300 hover:border-[var(--c-glow-line)] focus-visible:border-[var(--c-glow-line)]"
+              aria-label="Sort plants"
+              className="cine-mono cursor-pointer appearance-none rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.5)] py-2 pl-4 pr-9 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--c-bone)] outline-none transition-colors duration-300 hover:border-[var(--c-glow-line)] focus-visible:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {SORTS.map((s) => (
                 <option key={s.key} value={s.key} className="text-black">
@@ -225,7 +227,7 @@ export default function ShopGrid() {
                 </option>
               ))}
             </select>
-            <ArrowUpRight className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 rotate-90 text-[var(--c-sage)]" />
+            <ArrowUpRight className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 rotate-90 text-[var(--c-sage)]" aria-hidden="true" />
           </span>
         </label>
       </div>

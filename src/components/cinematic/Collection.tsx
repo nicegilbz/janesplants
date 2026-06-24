@@ -20,10 +20,15 @@ type Filter = PlantCategory | "All";
 
 function Difficulty({ level }: { level: number }) {
   return (
-    <span className="flex items-center gap-1">
+    <span
+      className="flex items-center gap-1"
+      role="img"
+      aria-label={`Care difficulty ${level} out of 5`}
+    >
       {[1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}
+          aria-hidden="true"
           className="h-1.5 w-1.5 rounded-full"
           style={{
             background: i <= level ? "var(--c-glow)" : "rgba(169,181,163,0.25)",
@@ -85,7 +90,9 @@ export default function Collection() {
               <button
                 key={key}
                 onClick={() => setFilter(key)}
-                className="cine-mono rounded-full border px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] transition-colors duration-300"
+                aria-pressed={active}
+                aria-label={`Filter: ${key === "All" ? "All plants" : key}`}
+                className="cine-mono rounded-full border px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{
                   borderColor: active
                     ? "var(--c-glow-line)"
@@ -127,7 +134,7 @@ export default function Collection() {
                 {/* rare badge */}
                 {p.rare && (
                   <span className="cine-mono absolute right-4 top-4 z-10 flex items-center gap-1 rounded-full border border-[var(--c-glow-line)] bg-[rgba(12,20,16,0.5)] px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.18em] text-[var(--c-glow)]">
-                    <Sparkles className="h-3 w-3" /> Rare
+                    <Sparkles className="h-3 w-3" aria-hidden="true" /> Rare
                   </span>
                 )}
 
@@ -165,18 +172,18 @@ export default function Collection() {
 
                 <div className="flex items-center justify-between text-[var(--c-sage)]">
                   <span className="flex items-center gap-2 text-[0.78rem]">
-                    <Sun className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+                    <Sun className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
                     {p.light}
                   </span>
                   {p.petSafe && (
-                    <span title="Pet-friendly">
-                      <PawPrint className="h-3.5 w-3.5 text-[var(--c-glow)]" />
+                    <span title="Pet-friendly" role="img" aria-label="Pet-friendly">
+                      <PawPrint className="h-3.5 w-3.5 text-[var(--c-glow)]" aria-hidden="true" />
                     </span>
                   )}
                 </div>
                 <div className="mt-3 flex items-center justify-between">
                   <span className="flex items-center gap-2 text-[0.72rem] text-[var(--c-sage)]">
-                    <Droplets className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+                    <Droplets className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
                     care
                   </span>
                   <Difficulty level={p.difficulty} />

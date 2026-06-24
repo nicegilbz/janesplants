@@ -74,6 +74,7 @@ export default function MediaSlot({
             playsInline
             preload="metadata"
             poster={src}
+            aria-label={label}
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src={video} type="video/mp4" />
@@ -105,7 +106,7 @@ export default function MediaSlot({
         style={{
           background:
             "radial-gradient(120% 100% at 30% 20%, rgba(31,95,63,0.55), transparent 60%), radial-gradient(90% 90% at 80% 90%, rgba(159,209,91,0.14), transparent 55%), linear-gradient(160deg, #102017, #0a120d)",
-          animation: "cine-breathe 9s ease-in-out infinite",
+          animation: reduced ? undefined : "cine-breathe 9s ease-in-out infinite",
         }}
       />
       <div
@@ -121,6 +122,7 @@ export default function MediaSlot({
           <Play
             className="h-5 w-5 translate-x-[1px] text-[var(--c-glow)]"
             fill="currentColor"
+            aria-hidden="true"
           />
         </div>
       </div>

@@ -58,7 +58,7 @@ export default function CareGuides() {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpen(isOpen ? "" : guide.slug)}
-                  className="group flex w-full items-center gap-5 px-6 py-7 text-left sm:px-9"
+                  className="group flex w-full items-center gap-5 px-6 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--c-glow)] sm:px-9"
                 >
                   <span
                     className={cn(
@@ -122,7 +122,10 @@ export default function CareGuides() {
                             key={tip}
                             className="flex items-start gap-3 text-[var(--c-bone)]/90"
                           >
-                            <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-[rgba(159,209,91,0.12)] text-[var(--c-glow)] shadow-[0_0_10px_rgba(159,209,91,0.25)]">
+                            <span
+                              className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-[rgba(159,209,91,0.12)] text-[var(--c-glow)] shadow-[0_0_10px_rgba(159,209,91,0.25)]"
+                              aria-hidden="true"
+                            >
                               <Check className="h-3 w-3" strokeWidth={3} />
                             </span>
                             <span className="text-[0.98rem] leading-relaxed">

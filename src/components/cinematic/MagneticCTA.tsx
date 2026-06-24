@@ -42,7 +42,7 @@ export default function MagneticCTA({
       onMouseMove={onMove}
       onMouseLeave={reset}
       style={{ x: sx, y: sy }}
-      className={`cine-cta ${variant === "ghost" ? "cine-cta--ghost" : ""} ${className}`}
+      className={`cine-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${variant === "ghost" ? "cine-cta--ghost" : ""} ${className}`}
     >
       {children}
     </motion.a>

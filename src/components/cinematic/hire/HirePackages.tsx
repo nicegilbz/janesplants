@@ -122,7 +122,10 @@ export default function HirePackages() {
                 <ul className="mt-6 space-y-2.5">
                   {pkg.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+                      <span
+                        className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                        aria-hidden="true"
+                      >
                         <Check className="h-2.5 w-2.5 text-[var(--c-glow)]" />
                       </span>
                       <span className="text-[0.86rem] leading-snug text-[var(--c-bone)]/85">
@@ -138,7 +141,7 @@ export default function HirePackages() {
                     href="#enquire"
                     variant={featured ? "solid" : "ghost"}
                   >
-                    Enquire <ArrowUpRight className="h-4 w-4" />
+                    Enquire <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </MagneticCTA>
                 </div>
               </article>

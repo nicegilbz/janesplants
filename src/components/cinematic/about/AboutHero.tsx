@@ -148,7 +148,7 @@ export default function AboutHero() {
 
         <div className="cine-anim-fade mt-9 flex flex-wrap items-center justify-center gap-4">
           <MagneticCTA href="#our-story">
-            <Sprout className="h-4 w-4" /> Read the story
+            <Sprout className="h-4 w-4" aria-hidden="true" /> Read the story
           </MagneticCTA>
           <MagneticCTA href="/visit" variant="ghost">
             Come and visit
@@ -172,6 +172,7 @@ export default function AboutHero() {
         </span>
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
+          aria-hidden="true"
           style={{
             animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite",
           }}

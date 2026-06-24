@@ -32,6 +32,7 @@ import {
   Check,
 } from "lucide-react";
 import { PLANTS, plantImage, type Plant } from "@/lib/content";
+import { useReducedMotion } from "@/components/cinematic/hooks";
 
 type LightKey = "low" | "medium" | "bright";
 type CareKey = "low" | "some" | "high";
@@ -141,6 +142,7 @@ function matchPlants(c: Choices): Plant[] {
 }
 
 export default function BuildConfigurator() {
+  const reduced = useReducedMotion();
   const [step, setStep] = useState(0);
   const [choices, setChoices] = useState<Partial<Choices>>({});
   const [done, setDone] = useState(false);
@@ -185,7 +187,7 @@ export default function BuildConfigurator() {
         <motion.div
           className="h-px bg-[var(--c-glow)]"
           animate={{ width: `${Math.round(progress * 100)}%` }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={reduced ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           style={{ boxShadow: "0 0 10px var(--c-glow)" }}
         />
       </div>
@@ -193,9 +195,9 @@ export default function BuildConfigurator() {
       {!done ? (
           <motion.div
             key={`step-${step}`}
-            initial={{ opacity: 0, y: 18 }}
+            initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={reduced ? { duration: 0 } : { duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="mb-2 flex items-center gap-3">
               <span className="cine-mono text-[0.66rem] uppercase tracking-[0.24em] text-[var(--c-glow)]">
@@ -212,10 +214,11 @@ export default function BuildConfigurator() {
                 <button
                   key={opt.v}
                   onClick={() => choose(current, opt)}
-                  className="group flex flex-col items-start gap-3 rounded-2xl cine-glass p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-glow-line)] focus-visible:-translate-y-1 focus-visible:outline-none"
+                  aria-label={`${opt.label}. ${opt.sub}`}
+                  className="group flex flex-col items-start gap-3 rounded-2xl cine-glass p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-glow-line)] focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[var(--c-glow-soft)] text-[var(--c-glow)] transition-colors group-hover:border-[var(--c-glow-line)]">
-                    <opt.Icon className="h-5 w-5" />
+                    <opt.Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span>
                     <span className="block font-[family-name:var(--font-serif)] text-lg text-[var(--c-bone)]">
@@ -232,18 +235,19 @@ export default function BuildConfigurator() {
             {step > 0 && (
               <button
                 onClick={() => setStep(step - 1)}
-                className="cine-mono mt-8 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                aria-label="Back to the previous step"
+                className="cine-mono mt-8 inline-flex items-center gap-2 rounded text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
-                <ArrowLeft className="h-3.5 w-3.5" /> Back
+                <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Back
               </button>
             )}
           </motion.div>
         ) : (
           <motion.div
             key="result"
-            initial={{ opacity: 0, y: 18 }}
+            initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={reduced ? { duration: 0 } : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="cine-mono text-[0.66rem] uppercase tracking-[0.24em] text-[var(--c-glow)]">
               Your jungle
@@ -278,7 +282,7 @@ export default function BuildConfigurator() {
                     key={tag}
                     className="cine-mono flex items-center gap-1.5 rounded-full border border-[var(--c-brass-line)] px-3 py-1.5 text-[0.64rem] uppercase tracking-[0.16em] text-[var(--c-sage)]"
                   >
-                    <Check className="h-3 w-3 text-[var(--c-glow)]" />
+                    <Check className="h-3 w-3 text-[var(--c-glow)]" aria-hidden="true" />
                     {tag}
                   </span>
                 ))}
@@ -289,13 +293,13 @@ export default function BuildConfigurator() {
               {result.map((p, i) => (
                 <motion.div
                   key={p.slug}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={reduced ? false : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.05 * i }}
+                  transition={reduced ? { duration: 0 } : { duration: 0.4, delay: 0.05 * i }}
                 >
                   <Link
                     href={`/plant/${p.slug}`}
-                    className="group block overflow-hidden rounded-xl cine-glass"
+                    className="group block overflow-hidden rounded-xl cine-glass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
                       <Image
@@ -333,24 +337,28 @@ export default function BuildConfigurator() {
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <Link href="/visit#enquire" className="cine-cta">
+                <Link
+                  href="/visit#enquire"
+                  className="cine-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                >
                   Enquire about this jungle
                 </Link>
                 <button
                   onClick={restart}
-                  className="cine-mono inline-flex items-center gap-2 rounded-full border border-[var(--c-brass-line)] px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+                  aria-label="Start the configurator over"
+                  className="cine-mono inline-flex items-center gap-2 rounded-full border border-[var(--c-brass-line)] px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
-                  <RotateCcw className="h-3.5 w-3.5" /> Start over
+                  <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> Start over
                 </button>
               </div>
             </div>
 
             <Link
               href="/shop"
-              className="cine-mono mt-6 inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono mt-6 inline-flex items-center gap-1.5 rounded text-[0.7rem] uppercase tracking-[0.18em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Or browse the whole collection
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </motion.div>
         )}

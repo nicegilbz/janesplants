@@ -135,7 +135,7 @@ export default function CarePage() {
               <Link
                 key={guide.slug}
                 href={`/care/${guide.slug}`}
-                className="group relative overflow-hidden rounded-2xl cine-glass p-7 transition-colors duration-500 hover:bg-[var(--c-surface)]/50"
+                className="group relative overflow-hidden rounded-2xl cine-glass p-7 transition-colors duration-500 hover:bg-[var(--c-surface)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <div
                   className="pointer-events-none absolute -right-8 -top-12 h-40 w-40 rounded-full opacity-0 transition-opacity duration-700 group-hover:opacity-100"
@@ -156,7 +156,10 @@ export default function CarePage() {
                 </p>
                 <span className="cine-mono mt-6 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors group-hover:text-[var(--c-glow)]">
                   Read the full guide
-                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight
+                    className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </span>
               </Link>
             ))}
@@ -206,14 +209,17 @@ export default function CarePage() {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[var(--c-sage)]">
             <Link
               href="/"
-              className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Back to the glasshouse
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

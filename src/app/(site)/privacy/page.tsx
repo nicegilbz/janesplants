@@ -101,7 +101,7 @@ export default function PrivacyPage() {
               to delete it entirely. Just email{" "}
               <a
                 href={`mailto:${BRAND.contactEmail}`}
-                className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 {BRAND.contactEmail}
               </a>{" "}
@@ -115,14 +115,14 @@ export default function PrivacyPage() {
           Questions about any of this?{" "}
           <Link
             href="/visit"
-            className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+            className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
             Get in touch
           </Link>
           . You can also read our{" "}
           <Link
             href="/terms"
-            className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+            className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
             terms
           </Link>

@@ -17,7 +17,7 @@ export default function CinematicLayout({
 }) {
   return (
     <ThemeProvider>
-      <div className="cine cine-grain relative min-h-screen">
+      <div className="cine cine-grain relative min-h-screen overflow-x-clip">
         <CursorLeaves />
         <SiteHeader />
         <SmoothScroll>

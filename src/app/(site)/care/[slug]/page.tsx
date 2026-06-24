@@ -62,9 +62,12 @@ export default async function CareGuidePage({
       <header className="relative mx-auto w-full max-w-3xl px-6 pt-[7rem] lg:pt-32">
         <Link
           href="/care"
-          className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+          className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         >
-          <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <ArrowLeft
+            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5"
+            aria-hidden="true"
+          />
           All care guides
         </Link>
 
@@ -117,10 +120,13 @@ export default async function CareGuidePage({
           </h2>
           <Link
             href="/care"
-            className="cine-mono group hidden items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] sm:inline-flex"
+            className="cine-mono group hidden items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:inline-flex"
           >
             See all
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight
+              className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
         </div>
 
@@ -129,7 +135,7 @@ export default async function CareGuidePage({
             <Link
               key={g.slug}
               href={`/care/${g.slug}`}
-              className="group relative overflow-hidden rounded-2xl cine-glass p-6 transition-colors duration-500 hover:bg-[var(--c-surface)]/50"
+              className="group relative overflow-hidden rounded-2xl cine-glass p-6 transition-colors duration-500 hover:bg-[var(--c-surface)]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               <div
                 className="pointer-events-none absolute -right-8 -top-12 h-36 w-36 rounded-full opacity-0 transition-opacity duration-700 group-hover:opacity-100"
@@ -147,7 +153,10 @@ export default async function CareGuidePage({
               </p>
               <span className="cine-mono mt-5 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--c-brass)]">
                 Read the guide
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight
+                  className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </span>
             </Link>
           ))}
@@ -181,7 +190,7 @@ export default async function CareGuidePage({
             line at{" "}
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)]"
+              className="rounded-sm text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

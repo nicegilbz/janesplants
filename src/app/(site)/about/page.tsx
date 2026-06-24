@@ -110,7 +110,7 @@ export default function AboutPage() {
               <span className="cine-eyebrow">How we grow</span>
               <span className="h-px w-10 bg-[var(--c-brass-line)]" />
               <span className="cine-mono flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
-                <MapPin className="h-3.5 w-3.5 text-[var(--c-brass)]" />
+                <MapPin className="h-3.5 w-3.5 text-[var(--c-brass)]" aria-hidden="true" />
                 Hertford
               </span>
             </div>
@@ -134,14 +134,14 @@ export default function AboutPage() {
             <p className="mt-8 text-[0.85rem] text-[var(--c-sage)]">
               <Link
                 href="/visit"
-                className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Plan a visit
               </Link>{" "}
               or read our{" "}
               <Link
                 href="/care"
-                className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+                className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 care guides
               </Link>
@@ -166,7 +166,7 @@ export default function AboutPage() {
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
             <Link
               href="/shop"
-              className="cine-glass group relative overflow-hidden rounded-2xl p-9 transition-colors hover:bg-[var(--c-glow-soft)]"
+              className="cine-glass group relative overflow-hidden rounded-2xl p-9 transition-colors hover:bg-[var(--c-glow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               <span className="cine-mono text-[0.7rem] uppercase tracking-[0.26em] text-[var(--c-glow)]">
                 The shop
@@ -180,13 +180,16 @@ export default function AboutPage() {
               </p>
               <span className="mt-7 inline-flex items-center gap-2 text-[0.85rem] text-[var(--c-glow)]">
                 Browse the shop
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </span>
             </Link>
 
             <Link
               href="/hire"
-              className="cine-glass group relative overflow-hidden rounded-2xl p-9 transition-colors hover:bg-[var(--c-glow-soft)]"
+              className="cine-glass group relative overflow-hidden rounded-2xl p-9 transition-colors hover:bg-[var(--c-glow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               <span className="cine-mono text-[0.7rem] uppercase tracking-[0.26em] text-[var(--c-brass)]">
                 Plant hire and styling
@@ -200,7 +203,10 @@ export default function AboutPage() {
               </p>
               <span className="mt-7 inline-flex items-center gap-2 text-[0.85rem] text-[var(--c-brass)]">
                 See plant hire
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </span>
             </Link>
           </div>
@@ -250,7 +256,10 @@ export default function AboutPage() {
                   key={p}
                   className="cine-glass rounded-2xl p-8"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+                  <span
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                    aria-hidden="true"
+                  >
                     <Icon className="h-5 w-5 text-[var(--c-glow)]" />
                   </span>
                   <p className="cine-mono mt-6 text-[0.7rem] uppercase tracking-[0.26em] text-[var(--c-brass)]">
@@ -287,11 +296,17 @@ export default function AboutPage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/shop" className="cine-cta">
-              <Leaf className="h-4 w-4" /> Browse the shop
+            <Link
+              href="/shop"
+              className="cine-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              <Leaf className="h-4 w-4" aria-hidden="true" /> Browse the shop
             </Link>
-            <Link href="/visit" className="cine-cta cine-cta--ghost">
-              <MapPin className="h-4 w-4" /> Visit the glasshouse
+            <Link
+              href="/visit"
+              className="cine-cta cine-cta--ghost focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              <MapPin className="h-4 w-4" aria-hidden="true" /> Visit the glasshouse
             </Link>
           </div>
 
@@ -299,7 +314,7 @@ export default function AboutPage() {
             Or just say hello at{" "}
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+              className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

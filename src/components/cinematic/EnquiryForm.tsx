@@ -64,9 +64,13 @@ export default function EnquiryForm({
 
   if (status === "sent") {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-2xl cine-glass p-8">
+      <div
+        className="flex flex-col items-start gap-4 rounded-2xl cine-glass p-8"
+        role="status"
+        aria-live="polite"
+      >
         <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
-          <Check className="h-5 w-5 text-[var(--c-glow)]" />
+          <Check className="h-5 w-5 text-[var(--c-glow)]" aria-hidden="true" />
         </span>
         <h3 className="font-[family-name:var(--font-serif)] text-2xl text-[var(--c-bone)]">
           Thanks, that has landed with us.
@@ -87,7 +91,7 @@ export default function EnquiryForm({
   }
 
   const field =
-    "w-full rounded-xl border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.4)] px-4 py-3 text-[var(--c-bone)] outline-none transition-colors placeholder:text-[var(--c-sage)]/50 focus:border-[var(--c-glow-line)]";
+    "w-full rounded-xl border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.4)] px-4 py-3 text-[var(--c-bone)] outline-none transition-colors placeholder:text-[var(--c-sage)]/60 focus:border-[var(--c-glow-line)] focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
 
   return (
     <form onSubmit={onSubmit} className="rounded-2xl cine-glass p-6 sm:p-8">
@@ -106,9 +110,19 @@ export default function EnquiryForm({
           <span className="cine-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--c-sage)]">
             Name
           </span>
-          <input name="name" required className={`mt-2 ${field}`} placeholder="Your name" />
+          <input
+            name="name"
+            required
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? "enq-name-error" : undefined}
+            className={`mt-2 ${field}`}
+            placeholder="Your name"
+          />
           {errors.name && (
-            <span className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]">
+            <span
+              id="enq-name-error"
+              className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]"
+            >
               {errors.name}
             </span>
           )}
@@ -121,11 +135,16 @@ export default function EnquiryForm({
             name="email"
             type="email"
             required
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? "enq-email-error" : undefined}
             className={`mt-2 ${field}`}
             placeholder="you@email.com"
           />
           {errors.email && (
-            <span className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]">
+            <span
+              id="enq-email-error"
+              className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]"
+            >
               {errors.email}
             </span>
           )}
@@ -146,6 +165,8 @@ export default function EnquiryForm({
         <textarea
           name="message"
           required
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? "enq-message-error" : undefined}
           rows={compact ? 3 : 5}
           className={`mt-2 resize-none ${field}`}
           placeholder={
@@ -157,7 +178,10 @@ export default function EnquiryForm({
           }
         />
         {errors.message && (
-          <span className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]">
+          <span
+            id="enq-message-error"
+            className="mt-1 block text-[0.75rem] text-[var(--c-terracotta)]"
+          >
             {errors.message}
           </span>
         )}
@@ -167,20 +191,20 @@ export default function EnquiryForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="cine-cta disabled:cursor-not-allowed disabled:opacity-60"
+          className="cine-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "sending" ? (
             <>
-              <Leaf className="h-4 w-4 animate-pulse" /> Sending
+              <Leaf className="h-4 w-4 animate-pulse" aria-hidden="true" /> Sending
             </>
           ) : (
             <>
-              <Send className="h-4 w-4" /> Send enquiry
+              <Send className="h-4 w-4" aria-hidden="true" /> Send enquiry
             </>
           )}
         </button>
         {status === "error" && (
-          <span className="text-[0.8rem] text-[var(--c-sage)]">
+          <span className="text-[0.8rem] text-[var(--c-sage)]" role="alert">
             Something went wrong. Email us at{" "}
             <a
               className="text-[var(--c-glow)] underline-offset-4 hover:underline"

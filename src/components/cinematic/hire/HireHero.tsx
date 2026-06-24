@@ -155,7 +155,7 @@ export default function HireHero() {
 
           <div className="hire-hero-fade cine-anim-fade mt-9 flex flex-wrap items-center gap-4">
             <MagneticCTA href="#enquire">
-              <Leaf className="h-4 w-4" /> Start an enquiry
+              <Leaf className="h-4 w-4" aria-hidden="true" /> Start an enquiry
             </MagneticCTA>
             <MagneticCTA href="#packages" variant="ghost">
               See the packages
@@ -166,7 +166,7 @@ export default function HireHero() {
             Prefer to buy outright?{" "}
             <Link
               href="/shop"
-              className="text-[var(--c-glow)] underline-offset-4 hover:underline"
+              className="rounded-sm text-[var(--c-glow)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Shop the collection
             </Link>
@@ -203,6 +203,7 @@ export default function HireHero() {
         </span>
         <ArrowDown
           className="h-4 w-4 text-[var(--c-glow)]"
+          aria-hidden="true"
           style={{
             animation: reduced ? undefined : "cine-pulse 2s ease-in-out infinite",
           }}

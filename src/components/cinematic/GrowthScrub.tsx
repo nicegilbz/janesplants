@@ -207,7 +207,7 @@ export default function GrowthScrub({
             ref={videoRef}
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster={poster}
             // No autoPlay / loop here: in scrub mode WE drive playback; in the
             // non-scrub branch the effect sets loop + calls play().

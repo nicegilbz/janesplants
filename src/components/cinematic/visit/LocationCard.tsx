@@ -71,7 +71,10 @@ export default function LocationCard() {
           {/* opening hours */}
           <div className="visit-loc-reveal mt-9 rounded-2xl cine-glass p-6 sm:p-7">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]">
+              <span
+                className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--c-glow-line)] bg-[var(--c-glow-soft)]"
+                aria-hidden="true"
+              >
                 <Clock className="h-4 w-4 text-[var(--c-glow)]" />
               </span>
               <span className="cine-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--c-sage)]">
@@ -298,7 +301,7 @@ function StylisedMap({ reduced }: { reduced: boolean }) {
       {/* footer strip on the card */}
       <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-[var(--c-brass-line)]/30 bg-[rgba(8,14,10,0.55)] px-5 py-3 backdrop-blur-sm">
         <span className="flex items-center gap-2 text-[0.8rem] text-[var(--c-bone)]/85">
-          <MapPin className="h-4 w-4 flex-none text-[var(--c-glow)]" />
+          <MapPin className="h-4 w-4 flex-none text-[var(--c-glow)]" aria-hidden="true" />
           On the edge of Hertford, Hertfordshire
         </span>
         <span className="cine-mono hidden text-[0.62rem] uppercase tracking-[0.2em] text-[var(--c-sage)] sm:block">

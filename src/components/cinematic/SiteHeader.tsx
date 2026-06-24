@@ -51,8 +51,12 @@ export default function SiteHeader() {
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Leaf className="h-5 w-5 text-[var(--c-glow)]" />
+        <Link
+          href="/"
+          aria-label={`${BRAND.name} home`}
+          className="flex items-center gap-2.5 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        >
+          <Leaf className="h-5 w-5 text-[var(--c-glow)]" aria-hidden="true" />
           <span className="font-[family-name:var(--font-serif)] text-lg tracking-tight text-[var(--c-bone)]">
             {BRAND.name}
           </span>
@@ -65,7 +69,8 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="cine-mono text-[0.72rem] uppercase tracking-[0.18em] transition-colors"
+                aria-current={active ? "page" : undefined}
+                className="cine-mono rounded-sm text-[0.72rem] uppercase tracking-[0.18em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{ color: active ? "var(--c-glow)" : "var(--c-sage)" }}
               >
                 {item.label}
@@ -74,7 +79,7 @@ export default function SiteHeader() {
           })}
           <Link
             href="/visit#enquire"
-            className="cine-mono rounded-full border border-[var(--c-glow-line)] px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] text-[var(--c-glow)] transition-colors hover:bg-[var(--c-glow-soft)]"
+            className="cine-mono rounded-full border border-[var(--c-glow-line)] px-4 py-2 text-[0.7rem] uppercase tracking-[0.16em] text-[var(--c-glow)] transition-colors hover:bg-[var(--c-glow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           >
             Enquire
           </Link>
@@ -85,10 +90,15 @@ export default function SiteHeader() {
           <DayNightDial />
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-brass-line)] text-[var(--c-bone)]"
-            aria-label="Menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-brass-line)] text-[var(--c-bone)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
@@ -107,14 +117,15 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="cine-mono text-sm uppercase tracking-[0.18em] text-[var(--c-sage)]"
+                aria-current={pathname === item.href ? "page" : undefined}
+                className="cine-mono rounded-sm py-1 text-sm uppercase tracking-[0.18em] text-[var(--c-sage)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/visit#enquire"
-              className="cine-mono text-sm uppercase tracking-[0.18em] text-[var(--c-glow)]"
+              className="cine-mono rounded-sm py-1 text-sm uppercase tracking-[0.18em] text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Enquire
             </Link>

@@ -69,7 +69,7 @@ export default function JournalPage() {
               <Reveal as="li" key={post.slug} delay={i * 70}>
                 <Link
                   href={`/journal/${post.slug}`}
-                  className="group block py-9 outline-none sm:py-11"
+                  className="group block rounded-lg py-9 outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-4 focus-visible:ring-offset-transparent sm:py-11"
                 >
                   <div className="cine-mono flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)]">
                     <span className="text-[var(--c-glow)]">{post.category}</span>
@@ -89,7 +89,10 @@ export default function JournalPage() {
 
                   <span className="cine-mono mt-6 inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors group-hover:text-[var(--c-glow)]">
                     Read the note
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight
+                      className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
                   </span>
                 </Link>
               </Reveal>
@@ -100,21 +103,27 @@ export default function JournalPage() {
           <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3">
             <Link
               href="/care"
-              className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               The full care guides
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
             <Link
               href="/shop"
-              className="cine-mono group inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono group inline-flex items-center gap-2 rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-sage)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Shop the collection
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
             <a
               href={`mailto:${BRAND.contactEmail}`}
-              className="cine-mono text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)]"
+              className="cine-mono rounded-sm text-[0.66rem] uppercase tracking-[0.22em] text-[var(--c-brass)] transition-colors hover:text-[var(--c-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {BRAND.contactEmail}
             </a>

@@ -11,10 +11,15 @@ import type { Plant } from "@/lib/content";
 
 function DotMeter({ level }: { level: number }) {
   return (
-    <span className="flex items-center gap-1.5" aria-label={`${level} of 5`}>
+    <span
+      className="flex items-center gap-1.5"
+      role="img"
+      aria-label={`${level} of 5`}
+    >
       {[1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}
+          aria-hidden="true"
           className="h-2 w-2 rounded-full"
           style={{
             background:
@@ -39,7 +44,10 @@ function Row({
   return (
     <div className="flex items-center justify-between gap-4 py-3.5">
       <span className="flex items-center gap-3 text-[var(--c-sage)]">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.4)] text-[var(--c-brass)]">
+        <span
+          className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--c-brass-line)] bg-[rgba(12,20,16,0.4)] text-[var(--c-brass)]"
+          aria-hidden="true"
+        >
           {icon}
         </span>
         <span className="cine-mono text-[0.66rem] uppercase tracking-[0.2em]">
