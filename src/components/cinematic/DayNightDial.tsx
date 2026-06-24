@@ -7,7 +7,7 @@ import { useReducedMotion } from "./hooks";
 
 /** Brass day/night dial. Flips the whole site between the conservatory (day)
  *  and the glasshouse-after-dark (night) palette, with a View Transition morph. */
-export default function DayNightDial({ compact = false }: { compact?: boolean }) {
+export default function DayNightDial() {
   const { theme, toggle } = useTheme();
   const reduced = useReducedMotion();
   const isNight = theme === "night";
@@ -18,9 +18,7 @@ export default function DayNightDial({ compact = false }: { compact?: boolean })
       aria-label={isNight ? "Switch to day" : "Switch to night"}
       aria-pressed={!isNight}
       title={isNight ? "Daytime conservatory" : "After dark"}
-      className={`relative flex items-center justify-center overflow-hidden rounded-full border border-[var(--c-brass-line)] text-[var(--c-glow)] transition-colors hover:bg-[var(--c-glow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-        compact ? "h-9 w-9" : "h-9 w-9"
-      }`}
+      className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-[var(--c-brass-line)] text-[var(--c-glow)] transition-colors hover:bg-[var(--c-glow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-glow)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span

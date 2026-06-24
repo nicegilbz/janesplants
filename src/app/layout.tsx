@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Fraunces,
-  Space_Grotesk,
-  Instrument_Serif,
-} from "next/font/google";
+import { Geist, Geist_Mono, Fraunces, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 
@@ -19,12 +13,6 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
-// Technical grotesk for the futuristic / data art direction.
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-grotesk",
-  subsets: ["latin"],
-});
-
 // High-contrast serif for editorial accents and pull quotes.
 const instrument = Instrument_Serif({
   variable: "--font-accent",
@@ -36,7 +24,7 @@ const instrument = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Jane's Plants / Plants with presence",
   description:
-    "A stylish houseplant shop. Hand-picked plants, pots worth showing off, and honest care guidance. Four ways to experience the brand.",
+    "A working glasshouse and houseplant shop in Hertford. Hand-picked plants, pots worth showing off, honest care guidance, plus plant hire and styling.",
   metadataBase: new URL("https://janesplants.com"),
   openGraph: {
     title: "Jane's Plants",
@@ -98,7 +86,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${spaceGrotesk.variable} ${instrument.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${instrument.variable} antialiased`}
     >
       <body>
         <JsonLd data={ORGANISATION_JSONLD} />

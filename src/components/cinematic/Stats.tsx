@@ -58,14 +58,24 @@ export default function Stats() {
             const m = s.value.match(/^(\d+)(.*)$/);
             const num = m ? Number(m[1]) : 0;
             const suffix = m ? m[2] : s.value;
+            // The always-100% figure never changes, so render it statically
+            // rather than counting up from zero.
+            const animate = m !== null && s.value !== "100%";
             return (
               <div key={s.label} className="cine-stat px-2 text-center lg:text-left">
                 <div className="cine-serif flex items-baseline justify-center text-[clamp(3rem,7vw,5.5rem)] text-[var(--c-bone)] lg:justify-start">
                   {m ? (
-                    <span className="cine-stat-num" data-target={num}>
-                      <span>{reduced ? num : 0}</span>
-                      <span className="text-[var(--c-glow)]">{suffix}</span>
-                    </span>
+                    animate ? (
+                      <span className="cine-stat-num" data-target={num}>
+                        <span>{reduced ? num : 0}</span>
+                        <span className="text-[var(--c-glow)]">{suffix}</span>
+                      </span>
+                    ) : (
+                      <span>
+                        <span>{num}</span>
+                        <span className="text-[var(--c-glow)]">{suffix}</span>
+                      </span>
+                    )
                   ) : (
                     <span className="text-[var(--c-glow)]">{s.value}</span>
                   )}

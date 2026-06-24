@@ -10,6 +10,7 @@
  * Never looks broken.
  */
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
 import { useReducedMotion } from "./hooks";
@@ -36,6 +37,31 @@ export default function MediaSlot({
   priority?: boolean;
 }) {
   const reduced = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playsVideo = Boolean(video) && !reduced;
+
+  // Only decode/play the clip while it is on screen; pause it once it scrolls
+  // out of view so off-screen footage never decodes in the background.
+  useEffect(() => {
+    if (!playsVideo) return;
+    const el = videoRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // play() can reject if interrupted; ignore that safely.
+          void el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [playsVideo]);
+
   const corners = [
     "left-3 top-3 border-l border-t",
     "right-3 top-3 border-r border-t",
@@ -66,8 +92,9 @@ export default function MediaSlot({
         className={`group relative overflow-hidden rounded-2xl cine-glass ${className}`}
         style={{ aspectRatio: aspect }}
       >
-        {video && !reduced ? (
+        {playsVideo ? (
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop

@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { PLANTS, plantImage, type Plant } from "@/lib/content";
 import { useReducedMotion } from "@/components/cinematic/hooks";
+import EnquiryForm from "@/components/cinematic/EnquiryForm";
 
 type LightKey = "low" | "medium" | "bright";
 type CareKey = "low" | "some" | "high";
@@ -141,6 +142,35 @@ function matchPlants(c: Choices): Plant[] {
   return picked.slice(0, Math.min(5, picked.length));
 }
 
+// Turn the choices + matched plants into a friendly, UK-tone opening message so
+// the enquiry arrives with everything we need to help. Plain hyphens only.
+function buildEnquiryMessage(c: Choices, plants: Plant[], total: number): string {
+  const room = (c.roomLabel || "home").toLowerCase();
+  const light =
+    c.light === "low"
+      ? "On the shady side"
+      : c.light === "bright"
+        ? "Lots of light"
+        : "Bright but indirect light";
+  const care =
+    c.care === "low"
+      ? "set and forget"
+      : c.care === "high"
+        ? "happy to be devoted"
+        : "a little love";
+  const pets = c.pets ? "pet-safe please" : "no pets";
+  const picks = plants.map((p) => p.name).join(", ");
+
+  return [
+    `I am after a jungle for my ${room}.`,
+    `${light}, ${care}, ${pets}.`,
+    picks
+      ? `Tentative picks: ${picks} (about £${total} total).`
+      : `About £${total} total.`,
+    "Can you help me put it together?",
+  ].join(" ");
+}
+
 export default function BuildConfigurator() {
   const reduced = useReducedMotion();
   const [step, setStep] = useState(0);
@@ -154,6 +184,10 @@ export default function BuildConfigurator() {
     [done, choices],
   );
   const total = result.reduce((sum, p) => sum + p.price, 0);
+  const enquiryMessage = useMemo(
+    () => (done ? buildEnquiryMessage(choices as Choices, result, total) : ""),
+    [done, choices, result, total],
+  );
 
   function choose(stepDef: Step, opt: Option) {
     const next: Partial<Choices> = { ...choices };
@@ -350,6 +384,20 @@ export default function BuildConfigurator() {
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> Start over
                 </button>
+              </div>
+            </div>
+
+            {/* inline enquiry, pre-filled with the chosen jungle */}
+            <div className="mt-10">
+              <span className="cine-mono text-[0.66rem] uppercase tracking-[0.24em] text-[var(--c-glow)]">
+                Send us your jungle
+              </span>
+              <p className="mt-2 max-w-xl text-[var(--c-sage)]">
+                We have written the message for you. Tweak anything, add your
+                details and we will help you put it together.
+              </p>
+              <div className="mt-5">
+                <EnquiryForm kind="general" initialMessage={enquiryMessage} />
               </div>
             </div>
 

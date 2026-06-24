@@ -48,6 +48,18 @@ export default function CursorLeaves() {
     const leaves: Leaf[] = [];
     let last = { x: 0, y: 0, t: 0 };
     let raf = 0;
+    let running = false;
+
+    const startLoop = () => {
+      if (running || document.hidden) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
 
     const onMove = (e: PointerEvent) => {
       glow.style.transform = `translate3d(${e.clientX - 90}px, ${e.clientY - 90}px, 0)`;
@@ -66,6 +78,16 @@ export default function CursorLeaves() {
           dir: Math.random() > 0.5 ? 1 : -1,
         });
         last = { x: e.clientX, y: e.clientY, t: now };
+        // a leaf was spawned -> make sure the draw loop is running
+        startLoop();
+      }
+    };
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else if (leaves.length > 0) {
+        startLoop();
       }
     };
 
@@ -100,9 +122,9 @@ export default function CursorLeaves() {
       ctx.restore();
     };
 
-    const tick = () => {
+    function tick() {
       const now = performance.now();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
       for (let i = leaves.length - 1; i >= 0; i--) {
         const l = leaves[i];
         const p = (now - l.born) / l.life;
@@ -112,17 +134,23 @@ export default function CursorLeaves() {
         }
         drawLeaf(l, p);
       }
+      // stop once there is nothing left to animate; pointermove restarts it
+      if (leaves.length === 0) {
+        running = false;
+        return;
+      }
       raf = requestAnimationFrame(tick);
-    };
+    }
 
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("resize", resize);
-    raf = requestAnimationFrame(tick);
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stopLoop();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [rich]);
 

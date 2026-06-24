@@ -19,7 +19,7 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
-import * as THREE from "three";
+import type * as T from "three";
 import { cn } from "@/lib/utils";
 
 /**
@@ -58,11 +58,11 @@ type HoverImageProps = {
 };
 
 type GLState = {
-  renderer: THREE.WebGLRenderer;
-  scene: THREE.Scene;
-  camera: THREE.OrthographicCamera;
-  material: THREE.ShaderMaterial;
-  texture: THREE.Texture;
+  renderer: T.WebGLRenderer;
+  scene: T.Scene;
+  camera: T.OrthographicCamera;
+  material: T.ShaderMaterial;
+  texture: T.Texture;
   raf: number;
   start: number;
   active: boolean;
@@ -168,6 +168,9 @@ export default function HoverImage({
 
   // mutable GL state kept off-render so re-renders never touch live contexts
   const gl = useRef<GLState | null>(null);
+  // hover intent + an async-init guard (three.js is imported on first hover)
+  const hovering = useRef(false);
+  const initializing = useRef(false);
 
   // compute object-cover scale/offset for an image of given aspect in a box
   function coverFraming(imgW: number, imgH: number, boxW: number, boxH: number) {
@@ -207,15 +210,22 @@ export default function HoverImage({
     gl.current = null;
   }
 
-  function initGL() {
+  async function initGL() {
     const wrap = wrapRef.current;
-    if (!wrap || gl.current) return;
+    if (!wrap || gl.current || initializing.current) return;
 
     const w = wrap.clientWidth;
     const h = wrap.clientHeight;
     if (w === 0 || h === 0) return;
 
-    let renderer: THREE.WebGLRenderer;
+    // three.js is only pulled in on first hover, keeping it off the page bundle.
+    initializing.current = true;
+    const THREE = await import("three");
+    initializing.current = false;
+    // bail if the component unmounted or a context already exists by now
+    if (!wrapRef.current || gl.current) return;
+
+    let renderer: T.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
         alpha: true,
@@ -275,7 +285,7 @@ export default function HoverImage({
       raf: 0,
       start: performance.now(),
       active: true,
-      target: 1,
+      target: hovering.current ? 1 : 0,
       progress: 0,
       pointer: { x: 0.5, y: 0.5 },
     };
@@ -301,8 +311,8 @@ export default function HoverImage({
         wrap!.clientWidth,
         wrap!.clientHeight,
       );
-      (material.uniforms.uCover.value as THREE.Vector2).set(cover[0], cover[1]);
-      (material.uniforms.uOffset.value as THREE.Vector2).set(offset[0], offset[1]);
+      (material.uniforms.uCover.value as T.Vector2).set(cover[0], cover[1]);
+      (material.uniforms.uOffset.value as T.Vector2).set(offset[0], offset[1]);
     }
 
     // load the photo into the GL texture; reveal the canvas once decoded
@@ -342,7 +352,7 @@ export default function HoverImage({
       const t = (performance.now() - s.start) / 1000;
       s.material.uniforms.uTime.value = t;
       s.material.uniforms.uProgress.value = s.progress;
-      (s.material.uniforms.uPointer.value as THREE.Vector2).set(
+      (s.material.uniforms.uPointer.value as T.Vector2).set(
         s.pointer.x,
         s.pointer.y,
       );
@@ -358,10 +368,12 @@ export default function HoverImage({
     if (!wrap) return;
 
     const onEnter = () => {
-      if (!gl.current) initGL();
+      hovering.current = true;
       if (gl.current) gl.current.target = 1;
+      else void initGL();
     };
     const onLeave = () => {
+      hovering.current = false;
       if (gl.current) gl.current.target = 0;
     };
     const onMove = (e: PointerEvent) => {

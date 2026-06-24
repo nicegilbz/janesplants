@@ -25,9 +25,10 @@ import {
 } from "lucide-react";
 import MagneticCTA from "@/components/cinematic/MagneticCTA";
 import EnquiryForm from "@/components/cinematic/EnquiryForm";
-import { MistBand, PlantEmblem } from "@/components/cinematic/botanicals";
+import HoverImage from "@/components/cinematic/HoverImage";
+import { MistBand } from "@/components/cinematic/botanicals";
 import { useReducedMotion } from "@/components/cinematic/hooks";
-import { CARE_GUIDES, type Plant } from "@/lib/content";
+import { CARE_GUIDES, plantImage, type Plant } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import PlantInspector from "./PlantInspector";
 import PlantVitals from "./PlantVitals";
@@ -270,16 +271,23 @@ export default function PlantView({
               >
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 [box-shadow:inset_0_0_0_1px_var(--c-glow-line),0_24px_60px_-24px_rgba(159,209,91,0.35)]" />
 
-                <div className="relative mb-4 flex h-40 items-center justify-center">
-                  <div className="absolute inset-0 rounded-xl bg-[radial-gradient(60%_60%_at_50%_45%,rgba(31,95,63,0.35),transparent_70%)]" />
-                  <div className="relative h-full transition-transform duration-700 ease-out group-hover:scale-105">
-                    <PlantEmblem
-                      accent={p.accent}
-                      category={p.category}
-                      slug={p.slug}
-                      className="h-full"
+                <div className="relative mb-4 h-40 overflow-hidden rounded-xl">
+                  <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_45%,rgba(31,95,63,0.35),transparent_70%)]" />
+                  <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
+                    <HoverImage
+                      src={plantImage(p.slug)}
+                      alt={p.name}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="transition-transform duration-700 ease-out"
                     />
                   </div>
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, transparent 45%, rgba(6,12,8,0.35))",
+                    }}
+                  />
                 </div>
 
                 <div className="flex items-start justify-between gap-3">

@@ -14,13 +14,19 @@ import { BRAND } from "@/lib/content";
 type Kind = "general" | "plant" | "hire" | "visit";
 type Status = "idle" | "sending" | "sent" | "error";
 
+// Simple, forgiving email shape check. Not a full RFC validator on purpose:
+// we only want to catch obvious typos before the round-trip to the backend.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function EnquiryForm({
   kind = "general",
   subject = "",
+  initialMessage = "",
   compact = false,
 }: {
   kind?: Kind;
   subject?: string;
+  initialMessage?: string;
   compact?: boolean;
 }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -29,7 +35,6 @@ export default function EnquiryForm({
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrors({});
-    setStatus("sending");
     const form = e.currentTarget;
     const fd = new FormData(form);
     const payload = {
@@ -41,6 +46,25 @@ export default function EnquiryForm({
       message: String(fd.get("message") || ""),
       company: String(fd.get("company") || ""), // honeypot
     };
+
+    // Validate locally first so users see errors instantly, without waiting on
+    // a possibly cold backend. The server 422 path below stays as a backstop.
+    const localErrors: Record<string, string> = {};
+    if (payload.name.trim().length < 2) {
+      localErrors.name = "Please tell us your name.";
+    }
+    if (!EMAIL_RE.test(payload.email.trim())) {
+      localErrors.email = "Please enter a valid email address.";
+    }
+    if (payload.message.trim().length < 5) {
+      localErrors.message = "Please add a little more so we can help.";
+    }
+    if (Object.keys(localErrors).length > 0) {
+      setErrors(localErrors);
+      return;
+    }
+
+    setStatus("sending");
 
     try {
       const res = await fetch("/api/enquiry", {
@@ -165,6 +189,7 @@ export default function EnquiryForm({
         <textarea
           name="message"
           required
+          defaultValue={initialMessage}
           aria-invalid={errors.message ? true : undefined}
           aria-describedby={errors.message ? "enq-message-error" : undefined}
           rows={compact ? 3 : 5}

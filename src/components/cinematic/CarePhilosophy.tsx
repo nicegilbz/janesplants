@@ -29,6 +29,10 @@ export default function CarePhilosophy() {
       const panels = gsap.utils.toArray<HTMLElement>(".cine-care-panel");
       const totalShift = track.current.scrollWidth - window.innerWidth;
 
+      // On ultra-wide screens the track already fits; do not pin a section that
+      // never needs to move (it would eat a viewport of scroll for nothing).
+      if (totalShift < 1) return;
+
       const tween = gsap.to(track.current, {
         x: -totalShift,
         ease: "none",
