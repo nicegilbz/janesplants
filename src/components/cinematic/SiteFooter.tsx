@@ -6,10 +6,15 @@
 import Link from "next/link";
 import { Leaf } from "lucide-react";
 import { BRAND, CATEGORIES } from "@/lib/content";
+import { useTheme } from "./ThemeProvider";
 
 export default function SiteFooter() {
+  const { theme } = useTheme();
   return (
-    <footer className="relative border-t border-[var(--c-brass-line)] bg-[#0a120d] px-6 pb-10 pt-16">
+    <footer
+      className="relative border-t border-[var(--c-brass-line)] px-6 pb-10 pt-16"
+      style={{ background: theme === "day" ? "#e4e8d8" : "#0a120d" }}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">

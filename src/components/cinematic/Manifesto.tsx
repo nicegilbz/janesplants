@@ -19,7 +19,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { BRAND } from "@/lib/content";
 import { MonsteraLeaf } from "./botanicals";
-import MediaSlot from "./MediaSlot";
+import GrowthScrub from "./GrowthScrub";
 import { useReducedMotion } from "./hooks";
 
 export default function Manifesto() {
@@ -180,9 +180,14 @@ export default function Manifesto() {
           </div>
         </div>
 
-        {/* F2 growth time-lapse slot */}
+        {/* F2 growth time-lapse: scroll-scrubbed video set-piece */}
         <div className="mx-auto mt-6 max-w-md">
-          <MediaSlot id="F2" src="/media/leaf-macro.png" video="/media/video/growth.mp4" label="growth time-lapse" kind="loop" aspect="4 / 3" />
+          <GrowthScrub
+            poster="/media/leaf-macro.png"
+            video="/media/video/growth.mp4"
+            label="growth time-lapse"
+            aspect="4 / 3"
+          />
         </div>
       </div>
     </section>

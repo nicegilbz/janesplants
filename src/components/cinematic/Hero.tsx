@@ -22,10 +22,18 @@ import { Frond, PlantSilhouette, MistBand } from "./botanicals";
 import Pollen from "./Pollen";
 import MagneticCTA from "./MagneticCTA";
 import { useReducedMotion } from "./hooks";
+import { useTheme } from "./ThemeProvider";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { theme } = useTheme();
+  const heroPoster =
+    theme === "day" ? "/media/glasshouse-day.png" : "/media/hero.png";
+  const heroVideo =
+    theme === "day"
+      ? "/media/video/glasshouse-day.mp4"
+      : "/media/video/hero-loop.mp4";
 
   useGSAP(
     () => {
@@ -92,7 +100,8 @@ export default function Hero() {
       <div className="absolute inset-0">
         {reduced ? (
           <Image
-            src="/media/hero.png"
+            key={heroPoster}
+            src={heroPoster}
             alt=""
             fill
             priority
@@ -101,14 +110,15 @@ export default function Hero() {
           />
         ) : (
           <video
+            key={heroVideo}
             autoPlay
             muted
             loop
             playsInline
-            poster="/media/hero.png"
+            poster={heroPoster}
             className="absolute inset-0 h-full w-full object-cover"
           >
-            <source src="/media/video/hero-loop.mp4" type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
           </video>
         )}
         <div
@@ -173,25 +183,27 @@ export default function Hero() {
       {/* HERO CONTENT */}
       <div className="cine-hero-content relative z-20 mx-auto w-full max-w-6xl px-6 text-center">
         <div className="cine-hero-fade cine-anim-fade mb-7 flex items-center justify-center gap-3">
-          <span className="cine-eyebrow">{BRAND.location.label}</span>
-          <span className="h-px w-10 bg-[var(--c-brass-line)]" />
-          <span className="cine-mono text-[0.7rem] uppercase tracking-[0.28em] text-[var(--c-sage)]">
+          <span className="cine-eyebrow" style={{ color: "#9fd15b" }}>
+            {BRAND.location.label}
+          </span>
+          <span className="h-px w-10 bg-[rgba(176,141,87,0.5)]" />
+          <span className="cine-mono text-[0.7rem] uppercase tracking-[0.28em] text-[#a9b5a3]">
             Hertford
           </span>
         </div>
 
-        <h1 className="cine-serif mx-auto max-w-5xl text-[clamp(3.2rem,11vw,9.5rem)] text-[var(--c-bone)]">
+        <h1 className="cine-serif mx-auto max-w-5xl text-[clamp(3.2rem,11vw,9.5rem)] text-[#f4efe3]">
           <span className="block overflow-hidden">
             <span className="cine-hero-line cine-anim-rise block" style={{ animationDelay: "0.12s" }}>Plants with</span>
           </span>
           <span className="block overflow-hidden">
             <span className="cine-hero-line cine-anim-rise block" style={{ animationDelay: "0.26s" }}>
-              <span className="cine-accent text-[var(--c-glow)]">presence</span>.
+              <span className="cine-accent text-[#9fd15b]">presence</span>.
             </span>
           </span>
         </h1>
 
-        <p className="cine-hero-fade cine-anim-fade mx-auto mt-8 max-w-xl text-balance text-[1.05rem] leading-relaxed text-[var(--c-sage)]">
+        <p className="cine-hero-fade cine-anim-fade mx-auto mt-8 max-w-xl text-balance text-[1.05rem] leading-relaxed text-[#a9b5a3]">
           A working glasshouse in Hertford. We grow characterful houseplants,
           and we style and hire them for the rooms that want to feel alive.
         </p>

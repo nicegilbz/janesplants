@@ -190,3 +190,52 @@
     animation-delay: 0ms;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * DAY theme — "Conservatory" daylight. Default is night (above).
+ * data-theme="day" lives on <html>; recolours the token + class system.
+ * ------------------------------------------------------------------ */
+[data-theme="day"] .cine {
+  --c-canvas: #eef1e5;
+  --c-surface: #e3e8d6;
+  --c-emerald: #3a7d44;
+  --c-glow: #4f7a2c; /* deeper green reads on cream */
+  --c-brass: #8a6a34;
+  --c-terracotta: #b8542f;
+  --c-bone: #1e2c20; /* dark ink text */
+  --c-sage: #5a6a51; /* muted dark */
+  --c-glow-soft: rgba(79, 122, 44, 0.12);
+  --c-glow-line: rgba(79, 122, 44, 0.42);
+  --c-brass-line: rgba(138, 106, 52, 0.42);
+  background: var(--c-canvas);
+}
+
+/* Glass cards become light + airy in daylight */
+[data-theme="day"] .cine-glass {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(225, 231, 212, 0.55)
+  );
+  border: 1px solid rgba(138, 106, 52, 0.26);
+  backdrop-filter: blur(10px) saturate(112%);
+  -webkit-backdrop-filter: blur(10px) saturate(112%);
+}
+
+/* Grain is barely-there on a light ground */
+[data-theme="day"] .cine-grain::after {
+  opacity: 0.03;
+}
+
+/* View Transition morph between day and night */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

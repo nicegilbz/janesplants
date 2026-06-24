@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import SiteHeader from "@/components/cinematic/SiteHeader";
 import SiteFooter from "@/components/cinematic/SiteFooter";
 import CursorLeaves from "@/components/cinematic/CursorLeaves";
+import ThemeProvider from "@/components/cinematic/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Jane's Plants",
@@ -15,13 +16,15 @@ export default function CinematicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="cine cine-grain relative min-h-screen">
-      <CursorLeaves />
-      <SiteHeader />
-      <SmoothScroll>
-        <main>{children}</main>
-        <SiteFooter />
-      </SmoothScroll>
-    </div>
+    <ThemeProvider>
+      <div className="cine cine-grain relative min-h-screen">
+        <CursorLeaves />
+        <SiteHeader />
+        <SmoothScroll>
+          <main>{children}</main>
+          <SiteFooter />
+        </SmoothScroll>
+      </div>
+    </ThemeProvider>
   );
 }
