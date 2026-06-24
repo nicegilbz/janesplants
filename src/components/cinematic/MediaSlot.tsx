@@ -51,13 +51,17 @@ export default function MediaSlot({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // play() can reject if interrupted; ignore that safely.
-          void el.play().catch(() => {});
+          // play() can reject if not buffered yet; retry once the clip is ready.
+          void el.play().catch(() => {
+            el.addEventListener("canplay", () => void el.play().catch(() => {}), {
+              once: true,
+            });
+          });
         } else {
           el.pause();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -96,7 +100,7 @@ export default function MediaSlot({
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={src}
             aria-label={label}
             className="absolute inset-0 h-full w-full object-cover"

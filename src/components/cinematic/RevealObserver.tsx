@@ -20,55 +20,38 @@ export default function RevealObserver() {
 
     const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
 
-    if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
+    if (prefersReducedMotion()) {
       els.forEach((el) => el.classList.add("is-in"));
       return;
     }
 
+    // Position-based polling (rAF, throttled) rather than IntersectionObserver:
+    // it reads each element's actual on-screen position, so it is immune to the
+    // things that were leaving the LAST sections hidden (the GSAP pin spacer on
+    // CarePhilosophy, Lenis smooth scroll, IO edge cases). Reveals anything whose
+    // top has entered the viewport, and stops once everything is in.
     const remaining = new Set(els);
     const reveal = (el: HTMLElement) => {
       el.classList.add("is-in");
       remaining.delete(el);
-      io.unobserve(el);
     };
 
-    // Trigger as the element approaches (positive bottom margin), threshold 0,
-    // so even the LAST sections - which can never reach a negative-margin dead
-    // zone - reveal reliably.
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) reveal(entry.target as HTMLElement);
+    let raf = 0;
+    let last = -Infinity;
+    const check = (t: number) => {
+      if (t - last > 120) {
+        last = t;
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        for (const el of Array.from(remaining)) {
+          if (el.getBoundingClientRect().top < vh * 0.92) reveal(el);
         }
-      },
-      { rootMargin: "0px 0px 12% 0px", threshold: 0 },
-    );
-    els.forEach((el) => io.observe(el));
-
-    // Belt-and-braces: a rAF-throttled scroll check reveals anything whose top
-    // has entered the viewport, in case any IntersectionObserver edge case (pin
-    // spacers, smooth scroll) misses an element. Self-removes once all are in.
-    let ticking = false;
-    const sweep = () => {
-      ticking = false;
-      const vh = window.innerHeight;
-      for (const el of Array.from(remaining)) {
-        if (el.getBoundingClientRect().top < vh * 0.95) reveal(el);
       }
-      if (!remaining.size) window.removeEventListener("scroll", onScroll);
+      raf = remaining.size ? requestAnimationFrame(check) : 0;
     };
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(sweep);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    sweep();
+    raf = requestAnimationFrame(check);
 
     return () => {
-      io.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
