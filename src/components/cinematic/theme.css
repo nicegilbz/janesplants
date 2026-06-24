@@ -275,3 +275,62 @@
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Scroll reveals - lightweight (IntersectionObserver + CSS), no GSAP,
+ * so they run on every device incl. phones. The `.cine-js` gate means
+ * content is NEVER hidden if JS fails (it only hides once JS is ready).
+ * ------------------------------------------------------------------ */
+.cine-js
+  :is(.cine-mani-text, .cine-promise, .cine-stat, .cine-hire-reveal, .cine-visit-reveal, .cine-coll-head) {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.cine-js
+  :is(.cine-mani-text, .cine-promise, .cine-stat, .cine-hire-reveal, .cine-visit-reveal, .cine-coll-head).is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cine-js
+    :is(.cine-mani-text, .cine-promise, .cine-stat, .cine-hire-reveal, .cine-visit-reveal, .cine-coll-head) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Hero foliage parallax on MOBILE - CSS scroll-driven animation. Runs
+ * on the compositor (smooth, ~free), no GSAP/Lenis. Desktop has Lenis
+ * (html.lenis) and uses the GSAP parallax instead, so this is gated to
+ * html:not(.lenis). Degrades to a still hero where unsupported.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    html:not(.lenis) :is(.cine-layer-mist, .cine-layer-back, .cine-layer-mid, .cine-layer-fore, .cine-layer-near, .cine-hero-content, .cine-shafts) {
+      animation-timeline: scroll(root block);
+      animation-range: 0 100vh;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    }
+    html:not(.lenis) .cine-layer-mist { animation-name: cine-px-8; }
+    html:not(.lenis) .cine-layer-back { animation-name: cine-px-22; }
+    html:not(.lenis) .cine-layer-mid { animation-name: cine-px-46; }
+    html:not(.lenis) .cine-layer-fore { animation-name: cine-px-92; }
+    html:not(.lenis) .cine-layer-near { animation-name: cine-px-140; }
+    html:not(.lenis) .cine-hero-content { animation-name: cine-px-content; }
+    html:not(.lenis) .cine-shafts { animation-name: cine-px-shafts; }
+  }
+}
+@keyframes cine-px-8 { to { transform: translateY(-8%); } }
+@keyframes cine-px-22 { to { transform: translateY(-22%); } }
+@keyframes cine-px-46 { to { transform: translateY(-46%); } }
+@keyframes cine-px-92 { to { transform: translateY(-92%); } }
+@keyframes cine-px-140 { to { transform: translateY(-140%); } }
+@keyframes cine-px-content { to { transform: translateY(-18%); opacity: 0.4; } }
+@keyframes cine-px-shafts { to { opacity: 0.18; } }

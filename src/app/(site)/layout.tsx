@@ -5,6 +5,7 @@ import SiteHeader from "@/components/cinematic/SiteHeader";
 import SiteFooter from "@/components/cinematic/SiteFooter";
 import CursorLeaves from "@/components/cinematic/CursorLeaves";
 import ThemeProvider from "@/components/cinematic/ThemeProvider";
+import RevealObserver from "@/components/cinematic/RevealObserver";
 
 export const metadata: Metadata = {
   title: "Jane's Plants",
@@ -18,6 +19,7 @@ export default function CinematicLayout({
   return (
     <ThemeProvider>
       <div className="cine cine-grain relative min-h-screen overflow-x-clip">
+        <RevealObserver />
         <CursorLeaves />
         <SiteHeader />
         <SmoothScroll>

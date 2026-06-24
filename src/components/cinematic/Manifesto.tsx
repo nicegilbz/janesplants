@@ -12,36 +12,9 @@
 import { useRef } from "react";
 import { BRAND } from "@/lib/content";
 import MediaSlot from "./MediaSlot";
-import { useGsapReveal } from "./useGsapReveal";
 
 export default function Manifesto() {
   const root = useRef<HTMLDivElement>(null);
-
-  useGsapReveal(root, (gsap, _st, SplitText) => {
-      // Mission text - line-by-line reveal via SplitText
-      try {
-        const split = new SplitText(".cine-mani-text", { type: "lines" });
-        gsap.from(split.lines, {
-          opacity: 0,
-          yPercent: 110,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: ".cine-mani-text", start: "top 80%" },
-        });
-      } catch {
-        /* SplitText is free here; ignore if unavailable */
-      }
-
-      gsap.from(".cine-promise", {
-        opacity: 0,
-        x: -20,
-        duration: 0.7,
-        ease: "power2.out",
-        stagger: 0.12,
-        scrollTrigger: { trigger: ".cine-promise-list", start: "top 85%" },
-      });
-  });
 
   return (
     <section

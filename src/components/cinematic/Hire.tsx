@@ -10,7 +10,6 @@ import { useRef } from "react";
 import { Home, Building2, PartyPopper, Heart, ArrowUpRight } from "lucide-react";
 import MediaSlot from "./MediaSlot";
 import MagneticCTA from "./MagneticCTA";
-import { useGsapReveal } from "./useGsapReveal";
 
 const SERVICES = [
   {
@@ -37,17 +36,6 @@ const SERVICES = [
 
 export default function Hire() {
   const root = useRef<HTMLElement>(null);
-
-  useGsapReveal(root, (gsap) => {
-    gsap.from(".cine-hire-reveal", {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: "power3.out",
-      stagger: 0.12,
-      scrollTrigger: { trigger: root.current, start: "top 75%" },
-    });
-  });
 
   return (
     <section id="hire" ref={root} className="relative py-28 lg:py-40">

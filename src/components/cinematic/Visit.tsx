@@ -12,21 +12,9 @@ import { BRAND } from "@/lib/content";
 import { Frond } from "./botanicals";
 import MagneticCTA from "./MagneticCTA";
 import Pollen from "./Pollen";
-import { useGsapReveal } from "./useGsapReveal";
 
 export default function Visit() {
   const root = useRef<HTMLElement>(null);
-
-  useGsapReveal(root, (gsap) => {
-    gsap.from(".cine-visit-reveal", {
-      opacity: 0,
-      y: 36,
-      duration: 1,
-      ease: "power3.out",
-      stagger: 0.1,
-      scrollTrigger: { trigger: ".cine-visit-panel", start: "top 80%" },
-    });
-  });
 
   return (
     <section id="visit" ref={root} className="relative overflow-hidden pb-16 pt-10">
