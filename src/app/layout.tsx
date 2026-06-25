@@ -99,6 +99,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${instrument.variable} antialiased`}
     >
       <body>
+        {/* Arm the scroll-reveal hide BEFORE first paint, so reveal text is
+            never shown-then-hidden (the flash). If JS is off the class is never
+            added, so content stays visible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('cine-js')",
+          }}
+        />
         <JsonLd data={ORGANISATION_JSONLD} />
         {children}
       </body>
