@@ -12,7 +12,7 @@
  */
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowDown, Sprout } from "lucide-react";
 import { BRAND } from "@/lib/content";
 import { Frond, PlantSilhouette, MistBand } from "./botanicals";
@@ -21,6 +21,30 @@ import MagneticCTA from "./MagneticCTA";
 import { useReducedMotion } from "./hooks";
 import { useGsapReveal } from "./useGsapReveal";
 import { useTheme } from "./ThemeProvider";
+
+/**
+ * The hero loop. It stays fully transparent until it is genuinely PLAYING, then
+ * fades up over the poster. Because the poster is the video's own first frame,
+ * that fade is the same scene settling into motion - no cut, no jump. Keyed by
+ * src so a day/night swap remounts it and re-runs the same gentle fade.
+ */
+function HeroVideo({ src }: { src: string }) {
+  const [ready, setReady] = useState(false);
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      onPlaying={() => setReady(true)}
+      className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-out"
+      style={{ opacity: ready ? 1 : 0 }}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  );
+}
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +57,9 @@ export default function Hero() {
   const reduced = useReducedMotion();
   const { theme } = useTheme();
   const heroPoster =
-    theme === "day" ? "/media/glasshouse-day.webp" : "/media/hero.webp";
+    theme === "day"
+      ? "/media/glasshouse-day-poster.webp"
+      : "/media/hero.webp";
   const heroVideo =
     theme === "day"
       ? "/media/video/glasshouse-day.mp4"
@@ -92,9 +118,10 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
     >
-      {/* Base cinematic media: a poster still always sits underneath, so a
-          day/night swap cross-fades instead of flashing black; on desktop the
-          matching video fades in over it. Touch/reduced shows just the still. */}
+      {/* Base cinematic media: the poster IS the video's own first frame, so
+          when the loop fades up (only once it is actually playing) it is the
+          same scene settling into motion - no cut, no jump. The poster also
+          covers the day/night swap. */}
       <div className="absolute inset-0">
         <Image
           key={heroPoster}
@@ -102,23 +129,11 @@ export default function Hero() {
           alt=""
           fill
           priority
-          quality={50}
+          quality={60}
           sizes="100vw"
           className="object-cover"
         />
-        {!reduced && (
-          <video
-            key={heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="cine-hero-video absolute inset-0 h-full w-full object-cover"
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-        )}
+        {!reduced && <HeroVideo key={heroVideo} src={heroVideo} />}
         <div
           className="absolute inset-0"
           style={{
