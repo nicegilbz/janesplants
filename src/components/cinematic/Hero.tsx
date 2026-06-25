@@ -23,10 +23,12 @@ import { useGsapReveal } from "./useGsapReveal";
 import { useTheme } from "./ThemeProvider";
 
 /**
- * The hero loop. It stays fully transparent until it is genuinely PLAYING, then
- * fades up over the poster. Because the poster is the video's own first frame,
- * that fade is the same scene settling into motion - no cut, no jump. Keyed by
- * src so a day/night swap remounts it and re-runs the same gentle fade.
+ * The hero loop. It stays transparent until it is genuinely PLAYING, then
+ * appears over the poster. The poster IS this video's own first frame, so this
+ * is the same scene settling into motion - not a cross-fade between two images.
+ * The swap uses a tiny 180ms blend only to hide the subtle compression
+ * difference between the WebP still and the H.264 video; it reads as instant.
+ * Keyed by src so a day/night swap remounts it and re-runs the same blend.
  */
 function HeroVideo({ src }: { src: string }) {
   const [ready, setReady] = useState(false);
@@ -38,7 +40,7 @@ function HeroVideo({ src }: { src: string }) {
       playsInline
       preload="auto"
       onPlaying={() => setReady(true)}
-      className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1100ms] ease-out"
+      className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[180ms] ease-linear"
       style={{ opacity: ready ? 1 : 0 }}
     >
       <source src={src} type="video/mp4" />
