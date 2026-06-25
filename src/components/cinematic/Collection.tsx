@@ -125,7 +125,7 @@ export default function Collection() {
                     src={plantImage(p.slug)}
                     alt={p.name}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                    className="cine-card-media transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
                   <div className="cine-card-vignette pointer-events-none absolute inset-0" />
                 </div>

@@ -306,3 +306,31 @@
 @keyframes cine-px-140 { to { transform: translateY(-140%); } }
 @keyframes cine-px-content { to { transform: translateY(-18%); opacity: 0.4; } }
 @keyframes cine-px-shafts { to { opacity: 0.18; } }
+
+/* ------------------------------------------------------------------ *
+ * Collection card photos on MOBILE - a scroll-driven living "warp"
+ * (gentle scale + skew + parallax as the card travels through view).
+ * There is no cursor on touch, so this replaces the desktop WebGL hover
+ * distortion. CSS scroll-driven => runs on the compositor, ~free, on all
+ * cards. Gated to html:not(.lenis) so it ONLY runs where Lenis is absent
+ * (phones); desktop keeps the WebGL hover. Degrades to still if unsupported.
+ * ------------------------------------------------------------------ */
+@supports (animation-timeline: view()) {
+  html:not(.lenis) .cine-card-media {
+    animation: cine-card-warp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+    will-change: transform;
+  }
+}
+@keyframes cine-card-warp {
+  0% {
+    transform: scale(1.1) skewY(1.2deg) translateY(2.5%);
+  }
+  50% {
+    transform: scale(1.04) skewY(0deg) translateY(0);
+  }
+  100% {
+    transform: scale(1.1) skewY(-1.2deg) translateY(-2.5%);
+  }
+}
