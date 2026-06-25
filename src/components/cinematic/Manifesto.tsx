@@ -11,7 +11,7 @@
 
 import { useRef } from "react";
 import { BRAND } from "@/lib/content";
-import MediaSlot from "./MediaSlot";
+import GrowthScrub from "./GrowthScrub";
 
 export default function Manifesto() {
   const root = useRef<HTMLDivElement>(null);
@@ -67,13 +67,11 @@ export default function Manifesto() {
               "radial-gradient(60% 50% at 50% 45%, rgba(159,209,91,0.14), transparent 70%)",
           }}
         />
-        <MediaSlot
-          id="F2"
-          src="/media/leaf-macro.webp"
+        <GrowthScrub
+          poster="/media/leaf-macro.webp"
           video="/media/video/growth.mp4"
-          label="growth time-lapse"
-          kind="loop"
           aspect="3 / 4"
+          label="growth time-lapse"
           className="relative"
         />
       </div>
